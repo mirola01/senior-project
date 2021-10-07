@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="src/main.css">
+</head>
+<body>
+    <div id="add-note-overlay">
+        <div id="close">
+            <img src="src/img/close-outline.svg" alt="" id="close-btn">
+        </div>
+        <div>
+            <h2>Add a new note</h2>
+        </div>
+        <div id="add-note-form">
+            <input type="text" name="title" placeholder="title">
+            <select name="category" id=""">
+                <option value="">Select Category</option>
+                <option value="school">School</option>
+                <option value="home">Home</option>
+                <option value="work">Work</option>
+            </select>
+            <textarea name="note-desc" id="" cols="10" rows="2" placeholder=" add details"></textarea>
+            <button type="" id="submit-note">Add note!</button>
+        </div>
+    </div>
+    <div class="container" id="main-container">
+        <div class="main-content">
+            <div id="header">
+                <div id="welcome">
+                    <strong>Hey Michel, <br> Good Morning</strong>
+                    <div id="profile-img">
+                        <img src="" alt="">
+                    </div>
+                </div>
+                <div id="search">
+                    <img src="src/img/search-sharp.svg" alt="">
+                    <input type="text" placeholder="  Find Note..">
+                </div>
+            </div>
+            <div id="main-section">
+                <div id="categories">
+                    <span>School</span>
+                    <span>Home</span>
+                    <span>Work</span>
+                </div>
+                <div id="notes-section">
+                    <!-- <div class="notes">
+                        <strong>Title 1</strong>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, ut quas rerum corrupti perferendis
+                        </p>
+                        <strong>
+                            Mar 28
+                        </strong>
+                    </div>
+                    <div class="notes">
+                        <strong>Title 2</strong>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, ut quas rerum corrupti perferendis
+                        </p>
+                        <strong>
+                            Apr 6
+                        </strong>
+                    </div>
+                    <div class="notes">
+                        <strong>Title 3</strong>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, ut quas rerum corrupti perferendis
+                        </p>
+                        <strong>
+                            Sept 5
+                        </strong>
+                    </div>
+                    <div class="notes">
+                        <strong>Title 4</strong>
+                        <p>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi, ut quas rerum corrupti perferendis
+                        </p>
+                        <strong>
+                            Jul 27
+                        </strong>
+                    </div> -->
+                    <div id="add-new" class="notes">
+                        <div id="add-new-head">
+                            <img src="src/img/add-outline.svg" alt="">
+                            <span>Add new note</span>
+                        </div>
+                        <img src="src/img/undraw_Personal_notebook_re_d7dc.svg" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navbar">
+            <div class="items">
+                <div class="nav-items">
+                    <img src="src/img/grid-outline.svg" alt="">
+                </div>
+                <div class="nav-items" id="add">
+                    <img src="src/img/add-outline.svg" alt="">
+                </div>
+                <div class="nav-items">
+                    <img src="src/img/person-outline.svg" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="src/main.js"></script>
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+</body>
+</html>
