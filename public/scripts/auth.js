@@ -2,7 +2,6 @@
 var faunadb = window.faunadb;
 var q = faunadb.query;
 
-
 let auth0 = null;
 
 const fetchAuthConfig = () => fetch("/auth_config.json");
@@ -57,8 +56,8 @@ const updateUI = async () => {
         var htmlText = notes['data'].map(function(o){
             return `
                 <div class="card">
-                    <span class="tag tag-purple"> Title: ${o.data.title}</span>
-                    <p> Username: ${o.data.body}</p>
+                    <span class="tag tag-purple">${o.data.title}</span>
+                    <p>${o.data.body}</p>
                </div>`
           });
         notes_section.innerHTML += htmlText.join('');
@@ -69,6 +68,26 @@ const updateUI = async () => {
         document.getElementById("auth-btn").innerHTML = "Login"
     }
 };
+
+const login = async () => {
+    await auth0.loginWithRedirect({
+      redirect_uri: window.location.origin
+    });
+};
+
+const logout = () => {
+  auth0.logout({
+    returnTo: window.location.origin
+  });
+};
+
+document.getElementById("auth-btn").addEventListener('click', ()=> {
+    if (document.getElementById("auth-btn").innerHTML== "Login") {
+        login();
+    } else {
+        logout();
+    }
+})
 
 window.onload = async () => {
     await configureClient();
@@ -87,26 +106,6 @@ window.onload = async () => {
     }
 };
 
-document.getElementById("auth-btn").addEventListener('click', ()=> {
-    if (document.getElementById("auth-btn").innerHTML== "Login") {
-        login();
-    } else {
-        logout();
-    }
-})
-
-const login = async () => {
-    await auth0.loginWithRedirect({
-      redirect_uri: window.location.origin
-    });
-};
-
-const logout = () => {
-  auth0.logout({
-    returnTo: window.location.origin
-  });
-};
-
 const btn = document.querySelector('#add-note');
 
 const new_note = async ()=> {
@@ -115,21 +114,14 @@ const new_note = async ()=> {
     console.log(accessToken);
     console.log("the token is "+accessToken)
     if (isAuthenticated) {
-        function account (res) {
-            if (!res || !res.responseHeaders) return
-            h = res.responseHeaders
-            console.log(h)
-        }
-
         var client = new faunadb.Client({
             secret: String(accessToken),
             domain: 'db.us.fauna.com',
-            observer: account,
             port: 443,
             scheme: 'https'
         })
 
-        let data = client.query(
+        let data = await client.query(
             q.Create(q.Collection("Notes"), {
                 data: {
                     title: document.querySelector('#title').value,
@@ -139,14 +131,11 @@ const new_note = async ()=> {
             })
         ).then((ret) => console.log(ret))
         .catch((err) => console.error('Error: %s', err))
-
-        // let data = client.query(
-        //     q.Get(
-        //       q.Ref(q.Collection('Notes'), '1')
-        //     )
-        // )
         
-        console.log(data)
+        console.log(data);
+        body_.classList.remove('container-fade');
+        form.style.display = 'none';
+        window.location.reload();
     }
 };
 
