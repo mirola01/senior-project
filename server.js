@@ -11,8 +11,12 @@ app.get("/auth_config.json", (req, res) => {
 });
 
 // Serve the index page for all other requests
-app.get("/*", (_, res) => {
+app.get("/", (_, res) => {
   res.sendFile(join(__dirname, "index.html"));
+});
+
+app.get("/admin", (_, res) => {
+  res.sendFile(join(__dirname, "admin.html"));
 });
 
 // Listen on port 3000

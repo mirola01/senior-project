@@ -24,11 +24,6 @@ const updateUI = async () => {
 
     
     if (isAuthenticated) {
-        document.getElementById("auth-btn").innerHTML = "Logout"
-        document.getElementById("auth-btn").style.display = 'block';
-        document.querySelector(".card-container").style.display = 'grid';
-        document.querySelector("#add-new-btn").style.display = 'block';
-        document.querySelector('.please-login').style.display = 'none';
 
         const accessToken = await auth0.getTokenSilently();
         console.log(accessToken);
@@ -41,27 +36,69 @@ const updateUI = async () => {
             scheme: 'https'
         })
 
-        let notes = await client.query(
-            q.Map(
-                q.Paginate(
-                    q.Match(q.Index('notes_by_owner'), q.CurrentIdentity())
-                ),
-                q.Lambda(
-                    "X", q.Get(q.Var("X"))
+        document.getElementById("auth-btn").innerHTML = "Logout"
+        document.getElementById("auth-btn").style.display = 'block';
+        document.querySelector(".card-container").style.display = 'grid';
+        document.querySelector("#add-new-btn").style.display = 'block';
+        document.querySelector('.please-login').style.display = 'none';
+
+        // check the role
+        let token = await client.query(
+            q.CurrentToken()
+        )
+        let user_role = token["https:/db.fauna.com/roles"][0]
+        console.log(user_role)
+
+        if (user_role === 'user')
+        {
+
+            let notes = await client.query(
+                q.Map(
+                    q.Paginate(
+                        q.Match(q.Index('notes_by_owner'), q.CurrentIdentity())
+                    ),
+                    q.Lambda(
+                        "X", q.Get(q.Var("X"))
+                    )
                 )
-            )
-            
-        );
-        notes_section = document.querySelector('.card-container');
-        var htmlText = notes['data'].map(function(o){
-            return `
-                <div class="card">
-                    <span class="tag tag-purple">${o.data.title}</span>
-                    <p>${o.data.body}</p>
-               </div>`
-          });
-        notes_section.innerHTML += htmlText.join('');
-        
+                
+            );
+            notes_section = document.querySelector('.card-container');
+            var htmlText = notes['data'].map(function(o){
+                return `
+                    <div class="card">
+                        <span class="tag tag-purple">${o.data.title}</span>
+                        <p>${o.data.body}</p>
+                   </div>`
+              });
+            notes_section.innerHTML += htmlText.join('');
+        } else {
+            document.querySelector('.please-login').style.display = 'block';
+            document.querySelector('.please-login').innerHTML = 'Welcome Admin!';
+            let notes = await client.query(
+                q.Map(
+                    q.Paginate(
+                        q.Match(q.Index('allNotes'))
+                    ),
+                    q.Lambda(
+                        "X", q.Get(q.Var("X"))
+                    )
+                )
+                
+            );
+            console.log(notes);
+            notes_section = document.querySelector('.card-container');
+            notes_section.style.display = 'grid';
+            var htmlText = notes['data'].map(function(o){
+                return `
+                    <div class="card">
+                        <span class="tag tag-purple">${o.data.title}</span>
+                        <p>${o.data.body}</p>
+                   </div>`
+              });
+            notes_section.innerHTML += htmlText.join('');
+        }
+
     } else {
         document.getElementById("auth-btn").innerHTML = "Login"
         document.getElementById("auth-btn").style.display = 'block';

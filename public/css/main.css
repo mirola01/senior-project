@@ -11,6 +11,15 @@ body {
     opacity:0.3;
 }
 
+.admin-container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.admin-container #admin-header {
+    font-size: 3em;
+}
+
 #auth-btn {
     display: none;
 }
