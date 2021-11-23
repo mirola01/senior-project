@@ -1,0 +1,5 @@
+{
+  "domain": "YOUR_AUTH0_APP_DOMAIN",
+  "clientId": "YOUR_AUTH0_CLIENT-ID",
+  "aud": "https://db.fauna.com/db/ytjuc3yjryyrg"
+}
