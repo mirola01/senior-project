@@ -39,7 +39,7 @@ const updateUI = async () => {
         document.getElementById("auth-btn").innerHTML = "Logout"
         document.getElementById("auth-btn").style.display = 'block';
         document.querySelector(".card-container").style.display = 'grid';
-        document.querySelector("#add-new-btn").style.display = 'block';
+        // document.querySelector("#add-new-btn").style.display = 'block';
         document.querySelector('.please-login').style.display = 'none';
 
         // check the role
@@ -51,6 +51,7 @@ const updateUI = async () => {
 
         if (user_role === 'user')
         {
+            document.querySelector('#add-new-btn').style.display = 'block';
 
             let notes = await client.query(
                 q.Map(
@@ -75,6 +76,7 @@ const updateUI = async () => {
         } else {
             document.querySelector('.please-login').style.display = 'block';
             document.querySelector('.please-login').innerHTML = 'Welcome Admin!';
+            document.querySelector('#add-new-btn').style.display = 'None';
             let notes = await client.query(
                 q.Map(
                     q.Paginate(

@@ -1,5 +1,6 @@
 {
-  "domain": "YOUR_AUTH0_APP_DOMAIN",
-  "clientId": "YOUR_AUTH0_CLIENT-ID",
-  "aud": "https://db.fauna.com/db/ytjuc3yjryyrg"
+  "domain": "dev-curiouspaul.us.auth0.com",
+  "clientId": "ba9tR1ITrihelMsct185cyLegz7R78sK",
+  "aud": "https://db.fauna.com/db/ytjuc3yjryyrg",
+  "fauna_key": "fnAEZY1oDzAAQEfFLHOPzVp1jilXKhzj-OxJkpEM"
 }
