@@ -24,8 +24,55 @@ body {
     display: none;
 }
 
+/* Header */
+#header {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 1rem;
+}
+
+#head-sect-1 {
+    margin-top: 5%;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    gap: 2rem;
+}
+
+#head-sect-2>div{
+    background-color: #f4f4f4;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    padding: 3px 5px;
+}
+
+#head-sect-2>div input {
+    width: 100%;
+    border: none;
+    background-color: #f4f4f4;
+}
+
+
+#head-sect-2>div input:focus {
+    outline: none;
+}
+
+#head-sect-2 img {
+    width: 20px;
+    height: 20px;
+}
+
+#head-img {
+    width: 30px;
+    height: 30px;
+}
+
 /* Add New Overlay */
 
+/* .card-container {
+
+} */
 .form {
     background-color: #15172b;
     border-radius: 20px;
@@ -172,6 +219,27 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
     padding: 8px;
+    max-height: 20vh;
+    text-overflow: ellipsis;
+}
+
+#add-new-card button {
+    width: 100%;
+    height: 100%;
+}
+
+#add-new-card img{
+    width: 60%;
+    height: 60%;
+}
+
+#new-card-btn {
+    border: none
+}
+
+#new-card-btn img {
+    width: 60%;
+    height: 60%;
 }
 
 .tag {
@@ -184,6 +252,15 @@ body {
     text-transform: uppercase;
     cursor: pointer;
     background-color: #5e76bf;
+}
+
+.admin-msg {
+    display: none;
+    margin-top: -3%;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    padding: 3px;
+    border: solid 2px #47bcd4;
 }
 
 .header {

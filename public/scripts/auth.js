@@ -3,6 +3,7 @@ var faunadb = window.faunadb;
 var q = faunadb.query;
 
 let auth0 = null;
+const note_container = document.querySelector('.card-container');
 
 const fetchAuthConfig = () => fetch("/auth_config.json");
 
@@ -24,7 +25,7 @@ const updateUI = async () => {
 
     
     if (isAuthenticated) {
-
+        document.querySelector('.please-login').style.display = 'none';
         const accessToken = await auth0.getTokenSilently();
         console.log(accessToken);
 
@@ -39,8 +40,6 @@ const updateUI = async () => {
         document.getElementById("auth-btn").innerHTML = "Logout"
         document.getElementById("auth-btn").style.display = 'block';
         document.querySelector(".card-container").style.display = 'grid';
-        // document.querySelector("#add-new-btn").style.display = 'block';
-        document.querySelector('.please-login').style.display = 'none';
 
         // check the role
         let token = await client.query(
@@ -65,18 +64,26 @@ const updateUI = async () => {
                 
             );
             notes_section = document.querySelector('.card-container');
+            const addCard = notes_section.lastElementChild
+            notes_section.lastElementChild.remove()
             var htmlText = notes['data'].map(function(o){
                 return `
                     <div class="card">
                         <span class="tag tag-purple">${o.data.title}</span>
-                        <p>${o.data.body}</p>
+                        <p>${String(o.data.body).slice(0,40)}...</p>
                    </div>`
               });
+
             notes_section.innerHTML += htmlText.join('');
+            notes_section.appendChild(addCard)
+            document.querySelector('.please-login').style.display = 'none';
+
         } else {
-            document.querySelector('.please-login').style.display = 'block';
-            document.querySelector('.please-login').innerHTML = 'Welcome Admin!';
-            document.querySelector('#add-new-btn').style.display = 'None';
+            document.querySelector('#add-new-btn').style.display = 'none';
+            document.querySelector('#new-card-btn').style.display = 'none';
+            document.querySelector('#search-bar').style.display = 'none';
+            document.querySelector('.admin-msg').style.display = 'block';
+            notes_section = document.querySelector('.card-container');
             let notes = await client.query(
                 q.Map(
                     q.Paginate(
@@ -88,17 +95,18 @@ const updateUI = async () => {
                 )
                 
             );
-            console.log(notes);
-            notes_section = document.querySelector('.card-container');
+            
             notes_section.style.display = 'grid';
             var htmlText = notes['data'].map(function(o){
                 return `
                     <div class="card">
                         <span class="tag tag-purple">${o.data.title}</span>
-                        <p>${o.data.body}</p>
+                        <p id="note-body">${String(o.data.body).slice(0,40)}...</p>
+                        <p id="note-meta">
                    </div>`
               });
-            notes_section.innerHTML += htmlText.join('');
+            notes_section.innerHTML = htmlText.join('');
+            // document.querySelector('.please-login').style.display = 'None';
         }
 
     } else {
@@ -172,6 +180,7 @@ const new_note = async ()=> {
         .catch((err) => console.error('Error: %s', err))
         
         console.log(data);
+        note_container.appendChild(add_new_card);
         body_.classList.remove('container-fade');
         form.style.display = 'none';
         window.location.reload();
