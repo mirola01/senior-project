@@ -1,6 +1,8 @@
 const express = require("express");
-// const { join } = require("path");
+const cors = require("cors");
 const app = express();
+
+app.use(cors());
 
 // Endpoint to serve the configuration file
 app.get("/auth_config.json", (req, res) => {
