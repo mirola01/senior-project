@@ -5,7 +5,7 @@ var q = faunadb.query;
 let auth0 = null;
 const note_container = document.querySelector('.card-container');
 
-const fetchAuthConfig = () => fetch("/auth_config.json");
+const fetchAuthConfig = () => fetch("https://auth0-fauna.herokuapp.com/auth_config.json");
 
 // Auth0 Client
 const configureClient = async () => {
