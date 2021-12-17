@@ -20,11 +20,8 @@
   },
   "homepage": "https://github.com/auth0-blog/FaunaDB-Auth0-demo#readme",
   "dependencies": {
-    "axios": "^0.24.0",
     "cors": "^2.8.5",
-    "express": "^4.17.1",
-    "faunadb": "^4.4.1",
-    "nodemon": "^2.0.15"
+    "express": "^4.17.1"
   },
   "engines": {
     "node": "v16.13.0"
