@@ -180,7 +180,7 @@ const new_note = async ()=> {
         .catch((err) => console.error('Error: %s', err))
         
         console.log(data);
-        note_container.appendChild(add_new_card);
+        // note_container.appendChild(add_new_card);
         body_.classList.remove('container-fade');
         form.style.display = 'none';
         window.location.reload();
