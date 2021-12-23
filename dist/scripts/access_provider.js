@@ -6,7 +6,7 @@ const axios = require("axios").default;
 // const client
 
 const createProvider = async () => {
-    const resp = await axios.get("http://localhost:3000/auth_config.json");
+    const resp = await axios.get("<YOUR_HEROKU_URL>/auth_config.json");
     const config = resp.data;
     const AssignRole = (faunaRole, auth0Role) => {
         return {
