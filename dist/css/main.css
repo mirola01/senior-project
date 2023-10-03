@@ -20,12 +20,9 @@ body {
     font-size: 3em;
 }
 
-#auth-btn {
-    display: none;
-}
 
 /* Header */
-#header {
+#topbar {
     display: grid;
     grid-template-rows: 1fr 1fr;
     gap: 1rem;
