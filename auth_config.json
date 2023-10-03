@@ -1,6 +1,6 @@
 {
-  "domain": "<YOUR_AUTH0_APP_DOMAIN>",
-  "clientId": "<AUTH0_CLIENTID>",
-  "aud": "<FAUNA_ACCESS_PROVIDER_AUD_VALUE>",
-  "fauna_key": "<FAUNA_API_KEY>"
+  "domain": "dev-n84gx3uanib6ojpf.us.auth0.com",
+  "clientId": "Xe6t07ETgQBkSvipbSCCFRbxaBmeDMEC",
+  "aud": "https://db.fauna.com/db/ywhfa3yj6yyr1",
+  "fauna_key": "376153054506909769"
 }
