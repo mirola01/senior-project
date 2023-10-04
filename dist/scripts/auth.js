@@ -1,4 +1,3 @@
-
 // Fauna client
 var faunadb = window.faunadb;
 export var q = faunadb.query;
@@ -9,12 +8,17 @@ let isAuthenticated = false;
 
 export const configureClient = async () => {
     try {
-        const config = await response.json();
+        // Replace with your own Auth0 configuration
+        const config = {
+            domain: process.env.DOMAIN,
+            client_id: process.env.CLIENT_ID,
+            audience: process.env.AUDIENCE
+        };
 
         auth0 = await createAuth0Client({
-            domain: process.env.domain,
-            client_id: process.env.clientId,
-            audience: process.env.aud
+            domain: config.domain,
+            client_id: config.client_id,
+            audience: config.audience
         });
         console.log('Auth0 should be initialized here:', auth0);
         isAuthenticated = await auth0.isAuthenticated();
@@ -35,7 +39,7 @@ export const login = async () => {
         await auth0.loginWithRedirect({
             redirect_uri: "https://lineup-manager.netlify.app/player-database.html"
         });
-        
+
         // After successful login, the user will be redirected back to your app.
         // You can handle post-login logic in the callback handling part of your code.
     } catch (e) {
