@@ -10,3 +10,6 @@ npm-debug.log
 package.lock.json
 access_provdier.js
 >>>>>>> server
+
+# Local Netlify folder
+.netlify

@@ -10,6 +10,14 @@ window.onload = async () => {
   isAuthenticated = await auth0.isAuthenticated();
   console.log('why:', isAuthenticated);
   UI.updateUI(auth0);
+  // Call the authentication Netlify Function
+  const response = await fetch('/.netlify/functions/authenticate', {
+    headers: {
+      Authorization: `Bearer ${yourAuth0Token}`
+    }
+  });
+  const data = await response.json();
+  console.log('API Response:', data.message);
 
 };
 
