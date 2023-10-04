@@ -1,15 +1,4 @@
-<<<<<<< HEAD
 *.json
 node_modules/
-auth_config.json
-=======
-/node_modules
-npm-debug.log
-.DS_Store
-/*.env
-package.lock.json
-access_provdier.js
->>>>>>> server
-
 # Local Netlify folder
 .netlify
