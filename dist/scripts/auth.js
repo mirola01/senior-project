@@ -3,21 +3,18 @@
 var faunadb = window.faunadb;
 export var q = faunadb.query;
 
-const fetchAuthConfig = () => fetch("https://lineup-manager-4559a9dca214.herokuapp.com/auth_config.json");
-
 // Auth0 Client
 let auth0 = null;
 let isAuthenticated = false;
 
 export const configureClient = async () => {
     try {
-        const response = await fetchAuthConfig();
         const config = await response.json();
 
         auth0 = await createAuth0Client({
-            domain: config.domain,
-            client_id: config.clientId,
-            audience: config.aud
+            domain: process.env.domain,
+            client_id: process.env.clientId,
+            audience: process.env.aud
         });
         console.log('Auth0 should be initialized here:', auth0);
         isAuthenticated = await auth0.isAuthenticated();
