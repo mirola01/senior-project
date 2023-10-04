@@ -8,17 +8,13 @@ let isAuthenticated = false;
 
 export const configureClient = async () => {
     try {
-        // Replace with your own Auth0 configuration
-        const config = {
-            domain: process.env.DOMAIN,
-            client_id: process.env.CLIENT_ID,
-            audience: process.env.AUDIENCE
-        };
-
+        // Fetch Auth0 configuration from the server
+        const response = await fetch('/api/auth_config');
+        const config = await response.json();
         auth0 = await createAuth0Client({
-            domain: config.domain,
-            client_id: config.client_id,
-            audience: config.audience
+            domain: config.DOMAIN,
+            client_id: config.clientID,
+            audience: config.aud
         });
         console.log('Auth0 should be initialized here:', auth0);
         isAuthenticated = await auth0.isAuthenticated();
