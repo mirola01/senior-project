@@ -12,9 +12,9 @@ export const configureClient = async () => {
         const response = await fetch('/.netlify/functions/auth_config');
         const config = await response.json();
         auth0 = await createAuth0Client({
-            domain: config.DOMAIN,
-            client_id: config.clientID,
-            audience: config.aud
+            domain: config.domain,
+            client_id: config.client_id,
+            audience: config.audience
         });
         console.log('Auth0 should be initialized here:', auth0);
         isAuthenticated = await auth0.isAuthenticated();
