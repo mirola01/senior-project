@@ -35,7 +35,7 @@ passport.deserializeUser(function (user, done) {
 });
 
 // Middleware
-app.use(require("express-session")({ secret: "YOUR_SECRET_KEY", resave: false, saveUninitialized: false }));
+app.use(require("express-session")({ secret: authConfig.clientSecret, resave: false, saveUninitialized: false }));
 app.use(passport.initialize());
 app.use(passport.session());
 
