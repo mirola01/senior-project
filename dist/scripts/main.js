@@ -6,8 +6,11 @@ let auth0 = null;
 let isAuthenticated = false;
 
 window.addEventListener('load', async () => {
-  auth0 = await Auth.configureClient();
-  isAuthenticated = await auth0.isAuthenticated();
+  // Initialize the Auth0 client when the window loads
+  await Auth.configureClient();
+
+  // You can access the auth0 instance if needed
+  auth0 = Auth.getAuth0();
 });
 
 document.querySelector('#auth-btn').addEventListener('click', async (e) => {
