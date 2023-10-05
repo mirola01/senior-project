@@ -20,6 +20,7 @@ export const getAuth0 = () => {
     return auth0;
 };
 
+window.login = login;
 export const login = async () => {
     try {
         console.log("First", auth0)
