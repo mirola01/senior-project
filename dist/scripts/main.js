@@ -28,10 +28,11 @@ add_nw_btn.addEventListener('click', (e) => {
   console.log(e)
   body_.classList.add('container-fade');
   form.style.display = 'block';
-})
+});
 
 document.querySelector('#close-btn').addEventListener('click', (e) => {
   console.log(e)
   body_.classList.remove('container-fade');
   form.style.display = 'none';
 
+});
