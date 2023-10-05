@@ -9,7 +9,7 @@ let isAuthenticated = false;
 export const configureClient = async () => {
     try {
         // Fetch Auth0 configuration from the server
-        const response = await fetch('/.netlify/functions/auth_config');
+        const response = await fetch('/auth_config.json');
         const config = await response.json();
         auth0 = await createAuth0Client({
             domain: config.domain,
