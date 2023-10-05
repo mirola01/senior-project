@@ -8,8 +8,9 @@ window.onload = async () => {
   let isAuthenticated = false;
   auth0 = await Auth.configureClient();
   isAuthenticated = await auth0.isAuthenticated();
+  console.log('auth0:', auth0);
   console.log('why:', isAuthenticated);
-  UI.updateUI(auth0);
+
   // Call the authentication Netlify Function
   const response = await fetch('/.netlify/functions/authenticate', {
     headers: {
