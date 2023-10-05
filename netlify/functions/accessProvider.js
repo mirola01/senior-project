@@ -1,8 +1,11 @@
 
+// Import the FaunaDB client
 const faunadb = require('faunadb');
 const q = faunadb.query;
 
+// Main handler function for the Netlify function
 exports.handler = async function(event, context) {
+// Function to create an access provider in FaunaDB
     const createProvider = async () => {
         const AssignRole = (faunaRole, auth0Role) => {
             return {
@@ -34,6 +37,7 @@ exports.handler = async function(event, context) {
             )
         )
     }
+// Try to create the access provider and handle errors
   try {
     const result = await createProvider();
     return {

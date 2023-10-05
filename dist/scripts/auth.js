@@ -1,8 +1,11 @@
+// Initialize Auth0 client as null
 let auth0 = null;
+// Initialize authentication status as false
 let isAuthenticated = false;
 var faunadb = window.faunadb;
 export var q = faunadb.query;
 
+// Configure the Auth0 client
 export const configureClient = async () => {
     try {
         const response = await fetch('/.netlify/functions/auth_config');
@@ -20,6 +23,7 @@ export const getAuth0 = () => {
     return auth0;
 };
 
+// Handle user login
 export const login = async () => {
     try {
         console.log("First", auth0)
@@ -47,6 +51,7 @@ export const login = async () => {
     }
 };
 
+// Handle user logout
 export const logout = () => {
     auth0.logout({
         returnTo: 'https://lineup-manager.netlify.app'
