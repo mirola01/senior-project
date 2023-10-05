@@ -22,7 +22,9 @@ export const getAuth0 = () => {
 
 export const login = async () => {
     try {
+        console.log("First", auth0)
         isAuthenticated = await auth0.isAuthenticated();
+        console.log("Auth?", isAuthenticated)
         if (isAuthenticated) {
             console.log("Auth", auth0)
             const yourAuth0Token = await auth0.getTokenSilently();
