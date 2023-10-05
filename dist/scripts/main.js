@@ -8,8 +8,10 @@ window.onload = async () => {
   let isAuthenticated = false;
   auth0 = await Auth.configureClient();
   isAuthenticated = await auth0.isAuthenticated();
+  const yourAuth0Token = await auth0.getTokenSilently();
   console.log('auth0:', auth0);
   console.log('why:', isAuthenticated);
+  console.log('Auth0 Token:', yourAuth0Token);
 
   // Call the authentication Netlify Function
   const response = await fetch('/.netlify/functions/authenticate', {
