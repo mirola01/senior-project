@@ -34,6 +34,7 @@ export const login = async () => {
       const data = await response.json();
       console.log('API Response:', data.message);
     } else {
+        console.log("Not auth", auth0)
       await auth0.loginWithRedirect({
         redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
       });
