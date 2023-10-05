@@ -1,7 +1,6 @@
 {
   "name": "faunadb-auth0-demo",
   "version": "1.0.0",
-  "type": "module",
   "description": "",
   "main": "server.js",
   "scripts": {
