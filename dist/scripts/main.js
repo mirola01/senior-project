@@ -18,7 +18,6 @@ document.querySelector('#auth-btn').addEventListener('click', async (e) => {
   }
 });
 
-Events.setupEventListeners();
 
 const add_nw_btn = document.querySelector('#add-new-btn');
 const body_ = document.querySelector('.container');
