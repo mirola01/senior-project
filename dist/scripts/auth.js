@@ -4,6 +4,8 @@ export var q = faunadb.query;
 
 // Auth0 Client
 let auth0 = null;
+const REDIRECT_URI = 'https://lineup-manager.netlify.app/player-database.html';
+const RETURN_TO = 'https://lineup-manager.netlify.app';
 let isAuthenticated = false;
 
 export const configureClient = async () => {
@@ -20,6 +22,7 @@ export const configureClient = async () => {
         isAuthenticated = await auth0.isAuthenticated();
     } catch (e) {
         console.error('Auth0 client initialization failed:', e);
+        return null;
     }
 
     // const query = window.location.search;
@@ -31,15 +34,36 @@ export const configureClient = async () => {
 };
 
 export const login = async () => {
+    let yourAuth0Token = null;
+
+    // Initialize Auth0 client if not already done
+    if (!auth0) {
+        auth0 = await configureClient();
+    }
+
+    // Check if user is authenticated
+    isAuthenticated = await auth0.isAuthenticated();
+    if (!isAuthenticated) {
+        yourAuth0Token = await auth0.getTokenSilently();
+        // Call the authentication Netlify Function
+        const response = await fetch('/.netlify/functions/authenticate', {
+            headers: {
+                Authorization: `Bearer ${yourAuth0Token}`
+            }
+        });
+        const data = await response.json();
+        console.log('API Response:', data.message);
+    }
     try {
         await auth0.loginWithRedirect({
-            redirect_uri: "https://lineup-manager.netlify.app/player-database.html"
+            redirect_uri: REDIRECT_URI
         });
 
         // After successful login, the user will be redirected back to your app.
         // You can handle post-login logic in the callback handling part of your code.
     } catch (e) {
         console.error("Login failed:", e);
+        // Handle specific errors here
     }
 };
 
@@ -47,7 +71,7 @@ export const login = async () => {
 export const logout = () => {
     auth0.logout({
         logoutParams: {
-            returnTo: "https://lineup-manager.netlify.app"
+            returnTo: RETURN_TO
         }
     });
 };
