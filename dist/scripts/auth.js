@@ -35,12 +35,16 @@ export const login = async () => {
             });
             const data = await response.json();
             console.log('API Response:', data.message);
+            await auth0.loginWithRedirect({
+                redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
+            });
         } else {
-            console.log("Not auth", auth0)
+            console.log("Not auth, attempting to authenticate", auth0);
+            await auth0.loginWithRedirect({
+                redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
+            });
+            
         }
-        await auth0.loginWithRedirect({
-            redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
-        });
     } catch (e) {
         console.error('Login failed:', e);
     }
