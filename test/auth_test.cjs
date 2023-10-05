@@ -1,16 +1,13 @@
-const chai = require('chai');
-const expect = chai.expect;
-const sinon = require('sinon');
-
-// Import the functions you want to test from auth.js
-const { configureClient, login, logout } = require('../dist/scripts/auth');
+import { expect } from 'chai';
+import sinon from 'sinon';
+import * as Auth from '../dist/scripts/auth';
 
 describe('Auth Functions', () => {
   describe('configureClient', () => {
     it('should initialize Auth0 client', async () => {
       const fetchStub = sinon.stub(global, 'fetch');
       fetchStub.resolves({ json: () => ({ domain: 'test', client_id: 'test', audience: 'test' }) });
-      await configureClient();
+      await Auth.configureClient();
       expect(fetchStub.calledOnce).to.be.true;
       fetchStub.restore();
     });
@@ -18,9 +15,9 @@ describe('Auth Functions', () => {
 
   describe('login', () => {
     it('should handle login', async () => {
-      const isAuthenticatedStub = sinon.stub(auth0, 'isAuthenticated').resolves(true);
-      const getTokenSilentlyStub = sinon.stub(auth0, 'getTokenSilently').resolves('test-token');
-      await login();
+      const isAuthenticatedStub = sinon.stub(Auth.auth0, 'isAuthenticated').resolves(true);
+      const getTokenSilentlyStub = sinon.stub(Auth.auth0, 'getTokenSilently').resolves('test-token');
+      await Auth.login();
       expect(isAuthenticatedStub.calledOnce).to.be.true;
       expect(getTokenSilentlyStub.calledOnce).to.be.true;
       isAuthenticatedStub.restore();
@@ -30,8 +27,8 @@ describe('Auth Functions', () => {
 
   describe('logout', () => {
     it('should handle logout', async () => {
-      const logoutStub = sinon.stub(auth0, 'logout');
-      logout();
+      const logoutStub = sinon.stub(Auth.auth0, 'logout');
+      Auth.logout();
       expect(logoutStub.calledOnce).to.be.true;
       logoutStub.restore();
     });
