@@ -2,7 +2,7 @@
 let auth0 = null;
 let isAuthenticated = false;
 var faunadb = window.faunadb;
-export var q = faunadb.query;
+module.exports.q = faunadb.query;
 
 export const configureClient = async () => {
   try {
