@@ -31,6 +31,8 @@
     "node": "v16.13.0"
   },
   "devDependencies": {
-    "sinon": "^16.1.0"
+    "sinon": "^16.1.0",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4"
   }
 }
