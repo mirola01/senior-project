@@ -32,6 +32,11 @@ document.querySelector('#auth-btn').addEventListener('click', async (e) => {
   });
   const data = await response.json();
   console.log('API Response:', data.message);
+  if (document.querySelector('#auth-btn').innerHTML === 'Login') {
+    Auth.login();
+  } else {
+    Auth.logout();
+  }
 });
 document.querySelector('#close-btn').addEventListener('click', (e) => {
   console.log(e)
