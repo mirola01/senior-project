@@ -17,6 +17,9 @@ export const configureClient = async () => {
     console.error('Auth0 client initialization failed:', e);
   }
 };
+export const getAuth0 = () => {
+  return auth0;
+};
 
 export const login = async () => {
   try {

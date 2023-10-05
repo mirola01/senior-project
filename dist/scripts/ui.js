@@ -1,8 +1,7 @@
-import {
-    auth0, q
-} from './auth.js';
+import { getAuth0, q } from './auth.js';
 
 export async function updateUI() {
+    const auth0 = getAuth0();
     console.log('auth0 object before isAuthenticated call:', auth0);
 
     const isAuthenticated = await auth0.isAuthenticated();
