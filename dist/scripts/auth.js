@@ -1,6 +1,8 @@
 
 let auth0 = null;
 let isAuthenticated = false;
+var faunadb = window.faunadb;
+var q = faunadb.query;
 
 export const configureClient = async () => {
   try {
@@ -13,7 +15,6 @@ export const configureClient = async () => {
     });
   } catch (e) {
     console.error('Auth0 client initialization failed:', e);
-    return null;
   }
 };
 
