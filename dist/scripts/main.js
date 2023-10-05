@@ -7,8 +7,8 @@ window.onload = async () => {
   let auth0 = null;
   let isAuthenticated = false;
   auth0 = await Auth.configureClient();
+  isAuthenticated = await auth0.isAuthenticated();
   const yourAuth0Token = await auth0.getTokenSilently();
-  isAuthenticated = await yourAuth0Token.isAuthenticated();
   console.log('auth0:', auth0);
   console.log('why:', isAuthenticated);
   console.log('Auth0 Token:', yourAuth0Token);
