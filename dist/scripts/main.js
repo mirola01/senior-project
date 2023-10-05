@@ -14,6 +14,16 @@ window.addEventListener('load', async () => {
   console.log("load", auth0)
 });
 
+document.querySelector('#auth-btn').addEventListener('click', async (e) => {
+  console.log("auth click")
+  if (document.querySelector('#auth-btn').innerHTML === 'Login') {
+    console.log("login")
+    Auth.login();
+  } else {
+    Auth.logout();
+  }
+});
+
 
 const add_nw_btn = document.querySelector('#add-new-btn');
 const body_ = document.querySelector('.container');

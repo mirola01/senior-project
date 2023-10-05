@@ -21,7 +21,6 @@ export const getAuth0 = () => {
 };
 
 export const login = async () => {
-    window.login = login;
     try {
         console.log("First", auth0)
         isAuthenticated = await auth0.isAuthenticated();
