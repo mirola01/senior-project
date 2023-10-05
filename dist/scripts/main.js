@@ -8,13 +8,15 @@ let isAuthenticated = false;
 window.addEventListener('load', async () => {
   // Initialize the Auth0 client when the window loads
   await Auth.configureClient();
-
+  
   // You can access the auth0 instance if needed
   auth0 = Auth.getAuth0();
+  console.log("load", auth0)
 });
 
 document.querySelector('#auth-btn').addEventListener('click', async (e) => {
   if (document.querySelector('#auth-btn').innerHTML === 'Login') {
+    console.log("login")
     Auth.login();
   } else {
     Auth.logout();
