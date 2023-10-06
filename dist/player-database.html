@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js"></script>
 </head>
 
@@ -51,14 +51,14 @@
           </a>
         </li>
         <ul class="bottom-nav">
-            <li><a href="settings.html"><i class="fa-solid fa-gear"></i>
-                <p>Settings</p>
-              </a>
-            </li>
-            <li>
-              <button id="auth-btn" onclick="logout()">Log out</button>
-            </li>
-          </ul>
+          <li><a href="settings.html"><i class="fa-solid fa-gear"></i>
+              <p>Settings</p>
+            </a>
+          </li>
+          <li>
+            <button id="auth-btn" onclick="logout()">Log out</button>
+          </li>
+        </ul>
       </ul>
     </div>
   </div>
@@ -94,25 +94,24 @@
           <img src="images/search-outline.svg" alt="">
           <input type="text" placeholder=" search">
         </div>
-
       </div>
       <div id="add-new-btn">
         <img src="images/add-outline.svg" alt="">
       </div>
       <table id="player-table" class="table"></table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Age</th>
-            <th>Position</th>
-            <th>Action</th>
-          </tr>
-        </thead>
-        <tbody id="player-tbody">
-          <!-- Rows will be added here dynamically -->
-        </tbody>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Position</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="player-tbody">
+        <!-- Rows will be added here dynamically -->
+      </tbody>
       </table>
-      
+
     </div>
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
     <script type="module" src="scripts/auth.js"></script>
