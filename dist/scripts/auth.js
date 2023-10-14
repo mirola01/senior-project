@@ -10,6 +10,8 @@ export const configureClient = async () => {
     try {
         const response = await fetch('/.netlify/functions/auth_config');
         const config = await response.json();
+        console.log('Auth0 Config:', config);
+        console.log('Initializing Auth0 client with:', { domain: config.domain, client_id: config.client_id, audience: config.audience });
         auth0 = await createAuth0Client({
             domain: config.domain,
             client_id: config.client_id,
@@ -42,6 +44,7 @@ export const login = async () => {
             console.log('API Response:', data.message);
         } else {
             console.log("Not auth, attempting to authenticate", auth0);
+            console.log('Redirecting to:', 'https://lineup-manager.netlify.app/player-database.html');
             await auth0.loginWithRedirect({
                 redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
             });
