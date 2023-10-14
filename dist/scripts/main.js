@@ -9,7 +9,12 @@ let isAuthenticated = false;
 
 // Initialize the Auth0 client when the window loads
 window.addEventListener('load', async () => {
-  await Auth.configureClient();
+    try {
+      await Auth.configureClient();
+    } catch (err) {
+      console.error('Failed to initialize Auth0 client:', err);
+      return;
+    }
 
   // You can access the auth0 instance if needed
   auth0 = Auth.getAuth0();
