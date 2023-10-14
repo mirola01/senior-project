@@ -9,11 +9,9 @@ let isAuthenticated = false;
 
 // Initialize the Auth0 client when the window loads
 window.onload = async () => {
-  let auth0 = null;
-  let isAuthenticated = false;
   auth0 = await Auth.configureClient();
   isAuthenticated = await auth0.isAuthenticated();
-  console.log('why:', isAuthenticated);
+  console.log('Auth?', isAuthenticated);
   UI.updateUI(auth0);
 
 };
