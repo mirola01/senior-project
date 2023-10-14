@@ -13,16 +13,24 @@ window.addEventListener('load', async () => {
 
   // You can access the auth0 instance if needed
   auth0 = Auth.getAuth0();
-  console.log("load", auth0)
+  console.log("load", auth0);
+  // Debugging code
+  setTimeout(async () => {
+    const debugIsAuthenticated = await auth0.isAuthenticated();
+    console.log('Debug Auth?', debugIsAuthenticated);
+    console.log('Auth0 Transaction:', auth0.transaction);
+    console.log('Auth0 Scope:', auth0.options.scope);
+  }, 2000);
+
   isAuthenticated = await auth0.isAuthenticated();
-  console.log("Auth?", isAuthenticated)
+  console.log("Auth?", isAuthenticated);
 });
 
 // Handle authentication button click
 document.querySelector('#auth-btn').addEventListener('click', async (e) => {
-  console.log("auth click")
+  console.log("auth click");
   if (document.querySelector('#auth-btn').innerHTML === 'Login') {
-    console.log("login")
+    console.log("login");
     Auth.login();
   } else {
     Auth.logout();
