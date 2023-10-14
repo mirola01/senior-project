@@ -1,3 +1,4 @@
+import { getAuth0 } from './auth.js';
 // Function to create a new player
 export const new_player = async () => {
   console.log('Value of auth0.isAuthenticated:', auth0.isAuthenticated);
@@ -10,6 +11,7 @@ export const new_player = async () => {
   const accessToken = await auth0.getTokenSilently();
   console.log(accessToken);
   console.log("the token is " + accessToken)
+  auth0 = getAuth0();
   if (isAuthenticated) {
     var client = new faunadb.Client({
       secret: String(accessToken),

@@ -17,7 +17,7 @@ export const configureClient = async () => {
         });
     } catch (e) {
         console.error('Auth0 client initialization failed:', e);
-        console.log('Auth0 config:', config);
+        if (config) { console.log('Auth0 config:', config); }
     }
 };
 export const getAuth0 = () => {
