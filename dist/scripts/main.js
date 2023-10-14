@@ -23,6 +23,7 @@ window.addEventListener('load', async () => {
   setTimeout(async () => {
     const debugIsAuthenticated = await auth0.isAuthenticated();
     console.log('Debug Auth?', debugIsAuthenticated);
+    console.log('Debug Error:', error);
     console.log('Auth0 Transaction:', auth0.transaction);
     console.log('Auth0 Scope:', auth0.options.scope);
   }, 2000);
