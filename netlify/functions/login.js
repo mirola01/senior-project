@@ -1,14 +1,11 @@
-
 // Import Passport and Auth0 Strategy libraries
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
 
 // Main handler function for the Netlify function
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
   // Initialize Passport and Auth0 Strategy
-// Initialize Passport and Auth0 Strategy
-  const strategy = new Auth0Strategy(
-    {
+  const strategy = new Auth0Strategy({
       domain: process.env.DOMAIN,
       clientID: process.env.clientID,
       clientSecret: process.env.clientSecret,
@@ -19,15 +16,17 @@ exports.handler = async function(event, context) {
     }
   );
 
-// Use the Auth0 strategy with Passport
+  // Use the Auth0 strategy with Passport
   passport.use(strategy);
 
-// Authenticate using the Auth0 strategy
+  // Authenticate using the Auth0 strategy
   passport.authenticate('auth0', {
     scope: 'openid profile email'
   })(event, context);
   return {
     statusCode: 200,
-    body: JSON.stringify({ message: 'Login function' })
+    body: JSON.stringify({
+      message: 'Login function'
+    })
   };
 };
