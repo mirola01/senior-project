@@ -1,15 +1,21 @@
-// Import modules
+/**
+ * Import modules
+ */
 import * as Auth from './auth.js';
 import * as Database from './database.js';
 import * as UI from './ui.js';
 import * as Events from './events.js';
-// Initialize Auth0 client as null
+/**
+ * Initialize Auth0 client as null
+ */
 let auth0 = null;
 let isAuthenticated = false;
 
-// Initialize the Auth0 client when the window loads
+/**
+ * Initialize the Auth0 client when the window loads
+ */
 window.onload = async () => {
-  auth0 = await Auth.configureClient();
+  auth0 = await Auth.getAuth0();
   isAuthenticated = await auth0.isAuthenticated();
   console.log('Auth?', isAuthenticated);
   UI.updateUI(auth0);
@@ -17,7 +23,9 @@ window.onload = async () => {
 };
 
 
-// UI elements
+/**
+ * UI elements
+ */
 const add_nw_btn = document.querySelector('#add-new-btn');
 add_nw_btn.setAttribute('aria-label', 'Add new Button');
 
@@ -25,7 +33,9 @@ const body_ = document.querySelector('.container');
 const form = document.querySelector('.form');
 form.setAttribute('tabindex', '-1'); // to manage focus
 
-// Handle authentication button click
+/**
+ * Handle authentication button click
+ */
 document.querySelector('#auth-btn').addEventListener('click', async (e) => {
   console.log("auth click");
   const authBtn = document.querySelector('#auth-btn');
