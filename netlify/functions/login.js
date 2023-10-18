@@ -9,7 +9,7 @@ exports.handler = async function (event, context) {
       domain: process.env.DOMAIN,
       clientID: process.env.clientID,
       clientSecret: process.env.clientSecret,
-      callbackURL: 'https://lineup-manager.netlify.app/callback'
+      callbackURL: 'https://lineup-manager.netlify.app/player-database.html'
     },
     function (accessToken, refreshToken, extraParams, profile, done) {
       return done(null, profile);
