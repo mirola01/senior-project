@@ -4,14 +4,29 @@ import * as Database from './database.js';
 import * as UI from './ui.js';
 import * as Events from './events.js';
 
+let auth0Client = null;
 // Initialize the Auth0 client when the window loads
 window.onload = async () => {
   try {
     await Auth.configureClient();
     const auth0 = Auth.getAuth0();
     const isAuthenticated = await auth0.isAuthenticated();
-    console.log('Auth?', isAuthenticated);
-    UI.updateUI(auth0);
+    if (isAuthenticated) {
+      UI.updateUI(auth0);
+      return;
+    }
+      // NEW - check for the code and state parameters
+  const query = window.location.search;
+  if (query.includes("code=") && query.includes("state=")) {
+
+    // Process the login state
+    await auth0.handleRedirectCallback();
+    
+    console.log("Authentificated")
+
+    // Use replaceState to redirect the user away and remove the querystring parameters
+    window.history.replaceState({}, document.title, "/");
+  }
   } catch (e) {
     console.error('Initialization failed:', e);
   }
