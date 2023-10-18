@@ -17,6 +17,7 @@ export const configureClient = async () => {
             client_id: config.client_id,
             audience: config.audience
         });
+        console.log("2 --> Auth", auth0)
     } catch (e) {
         console.error('Auth0 client initialization failed:', e);
         if (config) { console.log('Auth0 config:', config); }
@@ -42,6 +43,7 @@ export const login = async () => {
             const data = await response.json();
             console.log('API Response:', data.message);
         } else {
+            configureClient();
             await auth0.loginWithRedirect({
                 redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
             });
