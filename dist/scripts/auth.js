@@ -18,8 +18,8 @@ export const configureClient = async () => {
             audience: config.audience
         });
         console.log("2 --> Auth", auth0)
-        let yourAuth0Token = await auth0.getTokenSilently();
-        isAuthenticated = await yourAuth0Token.isAuthenticated();
+        isAuthenticated = await auth0.isAuthenticated();
+        yourAuth0Token = await auth0.getTokenSilently();
         console.log('2 --> Auth?', isAuthenticated);
     } catch (e) {
         console.error('Auth0 client initialization failed:', e);
