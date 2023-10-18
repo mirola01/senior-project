@@ -4,12 +4,13 @@ let auth0 = null;
 let isAuthenticated = false;
 var faunadb = window.faunadb;
 export var q = faunadb.query;
+const fetchAuthConfig = () => fetch('/.netlify/functions/auth_config');
 
 // Configure the Auth0 client
 export const configureClient = async () => {
     let config;
     try {
-        const response = await fetch('/.netlify/functions/auth_config');
+        const response = await fetchAuthConfig();
         config = await response.json();
         console.log('Auth0 Config:', config);
         auth0 = await createAuth0Client({
@@ -42,6 +43,7 @@ export const login = async () => {
             const data = await response.json();
             console.log('API Response:', data.message);
         } else {
+            await configureClient();
             await auth0.loginWithRedirect({
                 redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
             });
