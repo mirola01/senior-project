@@ -1,3 +1,5 @@
+import { Auth0Client } from '@auth0/auth0-spa-js';
+
 // Initialize Auth0 client as null
 let auth0 = null;
 // Initialize authentication status as false
@@ -13,7 +15,7 @@ export const configureClient = async () => {
         const response = await fetchAuthConfig();
         config = await response.json();
         console.log('Auth0 Config:', config);
-        auth0 = await createAuth0Client({
+        auth0 = new Auth0Client({
             domain: config.domain,
             client_id: config.client_id,
             authorizationParams: {
@@ -22,6 +24,8 @@ export const configureClient = async () => {
         });
         const token = await auth0.getTokenSilently();
         console.log(token)
+        isAuthenticated = await auth0.isAuthenticated();
+        console.log(isAuthenticated)
     } catch (e) {
         console.error('Auth0 client initialization failed:', e);
         if (config) { console.log('Auth0 config:', config); }
