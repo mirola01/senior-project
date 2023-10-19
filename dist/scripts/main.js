@@ -30,6 +30,7 @@ window.onload = async () => {
   } catch (e) {
     console.error('Initialization failed:', e);
   }
+  UI.setupTabs();
 };
 
 // UI elements
