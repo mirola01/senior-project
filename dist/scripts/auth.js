@@ -20,6 +20,8 @@ export const configureClient = async () => {
                 audience: config.audience   // NEW - add the audience value
               }
         });
+        const token = await auth0.getTokenSilently();
+        console.log(token)
     } catch (e) {
         console.error('Auth0 client initialization failed:', e);
         if (config) { console.log('Auth0 config:', config); }
@@ -32,27 +34,9 @@ export const getAuth0 = () => {
 
 // Handle user login
 export const login = async () => {
-    let yourAuth0Token;
-    try {
-        isAuthenticated = await auth0.isAuthenticated();
-        if (isAuthenticated) {
-            yourAuth0Token = await auth0.getTokenSilently();
-            const response = await fetch('/.netlify/functions/authenticate', {
-                headers: {
-                    Authorization: `Bearer ${yourAuth0Token}`
-                }
-            });
-            const data = await response.json();
-            console.log('API Response:', data.message);
-        } else {
-            await auth0.loginWithRedirect({
+    await auth0.loginWithRedirect({
                 redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
-            });
-        }
-    } catch (e) {
-        console.error('Login failed:', e);
-        console.log('Login details:', isAuthenticated, yourAuth0Token);
-    }
+    });
 };
 
 // Handle user logout
