@@ -11,26 +11,12 @@ window.onload = async () => {
     await Auth.configureClient();
     const auth0 = Auth.getAuth0();
     const isAuthenticated = await auth0.isAuthenticated();
-    if (isAuthenticated) {
-      UI.updateUI(auth0);
-      return;
-    }
-      // NEW - check for the code and state parameters
-  const query = window.location.search;
-  if (query.includes("code=") && query.includes("state=")) {
-
-    // Process the login state
-    await auth0.handleRedirectCallback();
-    
-    console.log("Authentificated")
-
-    // Use replaceState to redirect the user away and remove the querystring parameters
-    window.history.replaceState({}, document.title, "/player-database");
-  }
+    console.log('Auth?', isAuthenticated);
+    UI.updateUI(auth0);
   } catch (e) {
     console.error('Initialization failed:', e);
   }
-  UI.setupTabs();
+  //UI.setupTabs();
 };
 
 // UI elements
