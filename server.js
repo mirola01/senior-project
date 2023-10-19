@@ -13,7 +13,7 @@ const config = {
   auth0Logout: true,
   baseURL: "https://lineup-manager.netlify.app/", 
   clientID: process.env.clientID, // Your Auth0 Client ID
-  issuerBaseURL: process.env.DOMAIN, // Your Auth0 Domain
+  issuerBaseURL: "https://dev-n84gx3uanib6ojpf.us.auth0.com", // Your Auth0 Domain
   secret: process.env.clientSecret,
 };
 
