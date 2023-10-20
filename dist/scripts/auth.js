@@ -38,6 +38,16 @@ export const login = async () => {
     await auth0.loginWithRedirect({
         redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
     });
+    const query = window.location.search;
+  if (query.includes("code=") && query.includes("state=")) {
+
+    // Process the login state
+    await auth0.handleRedirectCallback();
+    
+    console.log("Authentificated")
+
+    // Use replaceState to redirect the user away and remove the querystring parameters
+    window.history.replaceState({}, document.title, "/player-database.html");}
 };
 
 // Handle user logout
