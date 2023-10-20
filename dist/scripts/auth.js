@@ -16,9 +16,8 @@ export const configureClient = async () => {
         auth0 = new Auth0Client({
             domain: config.domain,
             client_id: config.client_id,
-            authorizationParams: {
-                audience: config.audience   // NEW - add the audience value
-              }
+            audience: config.audience
+            
         });
         const token = await auth0.getTokenSilently();
         console.log(token)
@@ -37,7 +36,7 @@ export const getAuth0 = () => {
 // Handle user login
 export const login = async () => {
     await auth0.loginWithRedirect({
-                redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
+        redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
     });
 };
 
