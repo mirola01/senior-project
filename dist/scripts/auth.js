@@ -13,7 +13,7 @@ export const configureClient = async () => {
         const response = await fetchAuthConfig();
         config = await response.json();
         console.log('Auth0 Config:', config);
-        auth0 = new Auth0Client({
+        auth0 = await createAuth0Client({ 
             domain: config.domain,
             client_id: config.client_id,
             audience: config.audience
