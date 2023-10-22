@@ -20,7 +20,6 @@ window.onload = async () => {
 
     // Use replaceState to redirect the user away and remove the querystring parameters
     window.history.replaceState({}, document.title, "/player-database.html");}
-};
     const isAuthenticated = await auth0.isAuthenticated();
     console.log('Auth?', isAuthenticated);
     UI.updateUI(auth0);
