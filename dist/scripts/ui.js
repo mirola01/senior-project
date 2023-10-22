@@ -27,7 +27,7 @@ export async function updateUI() {
         let token = await client.query(
             q.CurrentToken()
         );
-        console.log("token", token)
+        console.log("token", token);
         let user_role = token["https:/db.fauna.com/roles"][0];
         console.log("user_role",user_role);
 
