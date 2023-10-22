@@ -1,10 +1,10 @@
-import {
-    getAuth0,
-    q
-} from './auth.js';
+import * as Auth from "./auth.js";
+
+var faunadb = window.faunadb;
+var q = faunadb.query;
 
 export async function updateUI() {
-    const auth0 = getAuth0();
+    const auth0 = Auth.getAuth0();
 
     const isAuthenticated = await auth0.isAuthenticated();
     if (isAuthenticated) {
