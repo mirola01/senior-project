@@ -15,9 +15,11 @@ export async function updateUI() {
          * Fetch players
          */
         var client = new faunadb.Client({
-            domain: 'db.us.fauna.com',  
-            scheme: 'https',
-        });
+            secret: accessToken,
+            domain: 'db.us.fauna.com',
+            port: 443,
+            scheme: 'https'
+        })
         console.log("client", client)
         //document.querySelector(".card-container").style.display = 'grid';
         /**
