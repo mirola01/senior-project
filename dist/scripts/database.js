@@ -41,7 +41,6 @@ export const new_player = async () => {
   }
 };
 // Function to delete a player by ID
-// Function to delete a player by ID
 const delete_player = async (playerId) => {
   try {
     const isAuthenticated = await auth0.isAuthenticated();
