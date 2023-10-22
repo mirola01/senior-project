@@ -32,6 +32,10 @@ export const getAuth0 = () => {
     return auth0;
 };
 
+export const setAuth0 = (new_auth) => {
+    auth0 = new_auth;
+};
+
 // Handle user login
 export const login = async () => {
     await auth0.loginWithRedirect({

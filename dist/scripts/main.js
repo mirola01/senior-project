@@ -15,7 +15,7 @@ window.onload = async () => {
     if (query.includes("code=") && query.includes("state=")) {
       // Process the login state
       await auth0.handleRedirectCallback();
-
+      Auth.setAuth0(auth0);
       console.log("Authentificated");
 
       // Use replaceState to redirect the user away and remove the querystring parameters
