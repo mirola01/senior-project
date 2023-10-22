@@ -1,12 +1,16 @@
 import { getAuth0 } from './auth.js';
-// Function to create a new player
+/**
+ * Function to create a new player
+ */
 export const new_player = async () => {
   console.log('Value of auth0.isAuthenticated:', auth0.isAuthenticated);
   if (!auth0) {
     console.error('auth0 is not initialized.');
     return;
   }
-  // Check if the user is authenticated
+  /**
+ * Check if the user is authenticated
+ */
   const isAuthenticated = await auth0.isAuthenticated();
   const accessToken = await auth0.getTokenSilently();
   console.log(accessToken);
@@ -20,7 +24,9 @@ export const new_player = async () => {
       scheme: 'https'
     })
 
-    // Create a new player in the FaunaDB collection
+    /**
+ * Create a new player in the FaunaDB collection
+ */
     let data = await client.query(
         q.Create(q.Collection("Players"), {
           data: {
@@ -40,7 +46,9 @@ export const new_player = async () => {
     window.location.reload();
   }
 };
-// Function to delete a player by ID
+/**
+ * Function to delete a player by ID
+ */
 // Function to delete a player by ID
 const delete_player = async (playerId) => {
   try {
@@ -55,7 +63,9 @@ const delete_player = async (playerId) => {
         scheme: 'https'
       });
 
-      // Delete the player from the FaunaDB collection
+      /**
+ * Delete the player from the FaunaDB collection
+ */
       // Use q.Delete to remove the player document by ID
       await client.query(
         q.Delete(q.Ref(q.Collection("Players"), playerId))

@@ -1,4 +1,7 @@
-import { getAuth0, q } from './auth.js';
+import {
+    getAuth0,
+    q
+} from './auth.js';
 
 export async function updateUI() {
     const auth0 = getAuth0();
@@ -9,7 +12,9 @@ export async function updateUI() {
         const accessToken = await auth0.getTokenSilently();
         console.log(accessToken);
 
-        // fetch players
+        /**
+         * Fetch players
+         */
         var client = new faunadb.Client({
             secret: accessToken,
             domain: 'db.us.fauna.com',
@@ -17,7 +22,9 @@ export async function updateUI() {
             scheme: 'https'
         });
         //document.querySelector(".card-container").style.display = 'grid';
-        // check the role
+        /**
+         * Check the role
+         */
         let token = await client.query(
             q.CurrentToken()
         );
@@ -43,13 +50,17 @@ export async function updateUI() {
             //players_section.lastElementChild.remove()
             const tableBody = document.getElementById('player-tbody');
             var htmlText = players['data'].map(function (o) {
-                // Create a checkbox input element
+                /**
+                 * Create a checkbox input element
+                 */
                 const checkbox = document.createElement("input");
                 checkbox.type = "checkbox";
                 checkbox.className = "delete-checkbox"; // Add a class for identification
                 checkbox.setAttribute("data-id", o.ref.id); // Set the data-id attribute
 
-                // Create a label element for the checkbox
+                /**
+                 * Create a label element for the checkbox
+                 */
                 const label = document.createElement("label");
                 label.htmlFor = o.ref.id; // Match the 'for' attribute to the checkbox's ID
                 label.textContent = "Checkbox Label"; // You can customize the label text
@@ -104,3 +115,49 @@ export async function updateUI() {
         console.log("not auth")
     }
 }
+
+export function setupTabs() {
+    $('.tactical-guide').find('input, textarea').on('keyup blur focus', function (e) {
+
+        var $this = $(this),
+            label = $this.prev('label');
+
+        if (e.type === 'keyup') {
+            if ($this.val() === '') {
+                label.removeClass('active-tac highlight');
+            } else {
+                label.addClass('active-tac highlight');
+            }
+        } else if (e.type === 'blur') {
+            if ($this.val() === '') {
+                label.removeClass('active-tac highlight');
+            } else {
+                label.removeClass('highlight');
+            }
+        } else if (e.type === 'focus') {
+
+            if ($this.val() === '') {
+                label.removeClass('highlight');
+            } else if ($this.val() !== '') {
+                label.addClass('highlight');
+            }
+        }
+
+    });
+
+    $('.tab a').on('click', function (e) {
+
+        e.preventDefault();
+
+        $(this).parent().addClass('active-tac');
+        $(this).parent().siblings().removeClass('active-tac');
+
+        target = $(this).attr('href');
+
+        $('.tab-content > div').not(target).hide();
+
+        $(target).fadeIn(600);
+
+    });
+}
+
