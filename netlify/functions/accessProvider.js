@@ -35,7 +35,22 @@ exports.handler = async function (event, context) {
     )
   }
   // Try to create the access provider and handle errors
-  const result = createProvider()
-    .then((data)=>console.log("SUCCESS",data))
-    .catch((err)=>console.error("ERROR",err))
+  try {
+    const result = await createProvider();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        message: 'Access Provider Created',
+        data: result
+      })
+    };
+  } catch (err) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        message: 'Error',
+        error: err
+      })
+    };
+  }
 };
