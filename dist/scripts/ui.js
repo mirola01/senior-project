@@ -17,7 +17,6 @@ export async function updateUI() {
         var client = new faunadb.Client({
             secret: accessToken,
             domain: 'db.us.fauna.com',
-            port: 443,
             scheme: 'https'
         });
         console.log("client", client)
@@ -25,6 +24,7 @@ export async function updateUI() {
         /**
          * Check the role
          */
+        console.log("current token", q.CurrentToken())
         let token = await client.query(
             q.CurrentToken()
         );
