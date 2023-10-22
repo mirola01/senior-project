@@ -1,17 +1,5 @@
 import { getAuth0 } from './auth.js';
 
-window.onload = async () => {
-const query = window.location.search;
-  if (query.includes("code=") && query.includes("state=")) {
-
-    // Process the login state
-    await auth0.handleRedirectCallback();
-    
-    console.log("Authentificated")
-
-    // Use replaceState to redirect the user away and remove the querystring parameters
-    window.history.replaceState({}, document.title, "/player-database.html");}
-};
 // Function to create a new player
 export const new_player = async () => {
   console.log('Value of auth0.isAuthenticated:', auth0.isAuthenticated);
