@@ -5,7 +5,6 @@ var q = faunadb.query;
 
 export async function updateUI() {
     const auth0 = Auth.getAuth0();
-    console.log("ui fau and q", faunadb, q);
 
     const isAuthenticated = await auth0.isAuthenticated();
     if (isAuthenticated) {

@@ -2,8 +2,6 @@
 let auth0 = null;
 // Initialize authentication status as false
 let isAuthenticated = false;
-var faunadb = window.faunadb;
-export var q = faunadb.query;
 const fetchAuthConfig = () => fetch('/.netlify/functions/auth_config');
 
 // Configure the Auth0 client

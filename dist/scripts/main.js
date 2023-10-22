@@ -3,14 +3,12 @@ import * as Auth from "./auth.js";
 import * as Database from "./database.js";
 import * as UI from "./ui.js";
 import * as Events from "./events.js";
-var faunadb = window.faunadb;
-var q = faunadb.query;
+
 
 let auth0Client = null;
 // Initialize the Auth0 client when the window loads
 window.onload = async () => {
   try {
-    console.log("main 1 fau and q", faunadb, q);
     await Auth.configureClient();
     const auth0 = Auth.getAuth0();
     console.log("auth 1", auth0)
@@ -18,7 +16,6 @@ window.onload = async () => {
     if (query.includes("code=") && query.includes("state=")) {
       // Process the login state
       await auth0.handleRedirectCallback();
-      console.log("main 2 fau and q", faunadb, q);
       Auth.setAuth0(auth0);
       console.log("Authentificated");
       UI.updateUI();
