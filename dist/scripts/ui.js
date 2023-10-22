@@ -5,7 +5,6 @@ import {
 
 export async function updateUI() {
     const auth0 = getAuth0();
-    console.log('auth0 object before isAuthenticated call:', auth0);
 
     const isAuthenticated = await auth0.isAuthenticated();
     if (isAuthenticated) {
@@ -25,6 +24,7 @@ export async function updateUI() {
         /**
          * Check the role
          */
+        console.log("q", q)
         let token = await client.query(
             q.CurrentToken()
         );
