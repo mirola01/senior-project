@@ -1,4 +1,4 @@
-import * as Auth from "dist/scriptsauth.js";
+import * as Auth from "dist/scripts/auth.js";
 // Import the FaunaDB client
 const faunadb = require('faunadb');
 const q = faunadb.query;
