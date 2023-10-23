@@ -13,7 +13,7 @@ export async function updateUI() {
          */
         const fauna_key = Auth.getFaunaKey();
         var client = new faunadb.Client({
-            secret: accessToken,
+            secret: fauna_key,
             domain: 'db.us.fauna.com',
             port: 443,
             scheme: 'https'
