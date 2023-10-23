@@ -24,13 +24,24 @@ export async function updateUI() {
          * Check the role
          */
         // console.log("current token", q.CurrentToken())
-        let token = await client.query(
-             q.CurrentToken()
-         );
-        
-        console.log("token", token);
-        let user_role = token["https:/db.fauna.com/roles"][0];
-        console.log("user_role",user_role);
+        let token = await client.query(q.CurrentToken());
+
+if (token) {
+  console.log("Token exists:", token);
+  if (token["https:/db.fauna.com/roles"]) {
+    console.log("Property exists:", token["https:/db.fauna.com/roles"]);
+    if (token["https:/db.fauna.com/roles"].length > 0) {
+      let user_role = token["https:/db.fauna.com/roles"][0];
+      console.log("user_role", user_role);
+    } else {
+      console.log("Array is empty");
+    }
+  } else {
+    console.log("Property does not exist");
+  }
+} else {
+  console.log("Token is undefined or null");
+}
 
         // if (user_role === 'user') {
             document.querySelector('#add-new-btn').style.display = 'block';
