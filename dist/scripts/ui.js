@@ -5,9 +5,8 @@ var q = faunadb.query;
 
 export async function updateUI() {
     const auth0 = Auth.getAuth0();
-
+    const isAuthenticated = await auth0.isAuthenticated();
     if (isAuthenticated) {
-        const isAuthenticated = await auth0.isAuthenticated();
         const accessToken = await auth0.getTokenSilently();
         /**
          * Fetch players
