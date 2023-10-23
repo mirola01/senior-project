@@ -12,7 +12,7 @@ export async function updateUI() {
          * Fetch players
          */
         var client = new faunadb.Client({
-            secret: String(accessToken),
+            secret: process.env.fauna_key,
             domain: 'db.us.fauna.com',
             port: 443,
             scheme: 'https'
