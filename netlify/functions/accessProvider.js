@@ -5,7 +5,9 @@ const q = faunadb.query;
 
 // Main handler function for the Netlify function
 exports.handler = async function (event, context) {
-    const accessToken = event.headers['authorization'].split(' ')[1];
+    
+    const accessToken = event.headers['authorization']
+    console.log(accessToken)
   // Function to create an access provider in FaunaDB
   const createProvider = async () => {
     const AssignRole = (faunaRole, auth0Role) => {
