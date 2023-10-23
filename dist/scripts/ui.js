@@ -24,12 +24,13 @@ export async function updateUI() {
          * Check the role
          */
         // console.log("current token", q.CurrentToken())
-        // let token = await client.query(
-        //     q.CurrentToken()
-        // );
-        // console.log("token", token);
-        // let user_role = token["https:/db.fauna.com/roles"][0];
-        // console.log("user_role",user_role);
+        let token = await client.query(
+             q.CurrentToken()
+         );
+        
+        console.log("token", token);
+        let user_role = token["https:/db.fauna.com/roles"][0];
+        console.log("user_role",user_role);
 
         // if (user_role === 'user') {
             document.querySelector('#add-new-btn').style.display = 'block';
