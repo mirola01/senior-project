@@ -16,11 +16,7 @@ export async function updateUI() {
             domain: 'db.us.fauna.com',
             port: 443,
             scheme: 'https'
-          })
-        console.log("client", client)
-        const express = require('express')
-        const cors = require('cors')
-        const api = express()
+          });
         
         // Automatically allow cross-origin requests
         api.use(cors({ origin: true }))

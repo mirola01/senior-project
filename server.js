@@ -21,10 +21,7 @@ const config = {
 app.use(auth(config));
 
 // Add CORS middleware  <-- Add this block
-app.use(cors({
-  origin: 'https://lineup-manager.netlify.app'
-}));
-
+app.use(cors());
 // Define routes
 app.get("/", (req, res) => {
   res.send(req.oidc.isAuthenticated() ? "Logged in" : "Logged out");
