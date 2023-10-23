@@ -13,7 +13,7 @@ export async function updateUI() {
          */
         const fauna_key = Auth.getFaunaKey();
         var client = new faunadb.Client({
-            secret: accessToken,
+            secret: fauna_key,
             domain: 'db.us.fauna.com',
             port: 443,
             scheme: 'https'
@@ -29,7 +29,7 @@ export async function updateUI() {
          );
         
         console.log("token", token);
-        let user_role = token["https:/db.fauna.com/roles"][0];
+        let user_role = accessToken["https:/db.fauna.com/roles"][0];
         console.log("user_role",user_role);
 
         if (user_role === 'user') {
