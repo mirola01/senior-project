@@ -29,8 +29,8 @@ exports.handler = async function (event, context) {
             q.CreateAccessProvider(
                 {
                     "name": "Auth0",
-                    "issuer": `https://${process.env.domain}/`,
-                    "jwks_uri": `https://${process.env.domain}/.well-known/jwks.json`,
+                    "issuer": `https://${process.env.DOMAIN}/`,
+                    "jwks_uri": `https://${process.env.DOMAIN}/.well-known/jwks.json`,
                     "membership": [
                         AssignRole('writer', 'user'),
                         AssignRole('writer_admin', 'admin')
