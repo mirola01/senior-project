@@ -19,7 +19,7 @@ exports.handler = async function (event, context) {
         }
         
         const _client = new faunadb.Client({
-            secret: config.fauna_key,
+            secret: process.env.fauna_key,
             domain: 'db.us.fauna.com',
             port: 443,
             scheme: 'https'
@@ -29,8 +29,8 @@ exports.handler = async function (event, context) {
             q.CreateAccessProvider(
                 {
                     "name": "Auth0",
-                    "issuer": `https://${config.domain}/`,
-                    "jwks_uri": `https://${config.domain}/.well-known/jwks.json`,
+                    "issuer": `https://${process.env.domain}/`,
+                    "jwks_uri": `https://${process.env.domain}/.well-known/jwks.json`,
                     "membership": [
                         AssignRole('writer', 'user'),
                         AssignRole('writer_admin', 'admin')
@@ -41,7 +41,21 @@ exports.handler = async function (event, context) {
     
     }
     
-    const result = createProvider()
-        .then((data)=>console.log("SUCCESS",data))
-        .catch((err)=>console.error("ERROR",err))
+    try {
+        const result = await createProvider();
+        return {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: 'Access Provider Created',
+            data: result
+          })
+        };
+      } catch (err) {
+        return {
+          statusCode: 500,
+          body: JSON.stringify({
+            message: 'Error',
+            error: err
+          })
+        };}
 };
