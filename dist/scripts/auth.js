@@ -17,7 +17,6 @@ export const configureClient = async () => {
             audience: config.audience
             
         });
-        console.log("auth fau and q", faunadb, q);
         // const token = await auth0.getTokenSilently();
         // console.log(token)
         // isAuthenticated = await auth0.isAuthenticated();
