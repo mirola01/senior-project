@@ -10,6 +10,11 @@ export async function updateUI() {
     if (isAuthenticated) {
         const accessToken = await auth0.getTokenSilently();
         console.log(accessToken);
+        fetch('/.netlify/functions/accessProvider', {
+            headers: {
+              'Authorization': `Bearer ${accessToken}`
+            }
+          });
 
         /**
          * Fetch players
