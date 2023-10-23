@@ -29,7 +29,7 @@ export async function updateUI() {
          );
         
         console.log("token", token);
-        let user_role = accessToken["https:/db.fauna.com/roles"][0];
+        let user_role = accessToken["https:/db.fauna.com/roles"];
         console.log("user_role",user_role);
 
         if (user_role === 'user') {
