@@ -13,27 +13,24 @@ export async function updateUI() {
          */
         const fauna_key = Auth.getFaunaKey();
         var client = new faunadb.Client({
-            secret: fauna_key,
+            secret: accessToken,
             domain: 'db.us.fauna.com',
             port: 443,
             scheme: 'https'
-        });
-
+          });
+        
         //document.querySelector(".card-container").style.display = 'grid';
         /**
          * Check the role
          */
         // console.log("current token", q.CurrentToken())
-        // let token = await client.query(
-        //     q.CurrentToken()
-        // );
-
-        // console.log("token", token);
-        // let user_role = token["https:/db.fauna.com/roles"][0];
+        let token = await client.query(
+             q.CurrentToken()
+         );
         
-        const user = await auth0.getUser();
-        const user_role = user['https://db.fauna.com/roles']; // replace with the actual namespace and key where roles are stored in Auth0 token
-        console.log("user_role", user_role);
+        console.log("token", token);
+        let user_role = token["https:/db.fauna.com/roles"][0];
+        console.log("user_role",user_role);
 
         if (user_role === 'user') {
             document.querySelector('#add-new-btn').style.display = 'block';
@@ -164,3 +161,4 @@ export function setupTabs() {
 
     });
 }
+
