@@ -18,8 +18,6 @@ export async function updateUI() {
             scheme: 'https'
           });
         
-        // Automatically allow cross-origin requests
-        api.use(cors({ origin: true }))
         //document.querySelector(".card-container").style.display = 'grid';
         /**
          * Check the role
