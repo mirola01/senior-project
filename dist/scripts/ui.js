@@ -6,15 +6,9 @@ var q = faunadb.query;
 export async function updateUI() {
     const auth0 = Auth.getAuth0();
 
-    const isAuthenticated = await auth0.isAuthenticated();
     if (isAuthenticated) {
         const accessToken = await auth0.getTokenSilently();
         console.log(accessToken);
-        fetch('/.netlify/functions/accessProvider', {
-            headers: {
-              'Authorization': `Bearer ${accessToken}`
-            }
-          });
 
         /**
          * Fetch players
@@ -26,6 +20,12 @@ export async function updateUI() {
             scheme: 'https'
           })
         console.log("client", client)
+        const express = require('express')
+        const cors = require('cors')
+        const api = express()
+        
+        // Automatically allow cross-origin requests
+        api.use(cors({ origin: true }))
         //document.querySelector(".card-container").style.display = 'grid';
         /**
          * Check the role
