@@ -11,8 +11,9 @@ export async function updateUI() {
         /**
          * Fetch players
          */
+        const fauna_key = Auth.getFaunaKey();
         var client = new faunadb.Client({
-            secret: process.env.fauna_key,
+            secret: fauna_key,
             domain: 'db.us.fauna.com',
             port: 443,
             scheme: 'https'

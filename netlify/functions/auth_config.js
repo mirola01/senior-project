@@ -1,5 +1,5 @@
 
-const { DOMAIN, clientID, aud } = process.env;
+const { DOMAIN, clientID, aud, fauna_key } = process.env;
 
 exports.handler = async function(event, context) {
   return {
@@ -7,7 +7,8 @@ exports.handler = async function(event, context) {
     body: JSON.stringify({
       domain: DOMAIN,
       client_id: clientID,
-      audience: aud
+      audience: aud,
+      fauna_key: fauna_key
     })
   };
 };

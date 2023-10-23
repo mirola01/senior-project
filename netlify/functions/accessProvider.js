@@ -1,8 +1,6 @@
 // Import the FaunaDB client
 const faunadb = require("faunadb");
 const q = faunadb.query;
-const axios = require("axios").default;
-
 
 // Main handler function for the Netlify function
 exports.handler = async function (event, context) {

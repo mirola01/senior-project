@@ -2,6 +2,7 @@
 let auth0 = null;
 // Initialize authentication status as false
 let isAuthenticated = false;
+let fauna_key;
 const fetchAuthConfig = () => fetch('/.netlify/functions/auth_config');
 
 // Configure the Auth0 client
@@ -17,6 +18,8 @@ export const configureClient = async () => {
             audience: config.audience
             
         });
+        fauna_key = config.fauna_key;
+
         // const token = await auth0.getTokenSilently();
         // console.log(token)
         // isAuthenticated = await auth0.isAuthenticated();
@@ -34,6 +37,9 @@ export const setAuth0 = (new_auth) => {
     auth0 = new_auth;
 };
 
+export const getFaunaKey = () => {
+    return fauna_key;
+};
 // Handle user login
 export const login = async () => {
     await auth0.loginWithRedirect({
