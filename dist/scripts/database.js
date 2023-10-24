@@ -54,8 +54,8 @@ export const new_player = async () => {
 
     console.log(data);
     // note_container.appendChild(add_new_card);
-    body_.classList.remove('container-fade');
-    form.style.display = 'none';
+    //body_.classList.remove('container-fade');
+    //form.style.display = 'none';
     window.location.reload();
   }
 };
