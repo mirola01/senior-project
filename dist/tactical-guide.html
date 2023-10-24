@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tactical Guide</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js"></script>
+</head>
+
+<body>
+    <div class="header">
+        <div class="side-nav">
+          <a href="#" class="logo">
+            <img src="images/logo.png" class="logo-img">
+            <img src="images/logo-icon.png" class="logo-icon">
+          </a>
+          <ul class="nav-links">
+            <li><a href="dashboard.html"><i class="fas fa-house-user"></i>
+                <p>Dashboard</p>
+              </a>
+    
+            </li>
+            <li><a href="create.html"><i class="fa-solid fa-circle-plus"></i>
+                <p>Create Lineup</p>
+              </a>
+            </li>
+            <li><a href="player-database.html"><i class="fa-solid fa-user-group"></i>
+                <p>Player Database</p>
+              </a>
+            </li>
+            <li><a href="match-analysis.html"><i class="fa-solid fa-chart-line"></i>
+                <p>Match Analysis</p>
+              </a>
+            </li>
+            <li><a href="tactical-guide.html"><i class="fa-solid fa-chalkboard-user"></i>
+                <p>Tactical Guide</p>
+              </a>
+            </li>
+            <li><a href="community.html"><i class="fa-regular fa-comments"></i>
+                <p>Community</p>
+              </a>
+            </li>
+            <ul class="bottom-nav">
+              <li><a href="settings.html"><i class="fa-solid fa-gear"></i>
+                  <p>Settings</p>
+                </a>
+              </li>
+              <li>
+                <button id="auth-btn" onclick="logout()">Log out</button>
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+  <main>
+    <section class="tactical-guide">
+      <ul class="tab-group">
+        <li class="tab active-tac"><a href="#4-4-2">4-4-2</a></li>
+        <li class="tab"><a href="#4-3-3">4-3-3</a></li>
+        <li class="tab"><a href="#3-5-2">3-5-2</a></li>
+      </ul>
+      <h1>Soccer Tactical Guide for Coaches</h1>
+      <p>The formation you choose in soccer is not just a set of numbers; it's a statement of intent. It dictates your team's approach to the game, influencing both offensive and defensive strategies. This extended guide aims to delve deeper into the tactical nuances of popular formations, providing coaches with a comprehensive understanding to make informed decisions.</p>
+    
+      <!-- 4-4-2 Formation -->
+      <div class="tab-content">
+      <div id="4-4-2">
+        <h3>4-4-2: The Balanced Approach</h3>
+        <p><strong>When to Use:</strong> When you have two reliable strikers and want a balanced approach to both attack and defense.</p>
+        <ul>
+          <li><strong>Strengths:</strong> Easy to understand, making it ideal for amateur levels. Balanced in both attack and defense.</li>
+          <li><strong>Weaknesses:</strong> Can become predictable if not varied. Requires wingers to be defensively responsible.</li>
+          <li><strong>Tactical Considerations:</strong> Strikers should have complementary skills; one should excel at holding up the ball while the other should be a natural finisher. Central midfielders should be versatile, capable of both attacking contributions and defensive duties. Wingers should be instructed to track back and help in defense, especially against teams with attacking full-backs.</li>
+          <li><strong>Key Players:</strong> Two strikers, Versatile central midfielders</li>
+        </ul>
+      </div>
+      <!-- 4-3-3 Formation -->
+      <div id="4-3-3">
+        <h3>4-3-3: The Attacking Formation</h3>
+        <p><strong>When to Use:</strong> When you have fast, skillful wingers and a solid central striker. When you aim to dominate possession and create numerous scoring opportunities.</p>
+        <ul>
+          <li><strong>Strengths:</strong> Provides a strong attacking presence with three forwards. Can easily transition into a 4-5-1 for defensive stability.</li>
+          <li><strong>Weaknesses:</strong> Can leave gaps in the midfield if not properly balanced. Full-backs are often exposed and must be strong defensively.</li>
+          <li><strong>Tactical Considerations:</strong> Wingers should be capable of cutting inside to shoot as well as delivering accurate crosses. The central striker should be aerially strong to capitalize on crosses. One of the three midfielders should be defensively oriented to break up opposition attacks.</li>
+          <li><strong>Key Players:</strong> Skillful wingers, Aerially strong central striker</li>
+        </ul>
+      </div>
+      <!-- 3-5-2 Formation -->
+      <div id="3-5-2">
+        <h3>3-5-2: The Flexible Formation</h3>
+        <p><strong>When to Use:</strong> When you have strong wing-backs who can run up and down the flanks. When you want tactical flexibility to switch between a back three and a back five.</p>
+        <ul>
+          <li><strong>Strengths:</strong> Provides a strong central midfield presence. Wing-backs can provide width, allowing for a compact midfield.</li>
+          <li><strong>Weaknesses:</strong> Requires high stamina and speed from wing-backs. Can be vulnerable to counter-attacks, especially on the wings.</li>
+          <li><strong>Tactical Considerations:</strong> Wing-backs must be highly fit and capable of both attacking and defending. Central midfielders should excel at ball distribution and be able to break up play. One of the two strikers can drop deeper to act as a 'false 9', creating overloads in midfield.</li>
+          <li><strong>Key Players:</strong> Wing-backs, Ball-distributing central midfielders</li>
+        </ul>
+      </div>
+      </div>
+      <h2>Conclusion</h2>
+      <p>The formation you choose will set the tactical framework for your team, but it's the players and their understanding of their roles that bring it to life. Always consider your team's strengths and weaknesses, as well as the specific challenges posed by your opponents. And remember, flexibility is key; be prepared to adapt your formation and tactics as the game situation evolves.</p>
+    </section>     
+  </main>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+  <script type="module" src="scripts/auth.js"></script>
+  <script type="module" src="scripts/main.js"></script>
+
+</body>
+  
+  </html>
