@@ -1,7 +1,5 @@
-import { new_player } from './database.js';
+import { new_player, delete_player } from './database.js';
 import { login, logout } from './auth.js';
-
-
 
 /**
  * Event listener for a delete button or checkbox click
@@ -13,7 +11,9 @@ document.addEventListener('click', async function (e) {
         await delete_player(playerId);
       }
     }
-  });
+});
 
-const btn = document.querySelector('#add-player');
-btn.addEventListener('click', new_player());
+const add_btn = document.querySelector('#add-player');
+if (add_btn) { // Check if the button actually exists
+  add_btn.addEventListener('click', new_player);
+}
