@@ -35,17 +35,18 @@ export async function updateUI() {
     if (user_role === "user") {
       document.querySelector("#add-new-btn").style.display = "block";
 
-      let players = await client.query(
-        q.Map(
-          q.Paginate(q.Match(q.Index("players_by_owner"), token)),
-          q.Lambda("X", q.Get(q.Var("X")))
-        )
-        
-      );
+      let players = await fetch("/.netlify/functions/players_by_owner", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ token, userId: decodedJWT["sub"] }),
+      });
+      players = await players.json();
       //players_section = document.querySelector('.card-container');
       //const addCard = players_section.lastElementChild
       //players_section.lastElementChild.remove()
-      const tableBody = document.getElementById("player-tbody");
+      const tableBody = document.getElementById("player-table");
       var htmlText = players["data"].map(function (o) {
         /**
          * Create a checkbox input element
@@ -81,16 +82,17 @@ export async function updateUI() {
       document.querySelector("#search-bar").style.display = "none";
       //   document.querySelector(".admin-msg").style.display = "block";
       //players_section = document.querySelector('.card-container');
-      let players = await client.query(
-        q.Map(
-          q.Paginate(q.Match(q.Index("allPlayers"))),
-          q.Lambda("X", q.Get(q.Var("X")))
-        ),
-        { secret: token }
-      );
+      let players = await fetch("/.netlify/functions/allPlayers", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ token }),
+      });
+      players = await players.json();
 
       //players_section.style.display = 'grid';
-      const tableBody = document.querySelector("#player-table tbody");
+      const tableBody = document.querySelector("#player-table");
       var htmlText = players["data"].map(function (o) {
         return `
                     <tr>
