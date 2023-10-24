@@ -59,7 +59,7 @@ export const new_player = async () => {
 /**
  * Function to delete a player by ID
  */
-const delete_player = async (playerId) => {
+export const delete_player = async (playerId) => {
   try {
     const isAuthenticated = await auth0.isAuthenticated();
     const accessToken = await auth0.getTokenSilently();
