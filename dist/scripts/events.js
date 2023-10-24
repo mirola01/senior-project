@@ -3,7 +3,9 @@ import { login, logout } from './auth.js';
 
 
 
-// Event listener for a delete button or checkbox click
+/**
+ * Event listener for a delete button or checkbox click
+ */
 document.addEventListener('click', async function (e) {
     if (e.target && e.target.classList.contains('delete-checkbox')) {
       const playerId = e.target.getAttribute('data-id');
@@ -13,5 +15,5 @@ document.addEventListener('click', async function (e) {
     }
   });
 
-//const btn = document.querySelector('#add-player');
-//btn.addEventListener('click', new_player);
+const btn = document.querySelector('#add-player');
+btn.addEventListener('click', new_player());
