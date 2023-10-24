@@ -26,7 +26,7 @@ export async function updateUI() {
          */
         // console.log("current token", q.CurrentToken())
         let token = await client.query(q.CurrentToken());
-    token = token.value.id;
+        token = token.value.id;
 
     console.log("token", token);
     let user_role = decodedJWT["https://db.fauna.com/roles"][0];

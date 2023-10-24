@@ -1,28 +1,38 @@
-import { getAuth0 } from './auth.js';
+import * as Auth from "./auth.js";
 /**
  * Function to create a new player
  */
 export const new_player = async () => {
-  console.log('Value of auth0.isAuthenticated:', auth0.isAuthenticated);
-  if (!auth0) {
-    console.error('auth0 is not initialized.');
-    return;
-  }
   /**
  * Check if the user is authenticated
  */
-  const isAuthenticated = await auth0.isAuthenticated();
-  const accessToken = await auth0.getTokenSilently();
-  console.log(accessToken);
-  console.log("the token is " + accessToken)
-  auth0 = getAuth0();
-  if (isAuthenticated) {
-    var client = new faunadb.Client({
-      secret: String(accessToken),
-      domain: 'db.us.fauna.com',
-      port: 443,
-      scheme: 'https'
-    })
+  const auth0 = Auth.getAuth0();
+    const isAuthenticated = await auth0.isAuthenticated();
+    if (isAuthenticated) {
+        const accessToken = await auth0.getTokenSilently();
+        const decodedJWT = jwt_decode(accessToken);
+        /**
+         * Fetch players
+         */
+        const fauna_key = Auth.getFaunaKey();
+        var client = new faunadb.Client({
+            secret: fauna_key,
+            domain: 'db.us.fauna.com',
+            port: 443,
+            scheme: 'https'
+          });
+        
+        //document.querySelector(".card-container").style.display = 'grid';
+        /**
+         * Check the role
+         */
+        // console.log("current token", q.CurrentToken())
+        let token = await client.query(q.CurrentToken());
+        token = token.value.id;
+
+    console.log("token", token);
+    let user_role = decodedJWT["https://db.fauna.com/roles"][0];
+    console.log("user_role", user_role);
 
     /**
  * Create a new player in the FaunaDB collection
