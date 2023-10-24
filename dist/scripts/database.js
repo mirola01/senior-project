@@ -56,7 +56,7 @@ export const new_player = async () => {
     // note_container.appendChild(add_new_card);
     //body_.classList.remove('container-fade');
     //form.style.display = 'none';
-    window.location.reload();
+    //window.location.reload();
   }
 };
 /**
