@@ -8,6 +8,7 @@ export async function updateUI() {
     const isAuthenticated = await auth0.isAuthenticated();
     if (isAuthenticated) {
         const accessToken = await auth0.getTokenSilently();
+        const decodedJWT = jwt_decode(accessToken);
         /**
          * Fetch players
          */
