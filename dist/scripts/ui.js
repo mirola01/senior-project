@@ -37,10 +37,10 @@ export async function updateUI() {
 
       let players = await client.query(
         q.Map(
-          q.Paginate(q.Match(q.Index("players_by_owner"), q.CurrentIdentity())),
+          q.Paginate(q.Match(q.Index("players_by_owner"), token)),
           q.Lambda("X", q.Get(q.Var("X")))
-        ),
-        { secret: token }
+        )
+        
       );
       //players_section = document.querySelector('.card-container');
       //const addCard = players_section.lastElementChild
