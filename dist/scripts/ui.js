@@ -1,4 +1,5 @@
 import * as Auth from "./auth.js";
+const jwt_decode = require('jwt-decode');
 
 var faunadb = window.faunadb;
 var q = faunadb.query;
