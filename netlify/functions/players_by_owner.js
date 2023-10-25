@@ -16,7 +16,7 @@ exports.handler = async function (event, context) {
         q.Paginate(q.Match(q.Index("players_by_owner"), event.body.userId)),
         q.Lambda("X", q.Get(q.Var("X")))
       ),
-      { owner: event.body.token }
+      { owner: event.body.userId }
     );
 
     if (!allPlayers) {
