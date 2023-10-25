@@ -44,8 +44,10 @@ document.querySelector(".auth-btn").addEventListener("click", async (e) => {
       await auth0.handleRedirectCallback();
       Auth.setAuth0(auth0);
       console.log("Authentificated");
+
       // Use replaceState to redirect the user away and remove the querystring parameters
       window.history.replaceState({}, document.title, "/player-database.html");
+    }
     Auth.login();
   } else {
     Auth.logout();
