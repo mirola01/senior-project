@@ -31,14 +31,6 @@ window.onload = async () => {
   //UI.setupTabs();
 };
 
-// UI elements
-const add_nw_btn = document.querySelector("#add-new-btn");
-add_nw_btn.setAttribute("aria-label", "Add new Button");
-
-const body_ = document.querySelector(".container");
-const form = document.querySelector(".form");
-form.setAttribute("tabindex", "-1"); // to manage focus
-
 // Handle authentication button click
 document.querySelector(".auth-btn").addEventListener("click", async (e) => {
   console.log("auth click");
@@ -60,6 +52,13 @@ document.querySelector(".auth-btn").addEventListener("click", async (e) => {
     Auth.logout();
   }
 });
+// UI elements
+const add_nw_btn = document.querySelector("#add-new-btn");
+add_nw_btn.setAttribute("aria-label", "Add new Button");
+
+const body_ = document.querySelector(".container");
+const form = document.querySelector(".form");
+form.setAttribute("tabindex", "-1"); // to manage focus
 
 add_nw_btn.addEventListener("click", (e) => {
   console.log(e);
