@@ -226,6 +226,11 @@ span {
     padding: 0 4px 0 6px;
     color: #004AAD;
 }
+.pitch {float: left;width: 40%;}
+.pitch img {
+    align-content: center;
+}
+
 
 .topbar {
     height: 45px;

@@ -514,16 +514,4 @@ var players =  [{
     }
   }();
   
-  wc_team.init = function() {
-    //Save common elements
-    var c = document.getElementById("pitch"),
-      ctx = c.getContext("2d");
-  
-    wc_team.pitch.field.call(ctx);
-    wc_team.pitch.markings.call(ctx);
-  
-    wc_team.dragDrap.init();
-  }
-  
-  // Create the pitch
-  wc_team.init();
+ 
