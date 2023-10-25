@@ -46,7 +46,7 @@ export const new_player = async () => {
             name: document.querySelector('#playerName').value,
             age: document.querySelector('#playerAge').value,
             position: document.querySelector('#playerPosition').value,
-            owner: decodedJWT["sub"]
+            owner: token
           }
         })
       ).then((ret) => console.log(ret))
