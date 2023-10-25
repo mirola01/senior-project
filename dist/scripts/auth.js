@@ -1,5 +1,6 @@
 // Initialize Auth0 client as null
 let auth0 = null;
+let final_auth = null;
 // Initialize authentication status as false
 let isAuthenticated = false;
 let fauna_key;
@@ -30,11 +31,14 @@ export const configureClient = async () => {
 };
 
 export const getAuth0 = () => {
+    if (final_auth) {
+        return final_auth;
+    }
     return auth0;
 };
 
 export const setAuth0 = (new_auth) => {
-    auth0 = new_auth;
+    final_auth = new_auth;
 };
 
 export const getFaunaKey = () => {
