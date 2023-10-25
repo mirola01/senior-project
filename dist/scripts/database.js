@@ -46,7 +46,7 @@ export const new_player = async () => {
             name: document.querySelector('#playerName').value,
             age: document.querySelector('#playerAge').value,
             position: document.querySelector('#playerPosition').value,
-            owner: tokendecodedJWT.sub
+            owner: decodedJWT["sub"]
           }
         })
       ).then((ret) => console.log(ret))
@@ -56,7 +56,7 @@ export const new_player = async () => {
     // note_container.appendChild(add_new_card);
     //body_.classList.remove('container-fade');
     //form.style.display = 'none';
-    //window.location.reload();
+    window.location.reload();
   }
 };
 /**
