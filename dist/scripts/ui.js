@@ -41,9 +41,7 @@ export async function updateUI() {
       });
       console.log("token+userId", token, decodedJWT["sub"])
       players = await players.json();
-      //players_section = document.querySelector('.card-container');
-      //const addCard = players_section.lastElementChild
-      //players_section.lastElementChild.remove()
+
       const tableBody = document.getElementById("player-table");
       var htmlText = players["data"].map(function (o) {
         /**
@@ -54,6 +52,9 @@ export async function updateUI() {
         checkbox.className = "delete-checkbox"; // Add a class for identification
         checkbox.setAttribute("data-id", o.ref.id); // Set the data-id attribute
 
+        const jerseyNumber = o.data.jerseyNumber || "N/A";
+        const playerImage = o.data.imageURL || generateDefaultImage(jerseyNumber);
+
         /**
          * Create a label element for the checkbox
          */
@@ -61,25 +62,20 @@ export async function updateUI() {
         label.htmlFor = o.ref.id; // Match the 'for' attribute to the checkbox's ID
         label.textContent = "Checkbox Label"; // You can customize the label text
         return `
-        <tr>
-            <td>${o.data.name}</td>
-            <td>${o.data.age}</td>
-            <td>${o.data.position}</td>
-            <td>${checkbox.outerHTML}</td>
-        </tr>`;
+      <tr>
+          <td>${o.data.name}</td>
+          <td>${o.data.age}</td>
+          <td>${o.data.position}</td>
+          <td>${jerseyNumber}</td>
+          <td><img src="${playerImage}" alt="Player Image" width="50"></td> 
+      </tr>`;
       });
       console.log("tableBody:", tableBody);
       tableBody.innerHTML = htmlText.join("");
 
-      //players_section.innerHTML += htmlText.join('');
-      //players_section.appendChild(addCard)
-      //document.querySelector('.please-login').style.display = 'none';
     } else {
       document.querySelector("#add-new-btn").style.display = "none";
-      //   document.querySelector("#new-card-btn").style.display = "none";
       document.querySelector("#search-bar").style.display = "none";
-      //   document.querySelector(".admin-msg").style.display = "block";
-      //players_section = document.querySelector('.card-container');
       let players = await fetch("/.netlify/functions/allPlayers", {
         method: "POST",
         headers: {
@@ -89,7 +85,6 @@ export async function updateUI() {
       });
       players = await players.json();
 
-      //players_section.style.display = 'grid';
       const tableBody = document.querySelector("#player-table");
       var htmlText = players["data"].map(function (o) {
         return `
@@ -101,12 +96,36 @@ export async function updateUI() {
       });
       tableBody.innerHTML = htmlText.join("");
 
-      // document.querySelector('.please-login').style.display = 'None';
     }
   } else {
     console.log("not auth");
   }
 }
+
+function generateDefaultImage(jerseyNumber) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 100;
+  canvas.height = 100;
+  
+  const ctx = canvas.getContext('2d');
+  
+  // Draw background
+  ctx.fillStyle = 'gray';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  
+  // Draw text
+  ctx.fillStyle = 'white';
+  ctx.font = '48px Arial';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(jerseyNumber, canvas.width / 2, canvas.height / 2);
+  
+  // Convert to data URL
+  const dataURL = canvas.toDataURL('image/png');
+  
+  return dataURL;
+}
+
 
 export function setupTabs() {
   $(".tactical-guide")
