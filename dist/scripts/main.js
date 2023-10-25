@@ -9,6 +9,7 @@ let auth0Client = null;
 // Initialize the Auth0 client when the window loads
 window.onload = async () => {
   try {
+    await Auth.configureClient();
     const auth0 = Auth.getAuth0();
     console.log("auth 1", auth0)
     const query = window.location.search;
@@ -48,7 +49,6 @@ document.querySelector(".auth-btn").addEventListener("click", async (e) => {
   if (authBtn.innerHTML === "Sign in" || authBtn.innerHTML === "SIGN IN") {
     console.log("login");
     Auth.login();
-    await Auth.configureClient();
   } else {
     Auth.logout();
   }
