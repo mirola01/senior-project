@@ -9,27 +9,15 @@ let auth0Client = null;
 // Initialize the Auth0 client when the window loads
 window.onload = async () => {
   try {
-    await Auth.configureClient();
-    const auth0 = Auth.getAuth0();
-    console.log("auth 1", auth0)
-    const query = window.location.search;
-    if (query.includes("code=") && query.includes("state=")) {
-      // Process the login state
-      await auth0.handleRedirectCallback();
-      Auth.setAuth0(auth0);
-      console.log("Authentificated");
-      
-
-      // Use replaceState to redirect the user away and remove the querystring parameters
-      window.history.replaceState({}, document.title, "/player-database.html");
-    }
-
     UI.updateUI();
+
   } catch (e) {
     console.error("Initialization failed:", e);
   }
   //UI.setupTabs();
 };
+
+
 
 // Handle authentication button click
 document.querySelector(".auth-btn").addEventListener("click", async (e) => {
@@ -45,8 +33,19 @@ document.querySelector(".auth-btn").addEventListener("click", async (e) => {
   );
 
   // Perform login or logout based on the button label
-  if (authBtn.innerHTML === "Sign in") {
+  if (authBtn.innerHTML === "Sign in" || authBtn.innerHTML === "SIGN IN") {
     console.log("login");
+    await Auth.configureClient();
+    const auth0 = Auth.getAuth0();
+    console.log("auth 1", auth0)
+    const query = window.location.search;
+    if (query.includes("code=") && query.includes("state=")) {
+      // Process the login state
+      await auth0.handleRedirectCallback();
+      Auth.setAuth0(auth0);
+      console.log("Authentificated");
+      // Use replaceState to redirect the user away and remove the querystring parameters
+      window.history.replaceState({}, document.title, "/player-database.html");
     Auth.login();
   } else {
     Auth.logout();
