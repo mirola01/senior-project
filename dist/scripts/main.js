@@ -40,15 +40,20 @@ const form = document.querySelector(".form");
 form.setAttribute("tabindex", "-1"); // to manage focus
 
 // Handle authentication button click
-document.querySelector("#auth-btn").addEventListener("click", async (e) => {
+document.querySelector(".auth-btn").addEventListener("click", async (e) => {
   console.log("auth click");
-  const authBtn = document.querySelector("#auth-btn");
+  
+  // Since 'e.target' is the clicked element, we can directly use it here
+  const authBtn = e.target;
+
+  // Update aria-label
   authBtn.setAttribute(
     "aria-label",
     authBtn.innerHTML === "Login" ? "Login Button" : "Logout Button"
   );
 
-  if (authBtn.innerHTML === "Login") {
+  // Perform login or logout based on the button label
+  if (authBtn.innerHTML === "Sign in") {
     console.log("login");
     Auth.login();
   } else {
