@@ -83,13 +83,12 @@
         </select>
         <div class="cut"></div>
       </div>
-      <!-- Added jersey number field -->
+
       <div class="input-container ic4">
         <input id="playerJersey" class="input" type="number" min="1" max="99" placeholder="Jersey Number" />
         <div class="cut"></div>
       </div>
 
-      <!-- Added image upload field -->
       <div class="input-container ic5">
         <label for="playerImage">Upload an image:</label>
         <input id="playerImage" type="file" accept="image/*">
@@ -108,65 +107,22 @@
         <img src="images/add-outline.svg" alt="">
       </div>
       <table id="player-table" class="table"></table>
-      <main>
-        <div class="form">
-          <div class="title">
-            <img src="images/close-outline.svg" alt="" id="close-btn">
-            <h1>Add a Player</h1>
-          </div>
-          <div class="input-container ic1">
-            <input id="playerName" class="input" type="text" placeholder="Name" />
-            <div class="cut"></div>
-          </div>
-          <div class="input-container ic2">
-            <input id="playerAge" class="input" type="number" min="1" max="100" placeholder="Age" />
-            <div class="cut"></div>
-          </div>
-          <div class="input-container ic3">
-            <label for="playerPosition">Choose a position:</label>
-            <select id="playerPosition" name="playerPosition">
-              <option value="Goalkeeper">Goalkeeper</option>
-              <option value="Defender">Defender</option>
-              <option value="Midfield">Midfield</option>
-              <option value="Forward">Forward</option>
-            </select>
-            <div class="cut"></div>
-          </div>
-          <button type="submit" class="submit" id="add-player">submit</button>
-        </div>
-        <div class="container">
-          <div class="topbar">
-            <div id="search-bar">
-              <img src="images/search-outline.svg" alt="">
-              <input type="text" placeholder=" search">
-            </div>
-          </div>
-          <div id="add-new-btn">
-            <img src="images/add-outline.svg" alt="">
-          </div>
-          <table id="player-table" class="table"></table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Age</th>
-              <th>Position</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody id="player-tbody">
-            <!-- Rows will be added here dynamically -->
-          </tbody>
-          </table>
-    
-        </div>
-      </main>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Age</th>
+          <th>Position</th>
+          <th>Jersey Number</th> <!-- Added column for jersey number -->
+          <th>Image</th> <!-- Added column for image -->
+          <th>Action</th>
+        </tr>
+      </thead>
       <tbody id="player-tbody">
         <!-- Rows will be added here dynamically -->
       </tbody>
       </table>
 
     </div>
-  </main>
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
     <script type="module" src="scripts/auth.js"></script>
     <script type="module" src="scripts/main.js"></script>
