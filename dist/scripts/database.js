@@ -46,6 +46,8 @@ export const new_player = async () => {
             name: document.querySelector('#playerName').value,
             age: document.querySelector('#playerAge').value,
             position: document.querySelector('#playerPosition').value,
+            jersey: document.querySelector('#playerJersey').value,
+            image: document.querySelector('#playerImage').value,
             owner: decodedJWT["sub"]
           }
         })
@@ -53,9 +55,6 @@ export const new_player = async () => {
       .catch((err) => console.error('Error: %s', err))
 
     console.log(data);
-    // note_container.appendChild(add_new_card);
-    //body_.classList.remove('container-fade');
-    //form.style.display = 'none';
     window.location.reload();
   }
 };
