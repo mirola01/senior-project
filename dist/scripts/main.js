@@ -47,8 +47,8 @@ document.querySelector(".auth-btn").addEventListener("click", async (e) => {
   // Perform login or logout based on the button label
   if (authBtn.innerHTML === "Sign in" || authBtn.innerHTML === "SIGN IN") {
     console.log("login");
-    await Auth.configureClient();
     Auth.login();
+    await Auth.configureClient();
   } else {
     Auth.logout();
   }
