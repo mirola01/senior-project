@@ -33,8 +33,10 @@ export const configureClient = async () => {
 export const getAuth0 = () => {
     const storedAuth = localStorage.getItem('final_auth');
     if (storedAuth) {
+        console.log("1", storedAuth);
         return JSON.parse(storedAuth);
     }
+    console.log("2", auth0);
     return auth0;
 };
 
