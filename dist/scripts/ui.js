@@ -63,12 +63,11 @@ export async function updateUI() {
         label.textContent = "Checkbox Label"; // You can customize the label text
         return `
       <tr>
-          <td>${o.data.image}</td>
+          <td><img src="${playerImage}" alt="Player Image" width="50"></td> 
           <td>${o.data.name}</td>
           <td>${o.data.age}</td>
           <td>${o.data.position}</td>
           <td>${o.data.jersey}</td>
-          <td><img src="${playerImage}" alt="Player Image" width="50"></td> 
       </tr>`;
       });
       console.log("tableBody:", tableBody);
