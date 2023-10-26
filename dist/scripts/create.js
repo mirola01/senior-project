@@ -1,5 +1,6 @@
 import * as Auth from "./auth.js";
-
+var faunadb = window.faunadb;
+var q = faunadb.query;
 
 window.onload = function() {
 
