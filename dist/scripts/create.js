@@ -156,6 +156,7 @@ async function renderPositions() {
       positions[key].forEach((player) => {
         console.log("key", key, positions[key]);
         const li = document.createElement('li');
+        const ul2 = document.createElement('ul');
         const divPlayer = document.createElement('div');
         divPlayer.setAttribute('draggable', 'true');
         divPlayer.setAttribute('data-player', player.data.name);
@@ -168,14 +169,15 @@ async function renderPositions() {
 
         const p = document.createElement('p');
         p.textContent = player.data.name;
-        ul.style.display = "flex";
-        ul.style.flexDirection = "column";
-        ul.style.alignItems = "center";
+        ul2.style.display = "flex";
+        ul2.style.flexDirection = "column";
+        ul2.style.alignItems = "center";
 
         divPlayer.appendChild(img);
         li.appendChild(divPlayer);
-        ul.appendChild(li);
-        ul.appendChild(p);
+        ul2.appendChild(li);
+        ul2.appendChild(p);
+        ul.appendChild(ul2);
       });
 
       div.appendChild(ul);
