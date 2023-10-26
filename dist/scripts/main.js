@@ -10,7 +10,7 @@ let auth0Client = null;
 window.onload = async () => {
   try {
     await Auth.configureClient();
-    const auth0 = Auth.getAuth0();
+    let auth0 = Auth.getAuth0();
     console.log("auth 1", auth0)
     const query = window.location.search;
     if (query.includes("code=") && query.includes("state=")) {
@@ -19,7 +19,7 @@ window.onload = async () => {
       Auth.setAuth0(auth0);
       console.log("First", await auth0.isAuthenticated());
 
-      const auth0 = Auth.getAuth0();
+      auth0 = Auth.getAuth0();
       console.log("Second", await auth0.isAuthenticated());
 
       UI.updateUI();
