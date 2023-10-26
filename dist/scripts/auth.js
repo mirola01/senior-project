@@ -4,8 +4,6 @@
 
 // Initialize Auth0 client as null
 let auth0 = null;
-let final_auth = null;
-
 // Initialize authentication status as false
 let isAuthenticated = false;
 let fauna_key;
@@ -46,8 +44,9 @@ export const configureClient = async () => {
  * @returns {Object} The Auth0 client.
  */
 export const getAuth0 = () => {
+    let final_auth = window.localStorage.getItem("final_auth");
     if (final_auth) {
-        return final_auth;
+        return JSON.parse(final_auth);
     }
     return auth0;
 };
@@ -57,7 +56,7 @@ export const getAuth0 = () => {
  * @param {Object} new_auth - The new Auth0 client.
  */
 export const setAuth0 = (new_auth) => {
-    final_auth = new_auth;
+    window.localStorage.setItem("final_auth", JSON.stringify(new_auth));
 };
 
 /**
@@ -102,7 +101,13 @@ export const login = async () => {
  */
 export const logout = () => {
     localStorage.clear();
-    auth.logout({
+    let final_auth = window.localStorage.getItem("final_auth");
+    if (final_auth) {
+        final_auth.logout({
+            returnTo: 'https://lineup-manager.netlify.app'
+        });
+    }
+    auth0.logout({
         returnTo: 'https://lineup-manager.netlify.app'
     });
 };
