@@ -1028,9 +1028,11 @@ div#\34 -3-3 {
 .sec-pos ul {
   padding: 0px;
   margin: 0px;
-  width: 100%;
+  width: auto;
   clear: left;
   display: inline-block;
+  flex-direction: row;
+  display: flex;
 }
 .sec-pos ul li {
   width: 40px;
