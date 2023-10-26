@@ -3,7 +3,7 @@ var faunadb = window.faunadb;
 var q = faunadb.query;
 
 window.onload = function() {
-
+  console.log("window.onload triggered");
   renderPositions();
 };
 
@@ -110,6 +110,7 @@ wc_team.dragDrap = (function() {
 })();
 
 async function renderPositions() {
+  console.log("renderPositions triggered");
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
     const decodedJWT = jwt_decode(accessToken);
