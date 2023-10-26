@@ -168,9 +168,9 @@ async function renderPositions() {
 
         const p = document.createElement('p');
         p.textContent = player.data.name;
-        divPlayer.style.display = "flex";
-        divPlayer.style.flexDirection = "column";
-        divPlayer.style.alignItems = "center";
+        li.style.display = "flex";
+        li.style.flexDirection = "column";
+        li.style.alignItems = "center";
 
         divPlayer.appendChild(img);
         li.appendChild(divPlayer);
