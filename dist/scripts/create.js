@@ -159,9 +159,6 @@ async function renderPositions() {
         const divPlayer = document.createElement('div');
         divPlayer.setAttribute('draggable', 'true');
         divPlayer.setAttribute('data-player', player.data.name);
-        divPlayer.style.display = "flex";
-        divPlayer.style.flexDirection = "column";
-        divPlayer.style.alignItems = "center";
 
         const img = document.createElement('img');
         img.setAttribute('draggable', 'false');
@@ -171,6 +168,9 @@ async function renderPositions() {
 
         const p = document.createElement('p');
         p.textContent = player.data.name;
+        divPlayer.style.display = "flex";
+        divPlayer.style.flexDirection = "column";
+        divPlayer.style.alignItems = "center";
 
         divPlayer.appendChild(img);
         divPlayer.appendChild(p);
