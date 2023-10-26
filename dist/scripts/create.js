@@ -3,7 +3,7 @@ var faunadb = window.faunadb;
 var q = faunadb.query;
 
 document.addEventListener("DOMContentLoaded", function() {
-  // Your code
+  console.log("DOM")
   renderPositions();
 });
 
