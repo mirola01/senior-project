@@ -125,8 +125,6 @@ async function renderPositions() {
     let token = await client.query(q.CurrentToken());
     token = token.value.id;
 
-    let user_role = decodedJWT["https://db.fauna.com/roles"][0];
-
     let players = await fetch("/.netlify/functions/players_by_owner", {
       method: "POST",
       headers: {
@@ -155,6 +153,7 @@ async function renderPositions() {
       ul.setAttribute('data-pos', key);
 
       positions[key].forEach((player) => {
+        console.log("key", key, positions[key]);
         const li = document.createElement('li');
         const divPlayer = document.createElement('div');
         divPlayer.setAttribute('draggable', 'true');

@@ -1011,7 +1011,8 @@ div#\34 -3-3 {
 
 /* ==================== */
 .sec-pos {
-  width: 100%;    
+  width: 50%;
+  margin-left: auto;
   background: #ccc;
   padding: 0 10px 0 10px;
   border-radius: 5px;
