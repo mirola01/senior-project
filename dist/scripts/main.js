@@ -17,10 +17,10 @@ window.onload = async () => {
       // Process the login state
       await auth0.handleRedirectCallback();
       Auth.setAuth0(auth0);
-      console.log("First", await auth0.isAuthenticated());
+      console.log("First", auth0, await auth0.isAuthenticated());
 
       auth0 = Auth.getAuth0();
-      console.log("Second", await auth0.isAuthenticated());
+      console.log("Second", auth0,await auth0.isAuthenticated());
 
       UI.updateUI();
       console.log("Authentificated");
