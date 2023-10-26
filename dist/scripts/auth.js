@@ -33,7 +33,7 @@ export const configureClient = async () => {
 export const getAuth0 = () => {
     const storedAuth = localStorage.getItem('auth');
     if (storedAuth) {
-        console.log("1", storedAuth);
+        console.log("not parsed+parsed", storedAuth, JSON.parse(storedAuth));
         return JSON.parse(storedAuth);
     }
     console.log("2", auth0);
