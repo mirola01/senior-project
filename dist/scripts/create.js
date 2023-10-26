@@ -144,7 +144,7 @@ async function renderPositions() {
         positions[pos].push(player);
       }
     });
-
+    console.log(positions)
     const sectionElement = document.querySelector('section');
     Object.keys(positions).forEach((key) => {
       const div = document.createElement('div');
