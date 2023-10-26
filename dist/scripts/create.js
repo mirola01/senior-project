@@ -2,10 +2,11 @@ import * as Auth from "./auth.js";
 var faunadb = window.faunadb;
 var q = faunadb.query;
 
-window.onload = function() {
-  console.log("window.onload triggered");
+document.addEventListener("DOMContentLoaded", function() {
+  // Your code
   renderPositions();
-};
+});
+
 
 const wc_team = {}; // Initialize wc_team if it doesn't exist
 
