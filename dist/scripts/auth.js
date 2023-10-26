@@ -53,7 +53,12 @@ export const login = async () => {
 
 // Handle user logout
 export const logout = () => {
-    final_auth.logout({
+    if (final_auth) {
+        final_auth.logout({
+            returnTo: 'https://lineup-manager.netlify.app'
+        });
+    }
+    auth0.logout({
         returnTo: 'https://lineup-manager.netlify.app'
     });
 };
