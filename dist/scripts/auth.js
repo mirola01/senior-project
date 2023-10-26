@@ -31,15 +31,15 @@ export const configureClient = async () => {
 };
 
 export const getAuth0 = () => {
-    console.log("final+normal", final_auth, auth0);
-    if (final_auth) {
-        return final_auth;
+    const storedAuth = localStorage.getItem('final_auth');
+    if (storedAuth) {
+        return JSON.parse(storedAuth);
     }
     return auth0;
 };
 
 export const setAuth0 = (new_auth) => {
-    final_auth = new_auth;
+    localStorage.setItem('final_auth', JSON.stringify(new_auth));
 };
 
 export const getFaunaKey = () => {
