@@ -39,17 +39,12 @@ document.querySelector(".auth-btn").addEventListener("click", async (e) => {
   // Since 'e.target' is the clicked element, we can directly use it here
   const authBtn = e.target;
 
-  // Update aria-label
-  authBtn.setAttribute(
-    "aria-label",
-    authBtn.innerHTML === "Login" ? "Login Button" : "Logout Button"
-  );
-
   // Perform login or logout based on the button label
-  if (authBtn.innerHTML === "Sign in" || authBtn.innerHTML === "SIGN IN") {
+  if (authBtn.innerHTML === "Sign in") {
     console.log("login");
     Auth.login();
   } else {
+    console.log("log out");
     Auth.logout();
   }
 });
