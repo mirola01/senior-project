@@ -119,6 +119,7 @@ function generateDefaultImage(jerseyNumber) {
   ctx.font = '48px Arial';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
+  console.log("Jersey", jerseyNumber)
   ctx.fillText(jerseyNumber, canvas.width / 2, canvas.height / 2);
   
   // Convert to data URL
