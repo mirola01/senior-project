@@ -31,20 +31,18 @@ export const configureClient = async () => {
 };
 
 export const getAuth0 = () => {
-    const storedAuth = localStorage.getItem('auth');
-    if (storedAuth) {
-        console.log("not parsed+parsed", storedAuth, JSON.parse(storedAuth));
-        return JSON.parse(storedAuth);
+    if (final_auth) {
+        return final_auth;
     }
-    console.log("2", auth0);
     return auth0;
 };
 
 export const setAuth0 = (new_auth) => {
-    console.log("3");
-    localStorage.setItem('auth', JSON.stringify(new_auth));
+    final_auth = new_auth;
 };
-
+export const setToken = (token) => {
+    localStorage.setItem("accessToken", token);
+};
 export const getFaunaKey = () => {
     return fauna_key;
 };
@@ -53,19 +51,11 @@ export const login = async () => {
     await auth0.loginWithRedirect({
         redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
     });
-    localStorage.clear();
 };
 
 // Handle user logout
 export const logout = () => {
-    console.log("final+normal", final_auth, auth0);
-    if (final_auth) {
-        localStorage.removeItem('auth');
-        final_auth.logout({
-            returnTo: 'https://lineup-manager.netlify.app'
-        });
-    }
-    auth0.logout({
+    final_auth.logout({
         returnTo: 'https://lineup-manager.netlify.app'
     });
 };

@@ -10,24 +10,21 @@ let auth0Client = null;
 window.onload = async () => {
   try {
     await Auth.configureClient();
-    let auth0 = Auth.getAuth0();
+    const auth0 = Auth.getAuth0();
     console.log("auth 1", auth0)
     const query = window.location.search;
     if (query.includes("code=") && query.includes("state=")) {
       // Process the login state
       await auth0.handleRedirectCallback();
       Auth.setAuth0(auth0);
-      console.log("First", auth0, await auth0.isAuthenticated());
-
-      auth0 = Auth.getAuth0();
-      console.log("Second", auth0,await auth0.isAuthenticated());
-
-      UI.updateUI();
+      const accessToken = await auth0.getTokenSilently();
+      Auth.setToken(accessToken);
       console.log("Authentificated");
 
       // Use replaceState to redirect the user away and remove the querystring parameters
       window.history.replaceState({}, document.title, "/player-database.html");
     }
+    UI.updateUI();
 
   } catch (e) {
     console.error("Initialization failed:", e);
@@ -49,7 +46,6 @@ document.querySelector(".auth-btn").addEventListener("click", async (e) => {
     console.log("login");
     Auth.login();
   } else {
-    console.log("log out");
     Auth.logout();
   }
 });
