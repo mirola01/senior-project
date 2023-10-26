@@ -17,6 +17,8 @@ window.onload = async () => {
       // Process the login state
       await auth0.handleRedirectCallback();
       Auth.setAuth0(auth0);
+      console.log("auth0", auth0);
+      console.log("authfinal", Auth.getAuth0());
       console.log("Authentificated");
 
       // Use replaceState to redirect the user away and remove the querystring parameters
