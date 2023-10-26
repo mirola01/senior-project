@@ -100,8 +100,8 @@ export const login = async () => {
  * @returns {void}
  */
 export const logout = () => {
-    localStorage.clear();
     let final_auth = window.localStorage.getItem("final_auth");
+    localStorage.clear();
     if (final_auth) {
         final_auth.logout({
             returnTo: 'https://lineup-manager.netlify.app'
