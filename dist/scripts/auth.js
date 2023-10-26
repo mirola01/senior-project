@@ -19,7 +19,7 @@ export const configureClient = async () => {
             audience: config.audience
             
         });
-        fauna_key = config.fauna_key;
+        localStorage.setItem("fauna_key", config.fauna_key);
 
         // const token = await auth0.getTokenSilently();
         // console.log(token)
@@ -44,7 +44,7 @@ export const setToken = (token) => {
     localStorage.setItem("accessToken", token);
 };
 export const getFaunaKey = () => {
-    return fauna_key;
+    return localStorage.getItem("fauna_key");
 };
 // Handle user login
 export const login = async () => {
@@ -55,6 +55,7 @@ export const login = async () => {
 
 // Handle user logout
 export const logout = () => {
+    localStorage.clear();
     final_auth.logout({
         returnTo: 'https://lineup-manager.netlify.app'
     });
