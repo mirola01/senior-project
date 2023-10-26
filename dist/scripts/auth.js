@@ -31,7 +31,7 @@ export const configureClient = async () => {
 };
 
 export const getAuth0 = () => {
-    const storedAuth = localStorage.getItem('final_auth');
+    const storedAuth = localStorage.getItem('auth');
     if (storedAuth) {
         console.log("1", storedAuth);
         return JSON.parse(storedAuth);
@@ -59,7 +59,7 @@ export const login = async () => {
 export const logout = () => {
     console.log("final+normal", final_auth, auth0);
     if (final_auth) {
-        localStorage.removeItem('final_auth');
+        localStorage.removeItem('auth');
         final_auth.logout({
             returnTo: 'https://lineup-manager.netlify.app'
         });
