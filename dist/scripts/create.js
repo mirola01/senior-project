@@ -151,11 +151,12 @@ async function renderPositions() {
     // Group players by their positions
     players.data.forEach((player) => {
       const pos = player.data.position.toLowerCase();
+      console.log("positions 1", pos);
       if (positions[pos]) {
         positions[pos].push(player);
       }
     });
-    console.log("positions", positions)
+    console.log("positions", positions);
     // Generate dynamic HTML
     const sectionElement = document.querySelector('section');
     Object.keys(positions).forEach((key) => {
