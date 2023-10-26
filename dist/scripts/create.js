@@ -108,10 +108,8 @@ wc_team.dragDrap = (function() {
 wc_team.dragDrap.init();
 
 async function renderPositions() {
-  const auth0 = Auth.getAuth0();
-  const isAuthenticated = await auth0.isAuthenticated();
-  if (isAuthenticated) {
-    const accessToken = await auth0.getTokenSilently();
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
     const decodedJWT = jwt_decode(accessToken);
     /**
      * Fetch players
