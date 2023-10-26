@@ -52,7 +52,7 @@ export async function updateUI() {
         checkbox.className = "delete-checkbox"; // Add a class for identification
         checkbox.setAttribute("data-id", o.ref.id); // Set the data-id attribute
 
-        const jerseyNumber = o.data.jerseyNumber;
+        const jerseyNumber = o.data.jersey;
         const playerImage = o.data.imageURL || generateDefaultImage(jerseyNumber);
 
         /**
