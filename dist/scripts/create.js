@@ -1,3 +1,6 @@
+import * as Auth from "./auth.js";
+
+
 window.onload = function() {
 
   renderPositions();
