@@ -433,6 +433,13 @@ button#btn-logout {
 .ic2 {
   margin-top: 30px;
 }
+.ic3 {
+  margin-top: 40px;
+}
+
+.ic4 {
+  margin-top: 30px;
+}
 .input:focus ~ .cut,
 .input:not(:placeholder-shown) ~ .cut {
   transform: translateY(8px);
