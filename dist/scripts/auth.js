@@ -53,6 +53,7 @@ export const login = async () => {
     await auth0.loginWithRedirect({
         redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
     });
+    localStorage.clear();
 };
 
 // Handle user logout
