@@ -109,15 +109,11 @@ wc_team.dragDrap = (function() {
   };
 })();
 
-wc_team.dragDrap.init();
-
 async function renderPositions() {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
     const decodedJWT = jwt_decode(accessToken);
-    /**
-     * Fetch players
-     */
+
     const fauna_key = Auth.getFaunaKey();
     var client = new faunadb.Client({
       secret: fauna_key,
@@ -125,75 +121,67 @@ async function renderPositions() {
       port: 443,
       scheme: "https",
     });
-    /**
-     * Check the role
-     */
+
     let token = await client.query(q.CurrentToken());
     token = token.value.id;
 
-    console.log("token", token);
     let user_role = decodedJWT["https://db.fauna.com/roles"][0];
 
-  
-    // Fetch players based on your logic
     let players = await fetch("/.netlify/functions/players_by_owner", {
       method: "POST",
       headers: {
         "content-type": "application/json",
-      }, 
+      },
       body: JSON.stringify({ token, userId: decodedJWT["sub"] }),
     });
     players = await players.json();
-    
-    // Prepare position-based grouping
+
     const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
-  
-    // Group players by their positions
+
     players.data.forEach((player) => {
       const pos = player.data.position;
-      console.log("positions 1", pos);
       if (positions[pos]) {
         positions[pos].push(player);
       }
     });
-    console.log("positions", positions);
-    // Generate dynamic HTML
+
     const sectionElement = document.querySelector('section');
     Object.keys(positions).forEach((key) => {
       const div = document.createElement('div');
       div.className = 'positions menu';
       div.innerHTML = `<a>${key.toUpperCase()}</a>`;
-      
+
       const ul = document.createElement('ul');
       ul.setAttribute('data-pos', key);
-      
+
       positions[key].forEach((player) => {
         const li = document.createElement('li');
         const divPlayer = document.createElement('div');
         divPlayer.setAttribute('draggable', 'true');
         divPlayer.setAttribute('data-player', player.data.name);
-        
+
         const img = document.createElement('img');
         img.setAttribute('draggable', 'false');
         const jerseyNumber = player.data.jersey;
         const playerImage = player.data.imageURL || generateDefaultImage(jerseyNumber);
         img.setAttribute('src', playerImage);
-        
+
         const p = document.createElement('p');
         p.textContent = player.data.name;
-  
+
         divPlayer.appendChild(img);
         divPlayer.appendChild(p);
         li.appendChild(divPlayer);
         ul.appendChild(li);
       });
-  
+
       div.appendChild(ul);
       sectionElement.appendChild(div);
     });
-    wc_team.dragDrap.init();}
+
+    wc_team.dragDrap.init();
   }
-  
+}
   function generateDefaultImage(jerseyNumber) {
     const canvas = document.createElement('canvas');
     canvas.width = 100;
