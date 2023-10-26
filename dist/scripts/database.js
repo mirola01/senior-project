@@ -9,9 +9,8 @@ export const new_player = async () => {
   /**
  * Check if the user is authenticated
  */
-  const auth0 = Auth.getAuth0();
-    const isAuthenticated = await auth0.isAuthenticated();
-    if (isAuthenticated) {
+  const accessToken = localStorage.getItem("accessToken");
+  if (accessToken) {
         const accessToken = await auth0.getTokenSilently();
         const decodedJWT = jwt_decode(accessToken);
         /**
