@@ -3,7 +3,6 @@ var faunadb = window.faunadb;
 var q = faunadb.query;
 
 document.addEventListener("DOMContentLoaded", function() {
-  console.log("DOM")
   renderPositions();
 });
 
@@ -160,6 +159,9 @@ async function renderPositions() {
         const divPlayer = document.createElement('div');
         divPlayer.setAttribute('draggable', 'true');
         divPlayer.setAttribute('data-player', player.data.name);
+        divPlayer.style.display = "flex";
+        divPlayer.style.flexDirection = "column";
+        divPlayer.style.alignItems = "center";
 
         const img = document.createElement('img');
         img.setAttribute('draggable', 'false');
@@ -177,10 +179,8 @@ async function renderPositions() {
       });
 
       div.appendChild(ul);
-      console.log("div", div);
       sectionElement.appendChild(div);
     });
-    console.log("final");
     wc_team.dragDrap.init();
   }
 }
