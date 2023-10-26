@@ -485,7 +485,10 @@ button#btn-logout {
 }
 .input-container.ic3 {
   margin-top: 20px;
+  display: flex;
 }
+select#playerPosition {place-self: center;margin-left: 10px;}
+
 .card-container {
   display: none;
   /* display: grid; */
