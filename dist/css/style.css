@@ -317,12 +317,12 @@ tr:nth-child(even) {
   background-color: #D8E4F4;
   border-radius: 20px;
   box-sizing: border-box;
-  height: 500px;
+  height: auto;
   padding: 20px;
   width: 70vw;
   position: fixed;
   margin-left: 5%;
-  margin-top: 10%;
+  margin-top: 8%;
   z-index: 50;
   display: none;
 }
