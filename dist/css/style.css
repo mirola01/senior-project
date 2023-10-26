@@ -217,8 +217,9 @@ main {
 
 label {
   display: table-cell;
-  width: 1px;
+  width: auto;
   white-space: nowrap;
+  
 }
 
 span {
