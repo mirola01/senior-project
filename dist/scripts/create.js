@@ -7,6 +7,7 @@ window.onload = function() {
   renderPositions();
 };
 
+const wc_team = {}; // Initialize wc_team if it doesn't exist
 
 wc_team.dragDrap = (function() {
   
