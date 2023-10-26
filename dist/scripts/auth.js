@@ -31,6 +31,7 @@ export const configureClient = async () => {
 };
 
 export const getAuth0 = () => {
+    console.log("final+normal", final_auth, auth0);
     if (final_auth) {
         return final_auth;
     }
@@ -53,6 +54,7 @@ export const login = async () => {
 
 // Handle user logout
 export const logout = () => {
+    console.log("final+normal", final_auth, auth0);
     if (final_auth) {
         final_auth.logout({
             returnTo: 'https://lineup-manager.netlify.app'
