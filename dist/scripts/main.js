@@ -18,11 +18,11 @@ window.onload = async () => {
       await auth0.handleRedirectCallback();
       Auth.setAuth0(auth0);
       console.log("Authentificated");
-      UI.updateUI();
 
       // Use replaceState to redirect the user away and remove the querystring parameters
       window.history.replaceState({}, document.title, "/player-database.html");
     }
+    UI.updateUI();
 
   } catch (e) {
     console.error("Initialization failed:", e);
