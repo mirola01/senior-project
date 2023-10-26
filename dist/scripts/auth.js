@@ -42,7 +42,7 @@ export const getAuth0 = () => {
 
 export const setAuth0 = (new_auth) => {
     console.log("3");
-    localStorage.setItem('final_auth', JSON.stringify(new_auth));
+    localStorage.setItem('auth', JSON.stringify(new_auth));
 };
 
 export const getFaunaKey = () => {
