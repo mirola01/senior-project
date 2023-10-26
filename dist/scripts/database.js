@@ -25,11 +25,9 @@ export const new_player = async () => {
             scheme: 'https'
           });
         
-        //document.querySelector(".card-container").style.display = 'grid';
         /**
          * Check the role
          */
-        // console.log("current token", q.CurrentToken())
         let token = await client.query(q.CurrentToken());
         token = token.value.id;
 
