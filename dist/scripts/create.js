@@ -146,11 +146,11 @@ async function renderPositions() {
     players = await players.json();
     
     // Prepare position-based grouping
-    const positions = { gk: [], df: [], md: [], fw: [] };
+    const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
   
     // Group players by their positions
     players.data.forEach((player) => {
-      const pos = player.data.position.toLowerCase();
+      const pos = player.data.position;
       console.log("positions 1", pos);
       if (positions[pos]) {
         positions[pos].push(player);
