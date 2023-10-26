@@ -155,7 +155,7 @@ async function renderPositions() {
         positions[pos].push(player);
       }
     });
-  
+    console.log("positions", positions)
     // Generate dynamic HTML
     const sectionElement = document.querySelector('section');
     Object.keys(positions).forEach((key) => {
