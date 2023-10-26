@@ -11,7 +11,6 @@ export const new_player = async () => {
  */
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
-        const accessToken = await auth0.getTokenSilently();
         const decodedJWT = jwt_decode(accessToken);
         /**
          * Fetch players
