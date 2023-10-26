@@ -173,8 +173,8 @@ async function renderPositions() {
         divPlayer.style.alignItems = "center";
 
         divPlayer.appendChild(img);
-        divPlayer.appendChild(p);
         li.appendChild(divPlayer);
+        li.appendChild(p);
         ul.appendChild(li);
       });
 
