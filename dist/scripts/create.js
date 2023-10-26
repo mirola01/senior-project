@@ -175,9 +175,10 @@ async function renderPositions() {
       });
 
       div.appendChild(ul);
+      console.log("div", div);
       sectionElement.appendChild(div);
     });
-
+    console.log("final");
     wc_team.dragDrap.init();
   }
 }
