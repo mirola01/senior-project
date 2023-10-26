@@ -183,6 +183,7 @@ img {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  width: auto;
 }
 
 .lineup-controls button:hover {
@@ -1018,6 +1019,7 @@ div#\34 -3-3 {
   border-radius: 5px;
   box-shadow: 0 0 5px 2px #000;
   border: 1px solid #fff;
+  height: auto;
 }
 .sec-pos a {
   clear: left;
