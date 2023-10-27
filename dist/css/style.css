@@ -653,6 +653,7 @@ div#\34 -3-3 {
 
 .tactical-guide h2 {
   height: auto;
+  margin-top: 10px;
 }
 
 .tactical-guide p {
@@ -1154,3 +1155,7 @@ ul#starting_11 .selected img {
 }
 
 .sec-pos h1 {height: auto;}
+
+.tab-content {
+  height: auto;
+}
