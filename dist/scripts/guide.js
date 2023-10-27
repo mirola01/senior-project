@@ -1,42 +1,28 @@
 export function setupTabs() {
-    $(".tactical-guide")
-    .find("input, textarea")
-    .on("keyup blur focus", function (e) {
-      var $this = $(this),
-        label = $this.prev("label");
 
-      if (e.type === "keyup") {
-        if ($this.val() === "") {
-          label.removeClass("active-tac highlight");
-        } else {
-          label.addClass("active-tac highlight");
-        }
-      } else if (e.type === "blur") {
-        if ($this.val() === "") {
-          label.removeClass("active-tac highlight");
-        } else {
-          label.removeClass("highlight");
-        }
-      } else if (e.type === "focus") {
-        if ($this.val() === "") {
-          label.removeClass("highlight");
-        } else if ($this.val() !== "") {
-          label.addClass("highlight");
-        }
-      }
+    $(".tab a").on("click", function (e) {
+      e.preventDefault();
+  
+      $(this).parent().addClass("active-tac");
+      $(this).parent().siblings().removeClass("active-tac");
+  
+      const target = $(this).attr("href");  // Declare target with const
+  
+      $(".tab-content > div").not(target).hide();
+  
+      $(target).fadeIn(600);
     });
-
-  $(".tab a").on("click", function (e) {
-    e.preventDefault();
-
-    $(this).parent().addClass("active-tac");
-    $(this).parent().siblings().removeClass("active-tac");
-
-    target = $(this).attr("href");
-
-    $(".tab-content > div").not(target).hide();
-
-    $(target).fadeIn(600);
-  });
   }
-setupTabs();
+  
+  // Initialize tabs
+  $(document).ready(function() {
+    // Hide all tab content divs
+    $(".tab-content > div").hide();
+    
+    // Show the first one
+    $(".tab-content > div:first-child").show();
+    
+    // Run the setupTabs function
+    setupTabs();
+  });
+  
