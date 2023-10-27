@@ -1069,9 +1069,11 @@ canvas {
 }
 
 #starting_11 {
-  position: absolute;
   margin: 0;
   padding: 0;
+  position: absolute;
+  top: 0px;
+  height: auto;
 }
 
 #starting_11 ul {
@@ -1081,11 +1083,15 @@ canvas {
 }
 
 #starting_11 li {
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  background-color: red; /* Just for visibility */
-  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  background: #000;
+  display: block;
+  opacity: 0.1;
+  border-radius: 100px;
+  box-shadow: 0px -2px 5px 1px #000;
+  border: 1px solid #666;
+  overflow: hidden;
 }
 
 #starting_11 li img {
@@ -1093,7 +1099,7 @@ canvas {
 }
 
 /* Individual positions remain the same */
-#pos1 { top: 119px; left: 158px; }
+#pos1 {top: 120px;left: 165px;}
 #pos2 { top: 171px; left: 64px; }
 #pos3 { top: 151px; left: 124px; }
 #pos4 { top: 151px; left: 202px;}
@@ -1104,7 +1110,7 @@ canvas {
 }
 #pos7 {
   top: 236px;
-  left: 118px;
+  left: 124px;
 }
 #pos8 {
   top: 236px;
