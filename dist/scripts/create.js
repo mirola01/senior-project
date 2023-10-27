@@ -238,7 +238,7 @@ async function saveLineup() {
       }
       playersInFormation[position].push(playerName);
     });
-
+    console.log("Formation", playersInFormation)
     let data = await client.query(
       q.Create(q.Collection('Formation'), {
         data: {
