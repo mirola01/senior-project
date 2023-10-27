@@ -210,3 +210,47 @@ async function renderPositions() {
     
     return dataURL;
   }
+
+  // Function to save lineup into Formation
+async function saveLineup() {
+  const accessToken = localStorage.getItem('accessToken');
+  if (accessToken) {
+    const decodedJWT = jwt_decode(accessToken);
+    const fauna_key = Auth.getFaunaKey();
+    var client = new faunadb.Client({
+      secret: fauna_key,
+      domain: 'db.us.fauna.com',
+      port: 443,
+      scheme: 'https'
+    });
+
+    let token = await client.query(q.CurrentToken());
+    token = token.value.id;
+
+    // Extract players from the HTML
+    const playersInFormation = {};
+    const playerElements = document.querySelectorAll('li.selected');
+    playerElements.forEach((element) => {
+      const position = element.getAttribute('data-pos');
+      const playerName = element.querySelector('div').getAttribute('data-player');
+      if (!playersInFormation[position]) {
+        playersInFormation[position] = [];
+      }
+      playersInFormation[position].push(playerName);
+    });
+
+    let data = await client.query(
+      q.Create(q.Collection('Formation'), {
+        data: {
+          formation: '4-4-2',
+          players: playersInFormation,  // Saving the players in each position
+          owner: decodedJWT['sub']
+        }
+      })
+    ).then((ret) => console.log(ret))
+    .catch((err) => console.error('Error:', err));
+  }
+}
+
+// Add click event listener for the 'Save Lineup' button
+document.querySelector('.save-lineup').addEventListener('click', saveLineup);
