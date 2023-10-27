@@ -25,7 +25,6 @@ window.onload = async () => {
       window.history.replaceState({}, document.title, "/player-database.html");
     }
     UI.updateUI();
-    UI.setupTabs();
 
   } catch (e) {
     console.error("Initialization failed:", e);
