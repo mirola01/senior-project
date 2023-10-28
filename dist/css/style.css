@@ -1092,6 +1092,7 @@ canvas {
   box-shadow: 0px -2px 5px 1px #000;
   border: 1px solid #666;
   overflow: hidden;
+  position: absolute;
 }
 
 #starting_11 li img {
@@ -1099,7 +1100,7 @@ canvas {
 }
 
 /* Individual positions remain the same */
-#pos1 {top: 120px;left: 165px;}
+#pos1 {top: 120px;  left: 158px;}
 #pos2 { top: 171px; left: 64px; }
 #pos3 { top: 151px; left: 124px; }
 #pos4 { top: 151px; left: 202px;}
@@ -1110,7 +1111,7 @@ canvas {
 }
 #pos7 {
   top: 236px;
-  left: 124px;
+  left: 111px;
 }
 #pos8 {
   top: 236px;
