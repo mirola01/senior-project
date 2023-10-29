@@ -235,7 +235,7 @@ async function saveLineup() {
       const playerName = element.querySelector('div').getAttribute('data-player');
       console.log(element)
       if (!playersInFormation[position]) {
-        playersInFormation[position] = null;
+        playersInFormation[position] = [];
       }
       playersInFormation[position].push(playerName);
     });
