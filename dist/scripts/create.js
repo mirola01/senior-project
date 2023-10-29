@@ -251,3 +251,6 @@ async function saveLineup() {
     .catch((err) => console.error('Error:', err));
   }
 }
+
+// Add click event listener for the 'Save Lineup' button
+document.querySelector('.save-lineup').addEventListener('click', saveLineup);
