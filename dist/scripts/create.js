@@ -251,7 +251,7 @@ async function renderPositions() {
       let data = await client.query(
         q.Create(q.Collection('Formation'), {
           data: {
-            name: document.querySelector('.titleFormation'),
+            name: document.querySelector('.titleFormation').textContent,
             formation: '4-4-2',
             players: playersInFormation,  // Saving the players in each position
             owner: decodedJWT['sub']
@@ -275,6 +275,7 @@ async function renderPositions() {
       if (element.classList.contains('selected')) {
         element.classList.remove('selected'); // Remove 'selected' class if present
       }
+      element.style.opacity = 0.4;
     });
   }  
 
