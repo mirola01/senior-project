@@ -233,16 +233,34 @@ async function renderPositions() {
         scheme: 'https'
       });
   
-      let token = await client.query(q.CurrentToken());
-      token = token.value.id;
+      // Get selected formation from the dropdown
+  const selectedFormation = document.querySelector('#formationSelector').value;
+
+  // Initialize object to hold player positions based on the selected formation
+  let playersInFormation = {};
   
-      // Initialize object to hold player positions
-      const playersInFormation = {
-        "gk": [null], // Assuming only one goalkeeper
-        "df": [null, null, null, null], // 4 defenders
-        "md": [null, null, null, null], // 4 midfielders
-        "fw": [null, null] // 2 forwards
-      };
+  if (selectedFormation === '4-4-2') {
+    playersInFormation = {
+      "gk": [null],
+      "df": [null, null, null, null],
+      "md": [null, null, null, null],
+      "fw": [null, null]
+    };
+  } else if (selectedFormation === '4-3-3') {
+    playersInFormation = {
+      "gk": [null],
+      "df": [null, null, null, null],
+      "md": [null, null, null],
+      "fw": [null, null, null]
+    };
+  } else if (selectedFormation === '3-5-2') {
+    playersInFormation = {
+      "gk": [null],
+      "df": [null, null, null],
+      "md": [null, null, null, null, null],
+      "fw": [null, null]
+    };
+  }
   
       // Extract players from the HTML
       const playerElements = document.querySelectorAll('li');
@@ -261,7 +279,7 @@ async function renderPositions() {
         q.Create(q.Collection('Formation'), {
           data: {
             name: document.querySelector('.titleFormation').textContent,
-            formation: '4-4-2',
+            formation: selectedFormation,
             players: playersInFormation,  // Saving the players in each position
             owner: decodedJWT['sub']
           }
