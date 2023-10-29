@@ -6,15 +6,13 @@ document.addEventListener("DOMContentLoaded", function() {
   renderPositions();
   const formationSelector = document.getElementById("formationSelector");
   const startingEleven = document.getElementById("starting_11");
+  // Example JS to switch class based on the dropdown
+document.getElementById('formationSelector').addEventListener('change', function() {
+  const selectedFormation = this.value; // this will be "formation-4-4-2" or "formation-4-3-3" or "formation-3-5-2"
+  document.getElementById('starting_11').className = selectedFormation;
+  console.log("Formation changed to:", this.value);
+});
 
-  formationSelector.addEventListener("change", function(e) {
-    const selectedFormation = e.target.value;
-    
-    // Remove all formation classes first (you may need to list all possible formations here)
-    startingEleven.classList.remove("4-4-2", "4-3-3", "3-5-2");
-    
-    // Add the selected formation as a class
-    startingEleven.classList.add(selectedFormation);
 });
 
 
