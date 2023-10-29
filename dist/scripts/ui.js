@@ -60,12 +60,12 @@ export async function updateUI() {
         label.htmlFor = o.ref.id; // Match the 'for' attribute to the checkbox's ID
         label.textContent = "Checkbox Label"; // You can customize the label text
         return `
-      <tr>
+      <tr class="table-expand-row-content">
           <td><img src="${playerImage}" alt="Player Image" class="playerImage"></td> 
           <td>${o.data.name}</td>
           <td>${o.data.age}</td>
           <td>${o.data.position}</td>
-          <td>${o.data.jersey}</td>
+          <td>${o.data.jersey} <span class="expand-icon"></td>
       </tr>`;
       });
       console.log("tableBody:", tableBody);
