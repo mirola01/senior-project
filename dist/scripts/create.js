@@ -4,6 +4,17 @@ var q = faunadb.query;
 
 document.addEventListener("DOMContentLoaded", function() {
   renderPositions();
+  const formationSelector = document.getElementById("formationSelector");
+  const startingEleven = document.getElementById("starting_11");
+
+  formationSelector.addEventListener("change", function(e) {
+    const selectedFormation = e.target.value;
+    
+    // Remove all formation classes first (you may need to list all possible formations here)
+    startingEleven.classList.remove("4-4-2", "4-3-3", "3-5-2");
+    
+    // Add the selected formation as a class
+    startingEleven.classList.add(selectedFormation);
 });
 
 
@@ -278,6 +289,7 @@ async function renderPositions() {
       element.style.opacity = 0.4;
     });
   }  
+
 
 // Add click event listener for the 'Save Lineup' button
 document.querySelector('.save-lineup').addEventListener('click', saveLineup);
