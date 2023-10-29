@@ -1097,7 +1097,11 @@ canvas {
 }
 
 #starting_11 li img {
-  margin-top: -5px;
+  width: 55px;
+  height: 55px;
+  top: -10px;
+  left: -2px;
+  position: relative;
 }
 
 /* Individual positions remain the same */

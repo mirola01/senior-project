@@ -212,46 +212,72 @@ async function renderPositions() {
   }
 
   // Function to save lineup into Formation
-async function saveLineup() {
-  const accessToken = localStorage.getItem('accessToken');
-  if (accessToken) {
-    const decodedJWT = jwt_decode(accessToken);
-    const fauna_key = Auth.getFaunaKey();
-    var client = new faunadb.Client({
-      secret: fauna_key,
-      domain: 'db.us.fauna.com',
-      port: 443,
-      scheme: 'https'
-    });
-
-    let token = await client.query(q.CurrentToken());
-    token = token.value.id;
-
-    // Extract players from the HTML
-    const playersInFormation = {};
-    const playerElements = document.querySelectorAll('li.selected');
-    playerElements.forEach((element) => {
-      const position = element.getAttribute('data-pos');
-      const playerName = element.querySelector('div').getAttribute('data-player');
-      console.log(element)
-      if (!playersInFormation[position]) {
-        playersInFormation[position] = [];
-      }
-      playersInFormation[position].push(playerName);
-    });
-    console.log("Formation", playersInFormation)
-    let data = await client.query(
-      q.Create(q.Collection('Formation'), {
-        data: {
-          formation: '4-4-2',
-          players: playersInFormation,  // Saving the players in each position
-          owner: decodedJWT['sub']
+  async function saveLineup() {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      const decodedJWT = jwt_decode(accessToken);
+      const fauna_key = Auth.getFaunaKey();
+      var client = new faunadb.Client({
+        secret: fauna_key,
+        domain: 'db.us.fauna.com',
+        port: 443,
+        scheme: 'https'
+      });
+  
+      let token = await client.query(q.CurrentToken());
+      token = token.value.id;
+  
+      // Initialize object to hold player positions
+      const playersInFormation = {
+        "gk": [null], // Assuming only one goalkeeper
+        "df": [null, null, null, null], // 4 defenders
+        "md": [null, null, null, null], // 4 midfielders
+        "fw": [null, null] // 2 forwards
+      };
+  
+      // Extract players from the HTML
+      const playerElements = document.querySelectorAll('li');
+      playerElements.forEach((element) => {
+        const position = element.parentNode.className; // Getting the class of the parent <ul>, which should indicate the position (gk, df, md, fw)
+        const index = Array.from(element.parentNode.children).indexOf(element); // Getting the index of the li inside its parent ul
+        const playerName = element.querySelector('div') ? element.querySelector('div').getAttribute('data-player') : null; // If there is no <div> (i.e., the position is empty), set playerName as null
+        
+        if (playersInFormation[position]) {
+          playersInFormation[position][index] = playerName; // Replace null with the playerName, or keep null if there's no player in this position
         }
-      })
-    ).then((ret) => console.log(ret))
-    .catch((err) => console.error('Error:', err));
+      });
+      console.log("Formation", playersInFormation)
+  
+      let data = await client.query(
+        q.Create(q.Collection('Formation'), {
+          data: {
+            name: document.querySelector('.titleFormation'),
+            formation: '4-4-2',
+            players: playersInFormation,  // Saving the players in each position
+            owner: decodedJWT['sub']
+          }
+        })
+      ).then((ret) => console.log(ret))
+      .catch((err) => console.error('Error:', err));
+    }
   }
-}
+  
+
+  // Function to save lineup into Formation
+  async function clearLineup() {
+    // Select all player slots on the pitch
+    const playerElements = document.querySelectorAll('li');
+  
+    // Clear the content of each player slot
+    playerElements.forEach((element) => {
+      element.innerHTML = ''; // Remove any inner HTML (e.g., player names, icons, etc.)
+  
+      if (element.classList.contains('selected')) {
+        element.classList.remove('selected'); // Remove 'selected' class if present
+      }
+    });
+  }
 
 // Add click event listener for the 'Save Lineup' button
 document.querySelector('.save-lineup').addEventListener('click', saveLineup);
+document.querySelector('.clear-lineup').addEventListener('click', clearLineup);
