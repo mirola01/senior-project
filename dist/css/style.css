@@ -172,6 +172,7 @@ img {
 }
 
 .lineup-controls {
+  margin-top: -85px;
   height: 20%;
 }
 
@@ -228,7 +229,7 @@ span {
   padding: 0 4px 0 6px;
   color: #004AAD;
 }
-.pitch {float: left;width: 40%;perspective: 1000px;perspective-origin: 50% 50%;}
+.pitch {float: left;width: 40%;perspective: 1000px;perspective-origin: 50% 50%;height: auto;margin-top: -189px;}
 .pitch img {
   align-content: center;
   transform: rotateX(50deg);
