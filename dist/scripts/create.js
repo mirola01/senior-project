@@ -62,7 +62,7 @@ wc_team.dragDrap = (function() {
   
     const data = e.dataTransfer.getData("text/html");
     const target = e.currentTarget;
-  
+    target.style.opacity = 1;
     if (target.innerHTML !== "") {
       dragReset(target.lastChild.dataset.player);
     }
@@ -265,8 +265,8 @@ async function renderPositions() {
 
   // Function to save lineup into Formation
   async function clearLineup() {
-    // Select all player slots on the pitch
-    const playerElements = document.querySelectorAll('li');
+    // Select player slots within the 'starting_11' div
+    const playerElements = document.querySelectorAll('#starting_11 li');
   
     // Clear the content of each player slot
     playerElements.forEach((element) => {
@@ -276,7 +276,7 @@ async function renderPositions() {
         element.classList.remove('selected'); // Remove 'selected' class if present
       }
     });
-  }
+  }  
 
 // Add click event listener for the 'Save Lineup' button
 document.querySelector('.save-lineup').addEventListener('click', saveLineup);
