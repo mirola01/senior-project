@@ -7,11 +7,53 @@ document.addEventListener("DOMContentLoaded", function() {
   const formationSelector = document.getElementById("formationSelector");
   const startingEleven = document.getElementById("starting_11");
   // Example JS to switch class based on the dropdown
-document.getElementById('formationSelector').addEventListener('change', function() {
-  const selectedFormation = this.value; // this will be "formation-4-4-2" or "formation-4-3-3" or "formation-3-5-2"
-  document.getElementById('starting_11').className = selectedFormation;
-  console.log("Formation changed to:", this.value);
-});
+  document.getElementById('formationSelector').addEventListener('change', function() {
+    const selectedFormation = this.value;
+    document.getElementById('starting_11').className = selectedFormation;
+    updateFormation(selectedFormation);
+  });
+  
+  function updateFormation(formation) {
+    const defenders = document.querySelector('.df');
+    const midfielders = document.querySelector('.md');
+    const forwards = document.querySelector('.fw');
+  
+    while (defenders.firstChild) {
+      defenders.removeChild(defenders.firstChild);
+    }
+    while (midfielders.firstChild) {
+      midfielders.removeChild(midfielders.firstChild);
+    }
+    while (forwards.firstChild) {
+      forwards.removeChild(forwards.firstChild);
+    }
+  
+    let defCount, midCount, fwdCount;
+    const formationNumbers = formation.split('-').slice(1).map(Number); // "4-4-2" becomes [4, 4, 2]
+  
+    [defCount, midCount, fwdCount] = formationNumbers;
+  
+    for (let i = 0; i < defCount; i++) {
+      const li = document.createElement('li');
+      li.id = `pos${i+2}`;
+      li.draggable = true;
+      defenders.appendChild(li);
+    }
+  
+    for (let i = 0; i < midCount; i++) {
+      const li = document.createElement('li');
+      li.id = `pos${i+2+defCount}`;
+      li.draggable = true;
+      midfielders.appendChild(li);
+    }
+  
+    for (let i = 0; i < fwdCount; i++) {
+      const li = document.createElement('li');
+      li.id = `pos${i+2+defCount+midCount}`;
+      li.draggable = true;
+      forwards.appendChild(li);
+    }
+  }  
 
 });
 
