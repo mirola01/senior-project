@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const selectedFormation = this.value;
     document.getElementById('starting_11').className = selectedFormation;
     updateFormation(selectedFormation);
+    wc_team.dragDrap.init();
   });
   
   function updateFormation(formation) {
