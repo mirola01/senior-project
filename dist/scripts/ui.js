@@ -35,40 +35,38 @@ export async function updateUI() {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ token, userId: decodedJWT["sub"] }),
+        body: JSON.stringify({
+          token,
+          userId: decodedJWT["sub"]
+        }),
       });
       console.log("token+userId", token, decodedJWT["sub"])
       players = await players.json();
 
-      const tableBody = document.getElementById("player-table");
+      const tableBody = document.getElementById("player-tbody");
       var htmlText = players["data"].map(function (o) {
-        /**
-         * Create a checkbox input element
-         */
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
-        checkbox.className = "delete-checkbox"; // Add a class for identification
-        checkbox.setAttribute("data-id", o.ref.id); // Set the data-id attribute
+        checkbox.className = "delete-checkbox";
+        checkbox.setAttribute("data-id", o.ref.id);
 
         const jerseyNumber = o.data.jersey;
         const playerImage = o.data.imageURL || generateDefaultImage(jerseyNumber);
 
-        /**
-         * Create a label element for the checkbox
-         */
         const label = document.createElement("label");
-        label.htmlFor = o.ref.id; // Match the 'for' attribute to the checkbox's ID
-        label.textContent = "Checkbox Label"; // You can customize the label text
+        label.htmlFor = o.ref.id;
+        label.textContent = "Checkbox Label";
+
         return `
       <tr class="table-expand-row-content">
           <td><img src="${playerImage}" alt="Player Image" class="playerImage"></td> 
           <td>${o.data.name}</td>
           <td>${o.data.age}</td>
           <td>${o.data.position}</td>
-          <td>${o.data.jersey} <span class="expand-icon"></td>
+          <td>${jerseyNumber} <span class="expand-icon"></span></td>
+          <td><input type="checkbox" class="delete-checkbox" data-id="${o.ref.id}"></td>
       </tr>`;
       });
-      console.log("tableBody:", tableBody);
       tableBody.innerHTML = htmlText.join("");
 
     } else {
@@ -79,7 +77,9 @@ export async function updateUI() {
         headers: {
           "content-type": "application/json",
         },
-        body: JSON.stringify({ token }),
+        body: JSON.stringify({
+          token
+        }),
       });
       players = await players.json();
 
@@ -104,13 +104,13 @@ function generateDefaultImage(jerseyNumber) {
   const canvas = document.createElement('canvas');
   canvas.width = 100;
   canvas.height = 100;
-  
+
   const ctx = canvas.getContext('2d');
-  
+
   // Draw background
   ctx.fillStyle = 'gray';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
+
   // Draw text
   ctx.fillStyle = 'white';
   ctx.font = '48px Arial';
@@ -118,10 +118,9 @@ function generateDefaultImage(jerseyNumber) {
   ctx.textBaseline = 'middle';
   console.log("Jersey", jerseyNumber)
   ctx.fillText(jerseyNumber, canvas.width / 2, canvas.height / 2);
-  
+
   // Convert to data URL
   const dataURL = canvas.toDataURL('image/png');
-  
+
   return dataURL;
 }
-
