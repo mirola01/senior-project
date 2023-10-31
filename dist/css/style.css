@@ -1296,3 +1296,6 @@ ul#starting_11 .selected img {
 .tab-content {
   height: auto;
 }
+img.playerImage {
+  width: auto;
+}
