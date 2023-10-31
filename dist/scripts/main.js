@@ -11,7 +11,6 @@ window.onload = async () => {
   try {
     await Auth.configureClient();
     const auth0 = Auth.getAuth0();
-    console.log("auth 1", auth0)
     const query = window.location.search;
     if (query.includes("code=") && query.includes("state=")) {
       // Process the login state

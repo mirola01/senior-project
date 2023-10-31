@@ -27,7 +27,7 @@ export async function updateUI() {
     let user_role = decodedJWT["https://db.fauna.com/roles"][0];
     console.log("user_role", user_role);
 
-    if (user_role === "user") {
+    if (user_role === "user" || user_role === undefined) {
       document.querySelector("#add-new-btn").style.display = "block";
 
       let players = await fetch("/.netlify/functions/players_by_owner", {
