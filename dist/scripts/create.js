@@ -55,6 +55,7 @@ document.addEventListener("DOMContentLoaded", function() {
       forwards.appendChild(li);
     }
   }  
+  wc_team.dragDrap.init();
 
 });
 
@@ -309,13 +310,10 @@ async function renderPositions() {
       const playerElements = document.querySelectorAll('li');
       playerElements.forEach((element) => {
         const position = element.parentNode.className; // Getting the class of the parent <ul>, which should indicate the position (gk, df, md, fw)
-        console.log('Position:', position);
         const index = Array.from(element.parentNode.children).indexOf(element); // Getting the index of the li inside its parent ul
         const playerName = element.querySelector('div') ? element.querySelector('div').getAttribute('data-player') : null; // If there is no <div> (i.e., the position is empty), set playerName as null
         if (playersInFormation[position]) {
-          console.log("position+index+playerName", position, index, playerName)
           playersInFormation[position][index] = playerName; // Replace null with the playerName, or keep null if there's no player in this position
-          console.log("playersInFormation", playersInFormation)
         }
       });
       console.log("Formation", playersInFormation)
