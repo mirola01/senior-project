@@ -7,35 +7,35 @@ var q = faunadb.query;
  */
 export const new_player = async () => {
   /**
- * Check if the user is authenticated
- */
+   * Check if the user is authenticated
+   */
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
-        const decodedJWT = jwt_decode(accessToken);
-        /**
-         * Fetch players
-         */
-        const fauna_key = Auth.getFaunaKey();
-        var client = new faunadb.Client({
-            secret: fauna_key,
-            domain: 'db.us.fauna.com',
-            port: 443,
-            scheme: 'https'
-          });
-        
-        /**
-         * Check the role
-         */
-        let token = await client.query(q.CurrentToken());
-        token = token.value.id;
+    const decodedJWT = jwt_decode(accessToken);
+    /**
+     * Fetch players
+     */
+    const fauna_key = Auth.getFaunaKey();
+    var client = new faunadb.Client({
+      secret: fauna_key,
+      domain: 'db.us.fauna.com',
+      port: 443,
+      scheme: 'https'
+    });
+
+    /**
+     * Check the role
+     */
+    let token = await client.query(q.CurrentToken());
+    token = token.value.id;
 
     console.log("token", token);
     let user_role = decodedJWT["https://db.fauna.com/roles"][0];
     console.log("user_role", user_role);
 
     /**
- * Create a new player in the FaunaDB collection
- */
+     * Create a new player in the FaunaDB collection
+     */
     let data = await client.query(
         q.Create(q.Collection("Players"), {
           data: {
@@ -59,21 +59,18 @@ export const new_player = async () => {
  */
 export const delete_player = async (playerId) => {
   try {
-    const isAuthenticated = await auth0.isAuthenticated();
-    const accessToken = await auth0.getTokenSilently();
-
-    if (isAuthenticated) {
-      var client = new faunadb.Client({
-        secret: String(accessToken),
-        domain: 'db.us.fauna.com',
-        port: 443,
-        scheme: 'https'
-      });
+    const fauna_key = Auth.getFaunaKey();
+    var client = new faunadb.Client({
+      secret: fauna_key,
+      domain: 'db.us.fauna.com',
+      port: 443,
+      scheme: 'https'
+    });
+    
 
       /**
- * Delete the player from the FaunaDB collection
- */
-      // Use q.Delete to remove the player document by ID
+       * Delete the player from the FaunaDB collection
+       */
       await client.query(
         q.Delete(q.Ref(q.Collection("Players"), playerId))
       );
@@ -82,7 +79,7 @@ export const delete_player = async (playerId) => {
       console.log(`Player with ID ${playerId} deleted successfully.`);
       window.location.reload();
     }
-  } catch (error) {
+   catch (error) {
     console.error('Error deleting player:', error);
   }
 };
