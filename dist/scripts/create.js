@@ -282,21 +282,21 @@ async function renderPositions() {
   // Initialize object to hold player positions based on the selected formation
   let playersInFormation = {};
   
-  if (selectedFormation === '4-4-2') {
+  if (selectedFormation === 'formation-4-4-2') {
     playersInFormation = {
       "gk": [null],
       "df": [null, null, null, null],
       "md": [null, null, null, null],
       "fw": [null, null]
     };
-  } else if (selectedFormation === '4-3-3') {
+  } else if (selectedFormation === 'formation-4-3-3') {
     playersInFormation = {
       "gk": [null],
       "df": [null, null, null, null],
       "md": [null, null, null],
       "fw": [null, null, null]
     };
-  } else if (selectedFormation === '3-5-2') {
+  } else if (selectedFormation === 'formation-3-5-2') {
     playersInFormation = {
       "gk": [null],
       "df": [null, null, null],
@@ -309,6 +309,7 @@ async function renderPositions() {
       const playerElements = document.querySelectorAll('li');
       playerElements.forEach((element) => {
         const position = element.parentNode.className; // Getting the class of the parent <ul>, which should indicate the position (gk, df, md, fw)
+        console.log('Position:', position);
         const index = Array.from(element.parentNode.children).indexOf(element); // Getting the index of the li inside its parent ul
         const playerName = element.querySelector('div') ? element.querySelector('div').getAttribute('data-player') : null; // If there is no <div> (i.e., the position is empty), set playerName as null
         if (playersInFormation[position]) {
