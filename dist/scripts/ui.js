@@ -50,11 +50,7 @@ export async function updateUI() {
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.className = "delete-checkbox";
-        if (o['@ref'] && o['@ref'].id) {  // Only set it if it exists
-          checkbox.setAttribute("data-id", o['@ref'].id);
-          console.log("o.ref and o.ref.id", o.ref, o['@ref'].id)
-        }
-        console.log("o.ref and o.ref.id", o.ref)
+        const id = o["ref"] && o["ref"]["@ref"] ? o["ref"]["@ref"].id : "undefined";
         const jerseyNumber = o.data.jersey;
         const playerImage = o.data.imageURL || generateDefaultImage(jerseyNumber);
 
@@ -69,7 +65,7 @@ export async function updateUI() {
           <td>${o.data.age}</td>
           <td>${o.data.position}</td>
           <td>${jerseyNumber} <span class="expand-icon"></span></td>
-          <td><input type="checkbox" class="delete-checkbox" data-id="${o.ref.id}"></td>
+          <td><input type="checkbox" class="delete-checkbox" data-id="${id}"></td>
       </tr>`;
       });
       tableBody.innerHTML = htmlText.join("");
