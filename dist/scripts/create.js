@@ -74,6 +74,7 @@ wc_team.dragDrap = (function() {
     players.forEach(player => {
       player.addEventListener("dragstart", dragStart, true);
       player.addEventListener("dragend", dragEnd, false);
+      player.draggable = true; 
     });
   
     position = document.querySelectorAll('#starting_11 li');
@@ -82,6 +83,7 @@ wc_team.dragDrap = (function() {
       pos.addEventListener('drop', drop, false);
       pos.addEventListener('dragenter', cancel, false);
       pos.addEventListener('dragover', cancel, false);
+      pos.draggable = true;
     });
   };
   
