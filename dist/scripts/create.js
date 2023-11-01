@@ -68,6 +68,7 @@ wc_team.dragDrap = (function() {
   let dragSrc;
   
   const init = () => {
+    console.log("Init called");
     const players = document.querySelectorAll(".positions ul");
   
     players.forEach(player => {
@@ -347,7 +348,9 @@ async function renderPositions() {
       }
       element.style.opacity = 0.4;
     });
+    console.log(document.querySelectorAll('#starting_11 li'));
     wc_team.dragDrap.init();
+
   }  
 
 
