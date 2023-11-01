@@ -49,10 +49,11 @@ export async function updateUI() {
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.className = "delete-checkbox";
-        console.log("o.ref and o.ref.id", o.ref, o['@ref'].id)
         if (o['@ref'] && o['@ref'].id) {  // Only set it if it exists
           checkbox.setAttribute("data-id", o['@ref'].id);
+          console.log("o.ref and o.ref.id", o.ref, o['@ref'].id)
         }
+        console.log("o.ref", o.ref)
         const jerseyNumber = o.data.jersey;
         const playerImage = o.data.imageURL || generateDefaultImage(jerseyNumber);
 
