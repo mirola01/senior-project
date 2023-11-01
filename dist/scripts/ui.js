@@ -45,54 +45,32 @@ export async function updateUI() {
 
       const tableBody = document.getElementById("player-tbody");
       tableBody.innerHTML = "";
-
-      players["data"].forEach(function (o) {
-        const row = document.createElement('tr');
-        row.className = "table-expand-row-content";
-
-        // Create and populate the image cell
-        const imgCell = document.createElement('td');
-        const img = document.createElement('img');
-        img.src = o.imageData; // Assuming o.imageData contains the base64 image string
-        img.className = "playerImage";
-        img.alt = "Player Image";
-        imgCell.appendChild(img);
-        row.appendChild(imgCell);
-
-        // Create and populate the name cell
-        const nameCell = document.createElement('td');
-        nameCell.textContent = o.name; // Assuming o.name contains the name
-        row.appendChild(nameCell);
-
-        // Create and populate the age cell
-        const ageCell = document.createElement('td');
-        ageCell.textContent = o.age; // Assuming o.age contains the age
-        row.appendChild(ageCell);
-
-        // Create and populate the position cell
-        const positionCell = document.createElement('td');
-        positionCell.textContent = o.position; // Assuming o.position contains the position
-        row.appendChild(positionCell);
-
-        // Create and populate the number cell
-        const numberCell = document.createElement('td');
-        numberCell.innerHTML = `${o.number} <span class="expand-icon"></span>`; // Assuming o.number contains the number
-        row.appendChild(numberCell);
-
-        // Create and populate the checkbox cell
-        const checkboxCell = document.createElement('td');
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.className = 'delete-checkbox';
-        if (o.ref && o.ref.id) { // Only set it if it exists
+      var htmlText = players["data"].map(function (o) {
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.className = "delete-checkbox";
+        console.log("o.ref and o.ref.id", o.ref, o.ref.id)
+        if (o.ref && o.ref.id) {  // Only set it if it exists
           checkbox.setAttribute("data-id", o.ref.id);
         }
-        checkboxCell.appendChild(checkbox);
-        row.appendChild(checkboxCell);
+        const jerseyNumber = o.data.jersey;
+        const playerImage = o.data.imageURL || generateDefaultImage(jerseyNumber);
 
-        // Append the row to the table body
-        tableBody.appendChild(row);
+        const label = document.createElement("label");
+        label.htmlFor = o.ref.id;
+        label.textContent = "Checkbox Label";
+
+        return `
+      <tr class="table-expand-row-content">
+          <td><img src="${playerImage}" alt="Player Image" class="playerImage"></td> 
+          <td>${o.data.name}</td>
+          <td>${o.data.age}</td>
+          <td>${o.data.position}</td>
+          <td>${jerseyNumber} <span class="expand-icon"></span></td>
+          <td><input type="checkbox" class="delete-checkbox" data-id="${o.ref.id}"></td>
+      </tr>`;
       });
+      tableBody.innerHTML = htmlText.join("");
 
     } else {
       document.querySelector("#add-new-btn").style.display = "none";
