@@ -348,6 +348,7 @@ async function renderPositions() {
       }
       element.style.opacity = 0.4;
     });
+    wc_team.dragDrap.init();
   }  
 
 
