@@ -308,10 +308,11 @@ async function renderPositions() {
       // Extract players from the HTML
       const playerElements = document.querySelectorAll('li');
       playerElements.forEach((element) => {
+        console.log("element", element)
         const position = element.parentNode.className; // Getting the class of the parent <ul>, which should indicate the position (gk, df, md, fw)
         const index = Array.from(element.parentNode.children).indexOf(element); // Getting the index of the li inside its parent ul
         const playerName = element.querySelector('div') ? element.querySelector('div').getAttribute('data-player') : null; // If there is no <div> (i.e., the position is empty), set playerName as null
-        
+        console.log("element", playerName)
         if (playersInFormation[position]) {
           playersInFormation[position][index] = playerName; // Replace null with the playerName, or keep null if there's no player in this position
         }
