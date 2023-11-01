@@ -74,7 +74,6 @@ wc_team.dragDrap = (function() {
     players.forEach(player => {
       player.addEventListener("dragstart", dragStart, true);
       player.addEventListener("dragend", dragEnd, false);
-      player.draggable = true; 
     });
   
     position = document.querySelectorAll('#starting_11 li');
@@ -83,7 +82,6 @@ wc_team.dragDrap = (function() {
       pos.addEventListener('drop', drop, false);
       pos.addEventListener('dragenter', cancel, false);
       pos.addEventListener('dragover', cancel, false);
-      pos.draggable = true;
     });
   };
   
@@ -350,10 +348,15 @@ async function renderPositions() {
       }
       element.style.opacity = 0.4;
     });
-    console.log(document.querySelectorAll('#starting_11 li'));
-    wc_team.dragDrap.init();
-    console.log(document.querySelector('#starting_11 li').draggable);
+    // Select all player divs
+    const playerDivs = document.querySelectorAll('.positions div');
 
+    // Loop through each player div and set draggable to true
+    playerDivs.forEach(div => {
+      div.draggable = true;
+    });
+
+    wc_team.dragDrap.init();
   }  
 
 
