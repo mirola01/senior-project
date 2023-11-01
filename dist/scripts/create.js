@@ -350,6 +350,7 @@ async function renderPositions() {
     });
     console.log(document.querySelectorAll('#starting_11 li'));
     wc_team.dragDrap.init();
+    console.log(document.querySelector('#starting_11 li').draggable);
 
   }  
 
