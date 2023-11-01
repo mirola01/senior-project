@@ -58,28 +58,40 @@ export const new_player = async () => {
  * Function to delete a player by ID
  */
 export const delete_player = async (playerId) => {
-  try {
-    const fauna_key = Auth.getFaunaKey();
-    var client = new faunadb.Client({
-      secret: fauna_key,
+  // Retrieve the token
+  const accessToken = localStorage.getItem("accessToken");
+
+  // Check if token exists
+  if (!accessToken) {
+      console.error('Error: No access token found.');
+      return;
+  }
+
+  // Initialize the Fauna client with the token
+  var client = new faunadb.Client({
+      secret: accessToken,
       domain: 'db.us.fauna.com',
       port: 443,
       scheme: 'https'
-    });
-    
+  });
 
-      /**
-       * Delete the player from the FaunaDB collection
-       */
+  try {
+      // Check if playerId is provided
+      if (!playerId) {
+          console.error('Error: Player ID is not provided or is undefined.');
+          return;
+      }
+
+      // Delete the player from the FaunaDB collection
       await client.query(
-        q.Delete(q.Ref(q.Collection("Players"), playerId))
+          q.Delete(q.Ref(q.Collection("Players"), playerId))
       );
 
       // Optionally, display a success message or perform any other necessary actions
       console.log(`Player with ID ${playerId} deleted successfully.`);
       window.location.reload();
-    }
-   catch (error) {
-    console.error('Error deleting player:', error);
+  }
+  catch (error) {
+      console.error('Error deleting player:', error);
   }
 };
