@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb.js"></script>
+  <script src="https://kit.fontawesome.com/78c0f84eb9.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+  <title>Create Lineup</title>
+</head>
+
+<body>
+  <div class="header">
+    <div class="side-nav">
+      <a href="#" class="logo">
+        <img src="images/logo.png" class="logo-img">
+        <img src="images/logo-icon.png" class="logo-icon">
+      </a>
+      <ul class="nav-links">
+        <li><a href="dashboard.html"><i class="fas fa-house-user" style="color: #004aad;"></i>
+            <p>Dashboard</p>
+          </a>
+
+        </li>
+        <li><a href="create.html"><i class="fas fa-plus-circle" style="color: #004aad;"></i>
+            <p>Create Lineup</p>
+          </a>
+        </li>
+        <li><a href="player-database.html"><i class="fas fa-users" style="color: #004aad;"></i>
+            <p>Player Database</p>
+          </a>
+        </li>
+        <li><a href="match-analysis.html"><i class="fas fa-chart-line" style="color: #004aad;"></i>
+            <p>Match Analysis</p>
+          </a>
+        </li>
+        <li><a href="tactical-guide.html"><i class="fas fa-chalkboard-teacher" style="color: #004aad;"></i>
+            <p>Tactical Guide</p>
+          </a>
+        </li>
+        <li><a href="community.html"><i class="fas fa-comments" style="color: #004aad;"></i>
+            <p>Community</p>
+          </a>
+        </li>
+
+        <li><a href="settings.html"><i class="fas fa-cog" style="color: #004aad;"></i>
+            <p>Settings</p>
+          </a>
+        </li>
+        <li>
+        <button class="auth-btn"><i class="fas fa-sign-out-alt" style="color: #004aad;"></i>Log out</button>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+  <main>
+    <div class="container">
+      <div class="topbar">
+
+        <h1 class="titleFormation" contenteditable="true">
+          Untitled
+        </h1>
+        <form onsubmit="event.preventDefault();" role="search">
+          <input id="search" type="search" placeholder="Search..." autofocus required />
+          <button type="submit">Go</button>
+        </form>
+        <div class="topbar-icons">
+          <i class="fa-regular fa-bell"></i>
+          <i class="fa-solid fa-share-nodes"></i>
+          <i class="fa-solid fa-ellipsis"></i>
+        </div>
+      </div>
+      <div class="lineup">
+        <div class="stage">
+          <div class="world">
+            <div class="team"></div>
+          </div>
+        </div>
+
+        <!-- ==================== -->
+
+        <div class="pitch">
+          <img src="images/pitch.jpg" alt="Soccer pitch">
+          <div id="starting_11" class="formation-4-4-2">
+            <ul class="gk">
+              <li id="pos1"></li>
+            </ul>
+            <ul class="df">
+              <li id="pos2" draggable="true"></li>
+              <li id="pos3" draggable="true"></li>
+              <li id="pos4" draggable="true"></li>
+              <li id="pos5" draggable="true"></li>
+            </ul>
+            <ul class="md">
+              <li id="pos6" draggable="true"></li>
+              <li id="pos7" draggable="true"></li>
+              <li id="pos8" draggable="true"></li>
+              <li id="pos9" draggable="true"></li>
+            </ul>
+            <ul class="fw">
+              <li id="pos10" draggable="true"></li>
+              <li id="pos11" draggable="true"></li>
+            </ul>
+          </div>
+        </div>
+
+        <section class="sec-pos">
+          <h1>Choose your team</h1>
+
+      </div>
+      </section>
+      <div class="lineup-controls">
+        <select id="formationSelector">
+          <option value="formation-4-4-2">4-4-2</option>
+          <option value="formation-4-3-3">4-3-3</option>
+          <option value="formation-3-5-2">3-5-2</option>
+        </select>
+        <button class="save-lineup">Update Lineup</button>
+        <button class="clear-lineup">Clear Lineup</button>
+      </div>
+    </div>
+    </div>
+  </main>
+  <script type="module" src="scripts/create.js"></script>
+  <script type="module" src="scripts/main.js"></script>
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+</body>
+<footer>
+  <a href="https://www.vecteezy.com/free-vector/soccer-field">Soccer Field Vectors by Vecteezy</a>
+</footer>
+
+</html>
