@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const selectedFormation = this.value;
     document.getElementById('starting_11').className = selectedFormation;
     updateFormation(selectedFormation);
+    makePlayersDraggable();
     wc_team.dragDrap.init();
   });
   
@@ -162,6 +163,16 @@ wc_team.dragDrap = (function() {
     init
   };
 })();
+
+function makePlayersDraggable() {
+  // Select all player divs
+  const playerDivs = document.querySelectorAll('.positions div');
+
+  // Loop through each player div and set draggable to true
+  playerDivs.forEach(div => {
+    div.draggable = true;
+  });
+}
 
 async function renderPositions() {
   console.log("renderPositions triggered");
@@ -356,7 +367,8 @@ async function renderPositions() {
       div.draggable = true;
     });
 
-    wc_team.dragDrap.init();
+    makePlayersDraggable();
+  wc_team.dragDrap.init();
   }  
 
 
