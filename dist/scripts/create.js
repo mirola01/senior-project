@@ -297,24 +297,24 @@ async function renderPositions() {
   
   if (selectedFormation === 'formation-4-4-2') {
     playersInFormation = {
-      "gk": [NO_PLAYER],
-      "df": [NO_PLAYER, NO_PLAYER, NO_PLAYER, NO_PLAYER],
-      "md": [NO_PLAYER, NO_PLAYER, NO_PLAYER, NO_PLAYER],
-      "fw": [NO_PLAYER, NO_PLAYER]
+      "gk": ["NO_PLAYER"],
+      "df": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "md": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "fw": ["NO_PLAYER", "NO_PLAYER"]
     };
   } else if (selectedFormation === 'formation-4-3-3') {
     playersInFormation = {
-      "gk": [NO_PLAYER],
-      "df": [NO_PLAYER, NO_PLAYER, NO_PLAYER, NO_PLAYER],
-      "md": [NO_PLAYER, NO_PLAYER, NO_PLAYER],
-      "fw": [NO_PLAYER, NO_PLAYER, NO_PLAYER]
+      "gk": ["NO_PLAYER"],
+      "df": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "md": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "fw": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER"]
     };
   } else if (selectedFormation === 'formation-3-5-2') {
     playersInFormation = {
-      "gk": [NO_PLAYER],
-      "df": [NO_PLAYER, NO_PLAYER, NO_PLAYER],
-      "md": [NO_PLAYER, NO_PLAYER, NO_PLAYER, NO_PLAYER, NO_PLAYER],
-      "fw": [NO_PLAYER, NO_PLAYER]
+      "gk": ["NO_PLAYER"],
+      "df": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "md": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "fw": ["NO_PLAYER", "NO_PLAYER"]
     };
   }
   
