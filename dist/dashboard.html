@@ -61,7 +61,44 @@
     </div>
   </div>
   <main>
-    
+    <main>
+        <div class="grid-container">
+            <div class="grid-x grid-padding-x">
+                <div class="large-12 cell">
+                    <h1>Welcome to the Dashboard</h1>
+                </div>
+            </div>
+            <div class="grid-x grid-padding-x">
+                <div class="large-6 medium-6 cell">
+                    <div class="callout">
+                        <h3>Formations</h3>
+                        <p>Manage and view all your formations here.</p>
+                        <a href="create.html" class="button">Create New Formation</a>
+                    </div>
+                </div>
+                <div class="large-6 medium-6 cell">
+                    <div class="callout">
+                        <h3>Players</h3>
+                        <p>View and manage your player database.</p>
+                        <a href="player-database.html" class="button">View Players</a>
+                    </div>
+                </div>
+                <div class="grid-x grid-padding-x" id="formationsList">
+                    <div class="reveal" id="formationModal" data-reveal>
+                        <h2 id="formationName">Formation Name</h2>
+                        <div id="formationDetails">
+                            <!-- Formation details will be populated here -->
+                        </div>
+                        <button class="close-button" data-close aria-label="Close modal" type="button">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </main>
+
 </main>
     <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
     <script type="module" src="scripts/auth.js"></script>
