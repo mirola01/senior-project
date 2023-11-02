@@ -1299,3 +1299,10 @@ ul#starting_11 .selected img {
 img.playerImage {
   width: auto;
 }
+
+button.auth-btn {
+  color: #004AAD;
+  text-decoration: none;
+  padding: 10px 14px;
+  display: flex;
+}
