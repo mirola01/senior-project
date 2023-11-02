@@ -45,17 +45,17 @@ async function fetchFormations(token) {
 }
 
 
-function displayFormations(formations) {
-    console.log(formations);
+function displayFormations(response) {
+    const formations = response.data;  // Access the "data" property of the response
 
     const formationsList = document.getElementById('formationsList');
     formations.forEach(formation => {
         const formationDiv = document.createElement('div');
         formationDiv.className = 'large-4 medium-4 cell formation-preview';
         formationDiv.innerHTML = `
-            <div class="callout formation-callout" data-formation-id="${formation.ref.id}">
-                <h3>${formation.data.name}</h3>
-                <p>${formation.data.description}</p>
+            <div class="callout formation-callout" data-formation-id="${formation.ref['@ref'].id}">
+                <h3>${formation.data.name.trim()}</h3>
+                <p>${formation.data.formation}</p>
                 <!-- Add more fields as needed -->
             </div>
         `;
@@ -70,6 +70,7 @@ function displayFormations(formations) {
         });
     });
 }
+
 
 function showFormationDetails(formationId) {
     // Fetch formation details from FaunaDB based on the formationId
