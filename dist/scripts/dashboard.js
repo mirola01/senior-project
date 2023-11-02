@@ -53,12 +53,13 @@ function displayFormations(response) {
         const formationDiv = document.createElement('div');
         formationDiv.className = 'large-4 medium-4 cell formation-preview';
         formationDiv.innerHTML = `
-            <div class="callout formation-callout" data-formation-id="${formation.ref['@ref'].id}">
-                <h3>${formation.data.name.trim()}</h3>
-                <p>${formation.data.formation}</p>
-                <!-- Add more fields as needed -->
-            </div>
-        `;
+    <div class="callout formation-callout" data-formation-id="${formation.ref['@ref'].id}">
+        <a href="edit-formation.html?id=${formation.ref['@ref'].id}"><h3>${formation.data.name.trim()}</h3></a>
+        <p>${formation.data.formation}</p>
+        <!-- Add more fields as needed -->
+    </div>
+`;
+
         formationsList.appendChild(formationDiv);
     });
 
