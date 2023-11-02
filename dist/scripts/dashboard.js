@@ -46,6 +46,8 @@ async function fetchFormations(token) {
 
 
 function displayFormations(formations) {
+    console.log(formations);
+
     const formationsList = document.getElementById('formationsList');
     formations.forEach(formation => {
         const formationDiv = document.createElement('div');
