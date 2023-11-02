@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         let user_role = decodedJWT["https://db.fauna.com/roles"][0];
 
         if (user_role === "user" || user_role === undefined) {
-            fetchFormations().then(formations => {
+            fetchFormations(token).then(formations => {  // Pass the token here
                 displayFormations(formations);
             });
         } else {
@@ -30,21 +30,22 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 });
 
-async function fetchFormations() {
+
+async function fetchFormations(token) {  // Accept the token as a parameter
     // Your logic to fetch formations from FaunaDB based on the user's role
-    // For this example, I'm assuming a function similar to players_by_owner
     let formations = await fetch("/.netlify/functions/formations_by_owner", {
         method: "POST",
         headers: {
             "content-type": "application/json",
         },
         body: JSON.stringify({
-            token,
+            token,  // Use the token here
             userId: decodedJWT["sub"]
         }),
     });
     return await formations.json();
 }
+
 
 function displayFormations(formations) {
     const formationsList = document.getElementById('formationsList');
