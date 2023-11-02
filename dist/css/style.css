@@ -1303,6 +1303,6 @@ img.playerImage {
 button.auth-btn {
   color: #004AAD;
   text-decoration: none;
-  padding: 10px 14px;
   display: flex;
+  margin-left: -7px;
 }
