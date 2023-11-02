@@ -30,9 +30,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 });
 
-
-async function fetchFormations(token) {  // Accept the token as a parameter
-    // Your logic to fetch formations from FaunaDB based on the user's role
+async function fetchFormations(token) {  
     let formations = await fetch("/.netlify/functions/formations_by_owner", {
         method: "POST",
         headers: {
