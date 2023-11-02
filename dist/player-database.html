@@ -2,131 +2,102 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Player Database</title>
-  <script src="https://kit.fontawesome.com/78c0f84eb9.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Database</title>
+    <script src="https://kit.fontawesome.com/78c0f84eb9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/faunadb@latest/dist/faunadb.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/css/foundation.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.8.1/dist/js/foundation.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jwt-decode@3.1.2/build/jwt-decode.min.js"></script>
 </head>
 
 <body>
-  <div class="header">
-    <div class="side-nav">
-      <a href="#" class="logo">
-        <img src="images/logo.png" class="logo-img">
-        <img src="images/logo-icon.png" class="logo-icon">
-      </a>
-      <ul class="nav-links">
-        <li><a href="dashboard.html"><i class="fas fa-house-user"></i>
-            <p>Dashboard</p>
-          </a>
-
-        </li>
-        <li><a href="create.html"><i class="fa-solid fa-circle-plus"></i>
-            <p>Create Lineup</p>
-          </a>
-        </li>
-        <li><a href="player-database.html"><i class="fa-solid fa-user-group"></i>
-            <p>Player Database</p>
-          </a>
-        </li>
-        <li><a href="match-analysis.html"><i class="fa-solid fa-chart-line"></i>
-            <p>Match Analysis</p>
-          </a>
-        </li>
-        <li><a href="tactical-guide.html"><i class="fa-solid fa-chalkboard-user"></i>
-            <p>Tactical Guide</p>
-          </a>
-        </li>
-        <li><a href="community.html"><i class="fa-regular fa-comments"></i>
-            <p>Community</p>
-          </a>
-        </li>
-        <ul class="bottom-nav">
-          <li><a href="settings.html"><i class="fa-solid fa-gear"></i>
-              <p>Settings</p>
+    <div class="header">
+        <div class="side-nav vertical menu">
+            <a href="#" class="logo">
+                <img src="images/logo.png" class="logo-img">
+                <img src="images/logo-icon.png" class="logo-icon">
             </a>
-          </li>
-          <li>
-            <button class="auth-btn">Log out</button>
-          </li>
-        </ul>
-      </ul>
-    </div>
-  </div>
-  <main>
-    <div class="form">
-      <div class="title">
-        <img src="images/close-outline.svg" alt="" id="close-btn">
-        <h1>Add a Player</h1>
-      </div>
-      <div class="input-container ic1">
-        <input id="playerName" class="input" type="text" placeholder="Name" />
-        <div class="cut"></div>
-      </div>
-      <div class="input-container ic2">
-        <input id="playerAge" class="input" type="number" min="1" max="100" placeholder="Age" />
-        <div class="cut"></div>
-      </div>
-      <div class="input-container ic3">
-        <label for="playerPosition">Choose a position:</label>
-        <select id="playerPosition" name="playerPosition">
-          <option value="Goalkeeper">Goalkeeper</option>
-          <option value="Defender">Defender</option>
-          <option value="Midfield">Midfield</option>
-          <option value="Forward">Forward</option>
-        </select>
-        <div class="cut"></div>
-      </div>
-
-      <div class="input-container ic4">
-        <input id="playerJersey" class="input" type="number" min="1" max="99" placeholder="Jersey Number" />
-        <div class="cut"></div>
-      </div>
-
-      <div class="input-container ic5">
-        <label for="playerImage">Upload an image:</label>
-        <input id="playerImage" type="file" accept="image/*">
-        <div class="cut"></div>
-      </div>
-      <button type="submit" class="submit" id="add-player">submit</button>
-    </div>
-    <div class="container">
-      <div class="topbar">
-        <div id="search-bar">
-          <img src="images/search-outline.svg" alt="">
-          <input type="text" placeholder=" search">
+            <ul class="nav-links vertical menu">
+                <li><a href="dashboard.html"><i class="fas fa-house-user"></i> Dashboard</a></li>
+                <li><a href="create.html"><i class="fa-solid fa-circle-plus"></i> Create Lineup</a></li>
+                <li><a href="player-database.html"><i class="fa-solid fa-user-group"></i> Player Database</a></li>
+                <li><a href="match-analysis.html"><i class="fa-solid fa-chart-line"></i> Match Analysis</a></li>
+                <li><a href="tactical-guide.html"><i class="fa-solid fa-chalkboard-user"></i> Tactical Guide</a></li>
+                <li><a href="community.html"><i class="fa-regular fa-comments"></i> Community</a></li>
+                <ul class="bottom-nav vertical menu">
+                    <li><a href="settings.html"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                    <li>
+                        <button class="auth-btn button">Log out</button>
+                    </li>
+                </ul>
+            </ul>
         </div>
-      </div>
-      <div id="add-new-btn">
-        <img src="images/add-outline.svg" alt="">
-      </div>
-      <table id="player-table" class="table-expand">
-        <thead>
-          <tr class="table-expand-row">
-            <th>Image</th> <!-- Added column for image -->
-            <th>Name</th>
-            <th>Age</th>
-            <th>Position</th>
-            <th>Jersey Number</th> <!-- Added column for jersey number -->
-            <th>Action</th> <!-- Column for checkbox -->
-          </tr>
-        </thead>
-        <tbody id="player-tbody">
-          <!-- Rows will be added here dynamically -->
-        </tbody>
-      </table>  
     </div>
-    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
-    <script type="module" src="scripts/auth.js"></script>
-    <script type="module" src="scripts/main.js"></script>
-    <script type="module" src="scripts/events.js"></script>
+    <main>
+        <div class="form callout">
+            <div class="title">
+                <img src="images/close-outline.svg" alt="" id="close-btn">
+                <h1>Add a Player</h1>
+            </div>
+            <div class="input-group">
+                <input id="playerName" class="input-group-field" type="text" placeholder="Name" />
+            </div>
+            <div class="input-group">
+                <input id="playerAge" class="input-group-field" type="number" min="1" max="100" placeholder="Age" />
+            </div>
+            <div class="input-group">
+                <label for="playerPosition">Choose a position:</label>
+                <select id="playerPosition" name="playerPosition" class="input-group-field">
+                    <option value="Goalkeeper">Goalkeeper</option>
+                    <option value="Defender">Defender</option>
+                    <option value="Midfield">Midfield</option>
+                    <option value="Forward">Forward</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <input id="playerJersey" class="input-group-field" type="number" min="1" max="99" placeholder="Jersey Number" />
+            </div>
+            <div class="input-group">
+                <label for="playerImage">Upload an image:</label>
+                <input id="playerImage" type="file" accept="image/*" class="input-group-field">
+            </div>
+            <button type="submit" class="submit button" id="add-player">Submit</button>
+        </div>
+        <div class="container">
+            <div class="topbar grid-x align-middle">
+                <div id="search-bar" class="cell medium-6">
+                    <img src="images/search-outline.svg" alt="">
+                    <input type="text" placeholder=" search" class="input-group-field">
+                </div>
+                <div id="add-new-btn" class="cell medium-6">
+                    <img src="images/add-outline.svg" alt="">
+                </div>
+            </div>
+            <table id="player-table" class="table-expand">
+                <thead>
+                    <tr class="table-expand-row">
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Position</th>
+                        <th>Jersey Number</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="player-tbody">
+                </tbody>
+            </table>
+        </div>
+        <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+        <script type="module" src="scripts/auth.js"></script>
+        <script type="module" src="scripts/main.js"></script>
+        <script type="module" src="scripts/events.js"></script>
+    </main>
 </body>
 
 </html>
