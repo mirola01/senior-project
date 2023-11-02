@@ -1306,3 +1306,7 @@ button.auth-btn {
   display: flex;
   margin-left: -7px;
 }
+i.fas.fa-sign-out-alt {
+  margin-right: 0px;
+  width: 30%;
+}
