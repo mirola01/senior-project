@@ -14,14 +14,14 @@ const client = new faunadb.Client({
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    loadFormationFromFaunaDB(wc_team); // Load and render positions from FaunaDB
+    loadFormationFromFaunaDB(); // Load and render positions from FaunaDB
 
   // Set up event listeners for formation selection and button clicks
   setupFormationSelector(wc_team);
   document.querySelector('.save-lineup').addEventListener('click', () => saveLineup(wc_team));
   document.querySelector('.clear-lineup').addEventListener('click', () => clearLineup(wc_team));
 });
-async function loadFormationFromFaunaDB(wc_team) {
+async function loadFormationFromFaunaDB() {
     const params = new URLSearchParams(window.location.search);
     const formationId = params.get('id');
     console.log("formationId", formationId)
@@ -33,7 +33,7 @@ async function loadFormationFromFaunaDB(wc_team) {
           displayFormations(formations);
         });
         //wc_team.updateFormation(response.data); // Update the team formation with the data
-        renderPositions(wc_team); // Then render the positions
+        renderPositions(); // Then render the positions
       } catch (error) {
         console.error('Error fetching formation:', error);
       }
