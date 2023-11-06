@@ -64,9 +64,44 @@ function displayFormations(response) {
   // If the matching option exists, select it
   if (matchingOption) {
     matchingOption.selected = true;
+    document.getElementById('starting_11').className = selectedFormation;
   }
   }
 
+  function renderPositions(formationData, wc_team) {
+    const positions = formationData.players;
+    
+    // Clear current positions
+    clearField();
+  
+    // Iterate over each position in the formation
+    for (const position in positions) {
+      const playerList = positions[position]; // e.g., ['ter Stegen', 'NO_PLAYER', ...]
+  
+      // Iterate over each player in the position list
+      playerList.forEach((playerName, index) => {
+        if (playerName !== 'NO_PLAYER') {
+          const playerElement = document.createElement('div');
+          playerElement.textContent = playerName; // Here you would add your player's image and styling
+          playerElement.classList.add('player', position);
+          playerElement.setAttribute('data-index', index);
+          
+          // Append to the respective position container on the field
+          document.querySelector(`.${position}-container`).appendChild(playerElement);
+        }
+      });
+    }
+  
+    // After rendering the positions, initialize any drag-and-drop functionality
+    wc_team.makePlayersDraggable();
+    wc_team.dragDrap.init();
+  }
+  
+  function clearField() {
+    // Remove existing players from the field
+    document.querySelectorAll('.player').forEach(player => player.remove());
+  }
+  
 
 
 function setupFormationSelector(wc_team) {
@@ -79,38 +114,3 @@ function setupFormationSelector(wc_team) {
   });
 }
 
-function setupTeam() {
-  const wc_team = {}; // Initialize wc_team if it doesn't exist
-
-  // Define all methods and properties for wc_team here.
-  wc_team.updateFormation = function (formation) {
-    // ... (updateFormation function code here)
-  };
-
-  wc_team.dragDrap = {
-    // ... (dragDrap module code here)
-  };
-
-  wc_team.makePlayersDraggable = function () {
-    // ... (makePlayersDraggable function code here)
-  };
-
-  return wc_team;
-}
-
-async function renderPositions(wc_team) {
-  // ... (renderPositions function code here, include wc_team.dragDrap.init(); at the end)
-}
-
-async function saveLineup(wc_team) {
-  // ... (saveLineup function code here)
-}
-
-async function clearLineup(wc_team) {
-  // ... (clearLineup function code here)
-}
-
-// Helper functions like generateDefaultImage can be defined below.
-function generateDefaultImage(jerseyNumber) {
-  // ... (generateDefaultImage function code here)
-}
