@@ -63,7 +63,7 @@ function displayFormations(response) {
   // If the matching option exists, select it
   if (matchingOption) {
     matchingOption.selected = true;
-    document.getElementById('starting_11').className = selectedFormation;
+    document.getElementById('starting_11').className = formationData;
   }
   }
 
