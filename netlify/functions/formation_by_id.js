@@ -12,9 +12,9 @@ exports.handler = async function (event, context) {
   });
 
   try {
-    let allFormations = await _client.query(Get(
-        Ref(
-            Collection('Formation'),
+    let allFormations = await _client.query(q.Get(
+        q.Ref(
+            q.Collection('Formation'),
             formationId
         )
     )
