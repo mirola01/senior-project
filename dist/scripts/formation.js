@@ -14,7 +14,6 @@ const client = new faunadb.Client({
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-    const wc_team = setupTeam(); // Setup the team interaction
     loadFormationFromFaunaDB(wc_team); // Load and render positions from FaunaDB
 
   // Set up event listeners for formation selection and button clicks
