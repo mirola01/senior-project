@@ -55,7 +55,16 @@ async function loadFormationFromFaunaDB(wc_team) {
 }
 
 function displayFormations(response) {
-  console.log("respomse", response)
+  const formationSelector = document.getElementById('formationSelector');
+  const formationData = response.data.formation; // Get the formation from the data
+
+  // Find the option with the matching value
+  const matchingOption = formationSelector.querySelector(`option[value="${formationData}"]`);
+
+  // If the matching option exists, select it
+  if (matchingOption) {
+    matchingOption.selected = true;
+  }
   }
 
 
