@@ -1,7 +1,7 @@
 import * as Auth from "./auth.js";
 var faunadb = window.faunadb;
 var q = faunadb.query;
-var pass_formation = ""
+
 // Initialize variables
 const accessToken = localStorage.getItem("accessToken");
 const decodedJWT = jwt_decode(accessToken);
@@ -13,7 +13,7 @@ const client = new faunadb.Client({
     scheme: "https",
 });
 
-document.addEventListener('DOMContentLoaded', async function () {
+document.addEventListener('DOMContentLoaded', async function() {
     if (accessToken) {
         let token = await client.query(q.CurrentToken());
         token = token.value.id;
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         let user_role = decodedJWT["https://db.fauna.com/roles"][0];
 
         if (user_role === "user" || user_role === undefined) {
-            fetchFormations(token).then(formations => { // Pass the token here
+            fetchFormations(token).then(formations => {  // Pass the token here
                 displayFormations(formations);
             });
         } else {
@@ -30,14 +30,14 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 });
 
-async function fetchFormations(token) {
+async function fetchFormations(token) {  
     let formations = await fetch("/.netlify/functions/formations_by_owner", {
         method: "POST",
         headers: {
             "content-type": "application/json",
         },
         body: JSON.stringify({
-            token, // Use the token here
+            token,  // Use the token here
             userId: decodedJWT["sub"]
         }),
     });
@@ -46,40 +46,30 @@ async function fetchFormations(token) {
 
 
 function displayFormations(response) {
-    const formations = response.data; // Access the "data" property of the response
+    const formations = response.data;  // Access the "data" property of the response
     const formationsList = document.getElementById('formationsList');
     formations.forEach(formation => {
         const formationDiv = document.createElement('div');
         formationDiv.className = 'large-4 medium-4 cell formation-preview';
-
-        // Create the formation link
-        const formationLink = document.createElement('a');
-        formationLink.href = `formation.html?id=${formation.ref['@ref'].id}`;
-        formationLink.textContent = formation.data.name.trim();
-
-        // Add a click event listener to the formation link
-        formationLink.addEventListener('click', (event) => {
-            // Save the player's position to a data attribute
-            pass_formation = formation.ref['@ref'];
-            console.log("pass-info" + pass_formation);
-        });
-
-        // Add the formation link to the formation div
-        formationDiv.appendChild(formationLink);
-
-        // Add more fields as needed
+        formationDiv.innerHTML = `
+    <div class="callout formation-callout" data-formation-id="${formation.ref['@ref'].id}">
+        <a href="formation.html?id=${formation.ref['@ref'].id}"><h3>${formation.data.name.trim()}</h3></a>
+        <p>${formation.data.formation}</p>
+        <!-- Add more fields as needed -->
+    </div>
+`;
 
         formationsList.appendChild(formationDiv);
     });
-}
 
-// Add click event to each formation
-document.querySelectorAll('.formation-callout').forEach(item => {
-    item.addEventListener('click', function () {
-        const formationId = this.getAttribute('data-formation-id');
-        showFormationDetails(formationId);
+    // Add click event to each formation
+    document.querySelectorAll('.formation-callout').forEach(item => {
+        item.addEventListener('click', function() {
+            const formationId = this.getAttribute('data-formation-id');
+            showFormationDetails(formationId);
+        });
     });
-});
+}
 
 
 function showFormationDetails(formationId) {
@@ -89,7 +79,7 @@ function showFormationDetails(formationId) {
             const modal = document.getElementById('formationModal');
             document.getElementById('formationName').innerText = formation.data.name;
             document.getElementById('formationDetails').innerText = formation.data.description;
-
+            
             // Open the modal
             var elem = new Foundation.Reveal($('#formationModal'));
             elem.open();
