@@ -41,7 +41,7 @@ async function loadFormationFromFaunaDB(wc_team) {
     }
   }
   async function fetchFormation(token, formationId) {  
-    let formations = await fetch("/.netlify/functions/formations_by_id", {
+    let formations = await fetch("/.netlify/functions/formation_by_id", {
         method: "POST",
         headers: {
             "content-type": "application/json",
