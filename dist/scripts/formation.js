@@ -28,10 +28,11 @@ async function loadFormationFromFaunaDB(wc_team) {
     console.log("formationId", formationId)
     if (formationId) {
       try {
-        const response = await client.query(
-          q.Get(q.Ref(q.Collection('formations'), formationId))
-        );
-        console.log("Response", response)
+        let token = await client.query(q.CurrentToken());
+        token = token.value.id;
+        fetchFormation(token, formationId).then(formations => {  // Pass the token here
+          displayFormations(formations);
+        });
         //wc_team.updateFormation(response.data); // Update the team formation with the data
         renderPositions(wc_team); // Then render the positions
       } catch (error) {
@@ -39,7 +40,25 @@ async function loadFormationFromFaunaDB(wc_team) {
       }
     }
   }
-  
+  async function fetchFormation(token) {  
+    let formations = await fetch("/.netlify/functions/formations_by_id", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json",
+        },
+        body: JSON.stringify({
+            token,  // Use the token here
+            formationId: formationId
+        }),
+    });
+    return await formations.json();
+}
+
+function displayFormations(response) {
+  console.log("respomse", response)
+  }
+
+
 
 function setupFormationSelector(wc_team) {
   document.getElementById('formationSelector').addEventListener('change', function () {
