@@ -2,7 +2,16 @@
 import * as Auth from "./auth.js";
 var faunadb = window.faunadb;
 var q = faunadb.query;
-var jwt_decode = window.jwt_decode; // Make sure jwt_decode is available in the global scope.
+// Initialize variables
+const accessToken = localStorage.getItem("accessToken");
+const decodedJWT = jwt_decode(accessToken);
+const fauna_key = Auth.getFaunaKey();
+const client = new faunadb.Client({
+    secret: fauna_key,
+    domain: "db.us.fauna.com",
+    port: 443,
+    scheme: "https",
+});
 
 document.addEventListener("DOMContentLoaded", function () {
     const wc_team = setupTeam(); // Setup the team interaction
@@ -16,13 +25,14 @@ document.addEventListener("DOMContentLoaded", function () {
 async function loadFormationFromFaunaDB(wc_team) {
     const params = new URLSearchParams(window.location.search);
     const formationId = params.get('id');
-  
+    console.log("formationId", formationId)
     if (formationId) {
       try {
         const response = await client.query(
           q.Get(q.Ref(q.Collection('formations'), formationId))
         );
-        wc_team.updateFormation(response.data); // Update the team formation with the data
+        console.log("Response", response)
+        //wc_team.updateFormation(response.data); // Update the team formation with the data
         renderPositions(wc_team); // Then render the positions
       } catch (error) {
         console.error('Error fetching formation:', error);
