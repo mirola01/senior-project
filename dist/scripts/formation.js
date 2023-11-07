@@ -51,6 +51,16 @@ async function fetchFormation(token, formationId) {
 
 function displayFormations(formationData) {
   console.log("formationData", formationData)
+  const formationName = formationData.data.formation;
+  const players = formationData.data.players;
+
+  console.log("Formation name:", formationName);
+  console.log("Players:");
+  for (const position in players) {
+    for (const player of players[position]) {
+      console.log(`  ${position}: ${player}`);
+    }
+  }
   const formationSelector = document.getElementById('formationSelector');
 
   // Find the option with the matching value
@@ -66,6 +76,7 @@ function displayFormations(formationData) {
 function renderPositions(formationData) {
   console.log("object", formationData)
   const positions = formationData;
+  
 
   // Iterate over each position in the formation
   for (const position in positions) {
