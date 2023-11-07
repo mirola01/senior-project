@@ -51,8 +51,8 @@ async function fetchFormation(token, formationId) {
 
 function displayFormations(formationData) {
   console.log("formationData", formationData)
-  const formationTitle = formationData.data.formation;
-  const formationName = formationData.data.name;
+  const formationTitle = formationData.data.name;
+  const formationName = formationData.data.formation;
   const players = formationData.data.players;
   console.log("formationName", formationName)
   const formationSelector = document.getElementById('formationSelector');
