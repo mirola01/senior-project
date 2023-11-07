@@ -221,16 +221,16 @@ async function renderPlayers() {
         const ul2 = document.createElement('ul');
         const divPlayer = document.createElement('div');
         divPlayer.setAttribute('draggable', 'true');
-        divPlayer.setAttribute('data-player', player.data.name);
+        divPlayer.setAttribute('data-player', loadedPlayers.name);
 
         const img = document.createElement('img');
         img.setAttribute('draggable', 'false');
-        const jerseyNumber = player.data.jersey;
-        const playerImage = player.data.imageURL || generateDefaultImage(jerseyNumber);
+        const jerseyNumber = loadedPlayers.jersey;
+        const playerImage = loadedPlayers.imageURL || generateDefaultImage(jerseyNumber);
         img.setAttribute('src', playerImage);
 
         const p = document.createElement('p');
-        p.textContent = player.data.name;
+        p.textContent = loadedPlayers.name;
         ul2.style.display = "flex";
         ul2.style.flexDirection = "column";
         li.style.alignItems = "center";
