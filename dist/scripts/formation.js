@@ -272,34 +272,60 @@ async function renderPlayers() {
 
 
 function renderPositions(formationData) {
-  console.log("object", formationData)
-  const positions = formationData;
+  console.log("formationData", formationData);
   
-
-  // Iterate over each position in the formation
-  for (const position in positions) {
-    console.log("position", position);
-    const playerList = positions[position]; // e.g., ['ter Stegen', 'NO_PLAYER', ...]
-
-    // Iterate over each player in the position list
-    playerList.forEach((playerName, index) => {
+  // Iterate over the formation positions
+  Object.keys(formationData).forEach((positionGroup, index) => {
+    const positionElements = document.querySelector(`.${positionGroup}`).children;
+    
+    formationData[positionGroup].forEach((playerName, index) => {
+      const positionElement = positionElements[index];
       if (playerName !== 'NO_PLAYER') {
+        // Get player data
         const player = getPlayerByName(playerName);
+        // If player exists in your loaded players list
         if (player) {
-          // Create image element for the player using player.data.jersey
-          const playerImageElement = createPlayerImageElement(player.data.jersey, player.data.imageURL);
-          // Append this image to the corresponding position on the field
-          document.getElementById(`pos${index}`).appendChild(playerImageElement);
+          // Create player element
+          const playerElement = createPlayerElement(player);
+          // Append to the corresponding position on the pitch
+          positionElement.appendChild(playerElement);
           // Set draggable to false since this player is already in the formation
-          playerImageElement.draggable = false;
-
-      }}
+          positionElement.draggable = false;
+        }
+      } else {
+        // Ensure the position is draggable if there is no player
+        positionElement.draggable = true;
+      }
     });
+  });
   }
-  // After rendering the positions, initialize any drag-and-drop functionality
-  wc_team.makePlayersDraggable();
-  wc_team.dragDrap.init();
-}
+  function createPlayerElement(player) {
+    const playerElement = document.createElement('div');
+    playerElement.setAttribute('data-player', player.data.name);
+    playerElement.draggable = false; // Player in the formation should not be draggable
+    
+    const img = document.createElement('img');
+    img.src = player.data.imageURL || generateDefaultImage(player.data.jersey);
+    img.draggable = false; // Image should not be draggable
+    img.alt = player.data.name;
+    
+    const playerName = document.createElement('p');
+    playerName.textContent = player.data.name;
+    
+    playerElement.appendChild(img);
+    playerElement.appendChild(playerName);
+    
+    return playerElement;
+  }
+  
+  function getPlayerByName(playerName) {
+    // Assuming loadedPlayers is a globally accessible array containing player objects
+    return loadedPlayers.find(player => player.data.name === playerName);
+  }
+  
+  // Call this function to set up your pitch when the page is loaded or when the formation is changed
+  renderPositions(formationData);
+
 function updateFormation(formation) {
   const defenders = document.querySelector('.df');
   const midfielders = document.querySelector('.md');
