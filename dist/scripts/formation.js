@@ -14,6 +14,7 @@ const client = new faunadb.Client({
 
 document.addEventListener("DOMContentLoaded", function () {
   loadFormationFromFaunaDB(); 
+  renderPlayers();
 });
 
 async function loadFormationFromFaunaDB() {
@@ -28,8 +29,7 @@ async function loadFormationFromFaunaDB() {
         displayFormations(formations);
       });
       //wc_team.updateFormation(response.data); // Update the team formation with the data
-      // Call this function to set up your pitch when the page is loaded or when the formation is changed
-
+      renderPlayers(); // Then render the positions
     } catch (error) {
       console.error('Error fetching formation:', error);
     }
@@ -169,7 +169,6 @@ wc_team.dragDrap = (function() {
   };
 })();
 
-var loadedPlayers = [];
 async function renderPlayers() {
   console.log("renderPositions triggered");
   const accessToken = localStorage.getItem("accessToken");
@@ -195,8 +194,6 @@ async function renderPlayers() {
       body: JSON.stringify({ token, userId: decodedJWT["sub"] }),
     });
     players = await players.json();
-    loadedPlayers = players;
-
 
     const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
 
@@ -326,7 +323,6 @@ function renderPositions(formationData) {
     // Assuming loadedPlayers is a globally accessible array containing player objects
     return loadedPlayers.find(player => player.data.name === playerName);
   }
-  
   
 function updateFormation(formation) {
   const defenders = document.querySelector('.df');
