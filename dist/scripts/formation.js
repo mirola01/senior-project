@@ -66,7 +66,8 @@ function displayFormations(formationData) {
 
 
 function renderPositions(formationData) {
-  const positions = formationData.players;
+  console.log("object", formationData)
+  const positions = formationData;
 
   // Iterate over each position in the formation
   for (const position in positions) {
