@@ -28,7 +28,8 @@ async function loadFormationFromFaunaDB() {
         displayFormations(formations);
       });
       //wc_team.updateFormation(response.data); // Update the team formation with the data
-      renderPlayers(); // Then render the positions
+      // Call this function to set up your pitch when the page is loaded or when the formation is changed
+
     } catch (error) {
       console.error('Error fetching formation:', error);
     }
@@ -323,9 +324,7 @@ function renderPositions(formationData) {
     return loadedPlayers.find(player => player.data.name === playerName);
   }
   
-  // Call this function to set up your pitch when the page is loaded or when the formation is changed
-  renderPositions(formationData);
-
+  
 function updateFormation(formation) {
   const defenders = document.querySelector('.df');
   const midfielders = document.querySelector('.md');
