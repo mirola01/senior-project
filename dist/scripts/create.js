@@ -324,11 +324,9 @@ async function renderPositions() {
         const position = element.parentNode.className; // Getting the class of the parent <ul>, which should indicate the position (gk, df, md, fw)
         const index = Array.from(element.parentNode.children).indexOf(element); // Getting the index of the li inside its parent ul
         const playerName = element.querySelector('div') ? element.querySelector('div').getAttribute('data-player') : "NO_PLAYER"; 
-
-if (playersInFormation[position]) {
-    playersInFormation[position][index] = playerName;
-}
-
+        if (playersInFormation[position]) {
+            playersInFormation[position][index] = playerName;
+        }
       });
       console.log("Formation", playersInFormation)
   
