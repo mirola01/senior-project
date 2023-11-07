@@ -169,6 +169,7 @@ wc_team.dragDrap = (function() {
   };
 })();
 
+var loadedPlayers = [];
 async function renderPlayers() {
   console.log("renderPositions triggered");
   const accessToken = localStorage.getItem("accessToken");
@@ -194,6 +195,8 @@ async function renderPlayers() {
       body: JSON.stringify({ token, userId: decodedJWT["sub"] }),
     });
     players = await players.json();
+    loadedPlayers = players;
+
 
     const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
 
