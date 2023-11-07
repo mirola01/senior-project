@@ -192,7 +192,7 @@ async function renderPlayers() {
       },
       body: JSON.stringify({ token, userId: decodedJWT["sub"] }),
     });
-    let playersData = await playersResponse.json();
+    let playersData = await players.json();
     // Store the fetched players in the global variable
     loadedPlayers = playersData.data;
     const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
