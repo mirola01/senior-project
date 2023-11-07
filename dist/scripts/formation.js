@@ -63,7 +63,7 @@ function displayFormations(formationData) {
     updateFormation(formationName); 
     matchingOption.selected = true;
     document.getElementById('starting_11').className = formationName;
-    renderPositions(); // Call renderPositions here with the actual formation data
+    renderPositions(players); // Call renderPositions here with the actual formation data
   }
 
   
