@@ -60,7 +60,7 @@ function displayFormations(formationData) {
   // Find the option with the matching value
   const matchingOption = formationSelector.querySelector(`option[value="${formationName}"]`);
   if (matchingOption) {
-    updateFormation(selectedFormation); 
+    updateFormation(formationName); 
     matchingOption.selected = true;
     document.getElementById('starting_11').className = formationName;
     renderPositions(); // Call renderPositions here with the actual formation data
