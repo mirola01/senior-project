@@ -60,6 +60,7 @@ function displayFormations(formationData) {
   // Find the option with the matching value
   const matchingOption = formationSelector.querySelector(`option[value="${formationName}"]`);
   if (matchingOption) {
+    updateFormation(selectedFormation); 
     matchingOption.selected = true;
     document.getElementById('starting_11').className = formationName;
     renderPositions(); // Call renderPositions here with the actual formation data
@@ -96,6 +97,49 @@ function renderPositions(formationData) {
   wc_team.makePlayersDraggable();
   wc_team.dragDrap.init();
 }
+function updateFormation(formation) {
+  const defenders = document.querySelector('.df');
+  const midfielders = document.querySelector('.md');
+  const forwards = document.querySelector('.fw');
+
+  while (defenders.firstChild) {
+    defenders.removeChild(defenders.firstChild);
+  }
+  while (midfielders.firstChild) {
+    midfielders.removeChild(midfielders.firstChild);
+  }
+  while (forwards.firstChild) {
+    forwards.removeChild(forwards.firstChild);
+  }
+
+  let defCount, midCount, fwdCount;
+  const formationNumbers = formation.split('-').slice(1).map(Number); // "4-4-2" becomes [4, 4, 2]
+
+  [defCount, midCount, fwdCount] = formationNumbers;
+
+  for (let i = 0; i < defCount; i++) {
+    const li = document.createElement('li');
+    li.id = `pos${i+2}`;
+    li.draggable = true;
+    defenders.appendChild(li);
+  }
+
+  for (let i = 0; i < midCount; i++) {
+    const li = document.createElement('li');
+    li.id = `pos${i+2+defCount}`;
+    li.draggable = true;
+    midfielders.appendChild(li);
+  }
+
+  for (let i = 0; i < fwdCount; i++) {
+    const li = document.createElement('li');
+    li.id = `pos${i+2+defCount+midCount}`;
+    li.draggable = true;
+    forwards.appendChild(li);
+  }
+}  
+
+
 
 function clearField() {
   // Remove existing players from the field

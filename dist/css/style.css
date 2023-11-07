@@ -1171,3 +1171,8 @@ h1 {
   width: auto;
   height: auto;
 }
+
+input.delete-checkbox {
+  width: 25px;
+  position: relative;
+}
