@@ -198,7 +198,7 @@ async function renderPlayers() {
     const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
 
     players.data.forEach((player) => {
-      const pos = player.data.position;
+      const pos = loadedPlayers.position;
       if (positions[pos]) {
         positions[pos].push(player);
       }
