@@ -11,10 +11,9 @@ const client = new faunadb.Client({
   port: 443,
   scheme: "https",
 });
-
+var loadedPlayers = [];
 document.addEventListener("DOMContentLoaded", function () {
   loadFormationFromFaunaDB(); 
-  renderPlayers();
 });
 
 async function loadFormationFromFaunaDB() {
@@ -193,8 +192,9 @@ async function renderPlayers() {
       },
       body: JSON.stringify({ token, userId: decodedJWT["sub"] }),
     });
-    players = await players.json();
-
+    let playersData = await playersResponse.json();
+    // Store the fetched players in the global variable
+    loadedPlayers = playersData.data;
     const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
 
     players.data.forEach((player) => {
@@ -272,51 +272,47 @@ async function renderPlayers() {
   }
 
 
-function renderPositions(formationData) {
-  console.log("formationData", formationData);
+  function renderPositions(formationData) {
+    console.log("formationData", formationData);
   
-  // Iterate over the formation positions
-  Object.keys(formationData).forEach((positionGroup, index) => {
-    const positionElements = document.querySelector(`.${positionGroup}`).children;
-    
-    formationData[positionGroup].forEach((playerName, index) => {
-      const positionElement = positionElements[index];
-      if (playerName !== 'NO_PLAYER') {
-        // Get player data
-        const player = getPlayerByName(playerName);
-        // If player exists in your loaded players list
-        if (player) {
-          // Create player element
-          const playerElement = createPlayerElement(player);
-          // Append to the corresponding position on the pitch
-          positionElement.appendChild(playerElement);
-          // Set draggable to false since this player is already in the formation
-          positionElement.draggable = false;
+    Object.keys(formationData).forEach((positionGroup) => {
+      const positionList = document.querySelector(`.${positionGroup}`);
+      const playerNames = formationData[positionGroup];
+  
+      playerNames.forEach((playerName, index) => {
+        const position = positionList.children[index];
+        if (playerName !== 'NO_PLAYER') {
+          const player = getPlayerByName(playerName);
+          if (player) {
+            const playerElement = createPlayerElement(player.data);
+            position.innerHTML = ''; // Clear any existing content
+            position.appendChild(playerElement);
+            position.draggable = false;
+          }
+        } else {
+          // Clear any existing content if the player is "NO_PLAYER"
+          position.innerHTML = '';
+          position.draggable = true;
         }
-      } else {
-        // Ensure the position is draggable if there is no player
-        positionElement.draggable = true;
-      }
+      });
     });
-  });
   }
-  function createPlayerElement(player) {
-    const playerElement = document.createElement('div');
-    playerElement.setAttribute('data-player', player.data.name);
-    playerElement.draggable = false; // Player in the formation should not be draggable
+  function createPlayerElement(playerData) {
+    const li = document.createElement('li');
+    li.draggable = false; // Player in the formation should not be draggable
     
     const img = document.createElement('img');
-    img.src = player.data.imageURL || generateDefaultImage(player.data.jersey);
+    img.src = playerData.imageURL || generateDefaultImage(playerData.jersey);
+    img.alt = playerData.name;
     img.draggable = false; // Image should not be draggable
-    img.alt = player.data.name;
     
     const playerName = document.createElement('p');
-    playerName.textContent = player.data.name;
+    playerName.textContent = playerData.name;
     
-    playerElement.appendChild(img);
-    playerElement.appendChild(playerName);
+    li.appendChild(img);
+    li.appendChild(playerName);
     
-    return playerElement;
+    return li;
   }
   
   function getPlayerByName(playerName) {
