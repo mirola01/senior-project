@@ -54,7 +54,7 @@ function displayFormations(formationData) {
   const formationTitle = formationData.data.formation;
   const formationName = formationData.data.name;
   const players = formationData.data.players;
-
+  console.log("formationName", formationName)
   const formationSelector = document.getElementById('formationSelector');
 
   // Find the option with the matching value
@@ -62,7 +62,7 @@ function displayFormations(formationData) {
   if (matchingOption) {
     matchingOption.selected = true;
     document.getElementById('starting_11').className = formationName;
-    renderPositions(players); // Call renderPositions here with the actual formation data
+    renderPositions(); // Call renderPositions here with the actual formation data
   }
 
   
