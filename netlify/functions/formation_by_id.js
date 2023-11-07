@@ -12,7 +12,7 @@ exports.handler = async function (event, context) {
   });
 
   try {
-    let allFormations = await _client.query(q.Get(
+    let playersFormation = await _client.query(q.Get(
         q.Ref(
             q.Collection('Formation'),
             formationId
@@ -20,13 +20,13 @@ exports.handler = async function (event, context) {
     )
 )
 
-    if (!allFormations) {
-      allPlayers = [];
+    if (!playersFormation) {
+      playersFormation = [];
     }
 
     return {
       statusCode: 200,
-      body: JSON.stringify(allFormations),
+      body: JSON.stringify(playersFormation),
     };
   } catch (error) {
     console.log(error);

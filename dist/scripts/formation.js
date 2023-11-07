@@ -15,8 +15,6 @@ const client = new faunadb.Client({
 
 document.addEventListener("DOMContentLoaded", function () {
   loadFormationFromFaunaDB(); 
-  document.querySelector('.save-lineup').addEventListener('click', () => saveLineup(wc_team));
-  document.querySelector('.clear-lineup').addEventListener('click', () => clearLineup(wc_team));
 });
 
 async function loadFormationFromFaunaDB() {
@@ -48,16 +46,15 @@ async function fetchFormation(token, formationId) {
       formationId: formationId
     }),
   });
-  console.log("formation json", await formations.json())
   return await formations.json();
 }
 
 function displayFormations(formationData) {
+  console.log("formationData", formationData)
   const formationSelector = document.getElementById('formationSelector');
 
   // Find the option with the matching value
   const matchingOption = formationSelector.querySelector(`option[value="${formationData.name}"]`);
-
   if (matchingOption) {
     matchingOption.selected = true;
     document.getElementById('starting_11').className = formationData.name;
@@ -67,7 +64,7 @@ function displayFormations(formationData) {
 
 
 function renderPositions(formationData) {
-  console.log("object", formationData)
+  console.log("object", formationData.data.players)
   const positions = formationData;
 
   // Iterate over each position in the formation
