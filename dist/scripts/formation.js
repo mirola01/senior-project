@@ -48,7 +48,7 @@ async function fetchFormation(token, formationId) {
       formationId: formationId
     }),
   });
-  console.log("formation json", formations.json())
+  console.log("formation json", await formations.json())
   return await formations.json();
 }
 
