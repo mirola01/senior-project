@@ -14,12 +14,11 @@ const client = new faunadb.Client({
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  loadFormationFromFaunaDB(); // Load and render positions from FaunaDB
-
-  
+  loadFormationFromFaunaDB(); 
   document.querySelector('.save-lineup').addEventListener('click', () => saveLineup(wc_team));
   document.querySelector('.clear-lineup').addEventListener('click', () => clearLineup(wc_team));
 });
+
 async function loadFormationFromFaunaDB() {
   const params = new URLSearchParams(window.location.search);
   const formationId = params.get('id');
@@ -82,13 +81,11 @@ function renderPositions(formationData) {
         playerElement.textContent = playerName; // Here you would add your player's image and styling
         playerElement.classList.add('player', position);
         playerElement.setAttribute('data-index', index);
-
         // Append to the respective position container on the field
         document.querySelector(`.${position}-container`).appendChild(playerElement);
       }
     });
   }
-
   // After rendering the positions, initialize any drag-and-drop functionality
   wc_team.makePlayersDraggable();
   wc_team.dragDrap.init();
@@ -98,8 +95,6 @@ function clearField() {
   // Remove existing players from the field
   document.querySelectorAll('.player').forEach(player => player.remove());
 }
-
-
 
 function setupFormationSelector(wc_team) {
   document.getElementById('formationSelector').addEventListener('change', function () {
