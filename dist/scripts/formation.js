@@ -16,8 +16,7 @@ const client = new faunadb.Client({
 document.addEventListener("DOMContentLoaded", function () {
   loadFormationFromFaunaDB(); // Load and render positions from FaunaDB
 
-  // Set up event listeners for formation selection and button clicks
-  setupFormationSelector(wc_team);
+  
   document.querySelector('.save-lineup').addEventListener('click', () => saveLineup(wc_team));
   document.querySelector('.clear-lineup').addEventListener('click', () => clearLineup(wc_team));
 });
@@ -53,49 +52,32 @@ async function fetchFormation(token, formationId) {
   return await formations.json();
 }
 
-function displayFormations(response) {
+function displayFormations(formationData) {
   const formationSelector = document.getElementById('formationSelector');
-  const formationData = response.data.formation; // Get the formation from the data
 
   // Find the option with the matching value
-  const matchingOption = formationSelector.querySelector(`option[value="${formationData}"]`);
+  const matchingOption = formationSelector.querySelector(`option[value="${formationData.name}"]`);
 
-  // If the matching option exists, select it
   if (matchingOption) {
     matchingOption.selected = true;
-    document.getElementById('starting_11').className = formationData;
-    // Iterate through each position (gk, df, md, fw) and player
-    for (const position in formationData.players) {
-      const playersList = formationData.players[position];
-      const positionContainer = document.querySelector(`.${position}-container`);
-
-      playersList.forEach(playerName => {
-        // Create player element only if the player's name is not "NO_PLAYER"
-        if (playerName !== "NO_PLAYER") {
-          const playerElement = document.createElement('div');
-          playerElement.textContent = playerName;
-          playerElement.classList.add('player', position);
-          // Append to the respective position container on the field
-          positionContainer.appendChild(playerElement);
-        }
-      });
-  }
+    document.getElementById('starting_11').className = formationData.name;
+    renderPositions(formationData); // Call renderPositions here with the actual formation data
   }
 }
 
-function renderPositions(formationData, wc_team) {
-  const positions = formationData.players;
 
-  // Clear current positions
-  clearField();
+function renderPositions(formationData) {
+  const positions = formationData.players;
 
   // Iterate over each position in the formation
   for (const position in positions) {
+    console.log("position", position);
     const playerList = positions[position]; // e.g., ['ter Stegen', 'NO_PLAYER', ...]
 
     // Iterate over each player in the position list
     playerList.forEach((playerName, index) => {
       if (playerName !== 'NO_PLAYER') {
+        console.log("playerName", playerName)
         const playerElement = document.createElement('div');
         playerElement.textContent = playerName; // Here you would add your player's image and styling
         playerElement.classList.add('player', position);
