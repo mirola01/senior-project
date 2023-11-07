@@ -51,25 +51,21 @@ async function fetchFormation(token, formationId) {
 
 function displayFormations(formationData) {
   console.log("formationData", formationData)
-  const formationName = formationData.data.formation;
+  const formationTitle = formationData.data.formation;
+  const formationName = formationData.data.name;
   const players = formationData.data.players;
 
-  console.log("Formation name:", formationName);
-  console.log("Players:");
-  for (const position in players) {
-    for (const player of players[position]) {
-      console.log(`  ${position}: ${player}`);
-    }
-  }
   const formationSelector = document.getElementById('formationSelector');
 
   // Find the option with the matching value
-  const matchingOption = formationSelector.querySelector(`option[value="${formationData.name}"]`);
+  const matchingOption = formationSelector.querySelector(`option[value="${formationName}"]`);
   if (matchingOption) {
     matchingOption.selected = true;
-    document.getElementById('starting_11').className = formationData.name;
-    renderPositions(formationData); // Call renderPositions here with the actual formation data
+    document.getElementById('starting_11').className = formationName;
+    renderPositions(players); // Call renderPositions here with the actual formation data
   }
+
+  
 }
 
 
