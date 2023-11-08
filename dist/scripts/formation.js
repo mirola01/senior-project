@@ -196,6 +196,7 @@ async function renderPlayers() {
     // Store the fetched players in the global variable
     loadedPlayers = playersData.data;
     const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
+    console.log("LoadedPlayers", loadedPlayers)
 
     loadedPlayers.forEach((player) => {
       const pos = loadedPlayers.position;
