@@ -1135,7 +1135,7 @@ ul#starting_11 .selected img {
   height: auto;
 }
 
-.sec-pos h1 {height: auto;}
+.sec-pos h1 {height: auto;font-size: x-large;text-align: center;}
 
 .tab-content {
   height: auto;
