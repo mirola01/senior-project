@@ -11,8 +11,8 @@ const client = new faunadb.Client({
   port: 443,
   scheme: "https",
 });
-var loadedPlayers = [];
 let player_info;
+let formations;
 document.addEventListener("DOMContentLoaded", function () {
   loadFormationFromFaunaDB(); 
 
@@ -44,7 +44,7 @@ async function loadFormationFromFaunaDB() {
   }
 }
 async function fetchFormation(token, formationId) {
-  let formations = await fetch("/.netlify/functions/formation_by_id", {
+  formations = await fetch("/.netlify/functions/formation_by_id", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -323,8 +323,9 @@ async function renderPlayers() {
   }
   
   function getPlayerByName(playerName) {
+
     // Assuming loadedPlayers is a globally accessible array containing player objects
-    return loadedPlayers.find(player => player_info.data.name === playerName);
+    return player_info.find(player => player_info.data.name === playerName);
   }
   
 function updateFormation(formation) {
