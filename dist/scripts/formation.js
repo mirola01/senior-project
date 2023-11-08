@@ -323,9 +323,9 @@ async function renderPlayers() {
   }
   
   function getPlayerByName(playerName) {
-
+    console.log("player_info", player_info)
     // Assuming loadedPlayers is a globally accessible array containing player objects
-    return player_info.find(player => player_info.data.name === playerName);
+    return player_info.find(player => player.data.name === playerName);
   }
   
 function updateFormation(formation) {
