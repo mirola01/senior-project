@@ -285,8 +285,9 @@ async function renderPlayers() {
     Object.keys(formationData).forEach((positionGroup) => {
       console.log("PositionGroup", positionGroup)
       const positionList = document.querySelector(`.${positionGroup}`);
+      console.log("PositionList", positionList)
       const playerNames = formationData[positionGroup];
-  
+      console.log("playerNames", playerNames)
       playerNames.forEach((playerName, index) => {
         const position = positionList.children[index];
         if (playerName !== 'NO_PLAYER') {
