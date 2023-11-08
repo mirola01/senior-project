@@ -11,8 +11,7 @@ const client = new faunadb.Client({
   port: 443,
   scheme: "https",
 });
-let player_info;
-let formations;
+const positionsObject = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
 document.addEventListener("DOMContentLoaded", function () {
   loadFormationFromFaunaDB(); 
 
@@ -44,7 +43,7 @@ async function loadFormationFromFaunaDB() {
   }
 }
 async function fetchFormation(token, formationId) {
-  formations = await fetch("/.netlify/functions/formation_by_id", {
+  let formations = await fetch("/.netlify/functions/formation_by_id", {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -194,27 +193,23 @@ async function renderPlayers() {
     let token = await client.query(q.CurrentToken());
     token = token.value.id;
 
-    player_info = await fetch("/.netlify/functions/players_by_owner", {
+    players = await fetch("/.netlify/functions/players_by_owner", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({ token, userId: decodedJWT["sub"] }),
     });
-    player_info = await player_info.json();
+    players = await players.json();
 
-    const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
-
-    player_info.data.forEach((player_info) => {
-      console.log("player_info",player_info)
-      const pos = player_info.data.position;
-      if (positions[pos]) {
-        positions[pos].push(player_info);
+    players.data.forEach((player) => {
+      const pos = player.data.position;
+      if (positionsObject[pos]) {
+        positionsObject[pos].push(player);
       }
     });
-    console.log(positions)
     const sectionElement = document.querySelector('section');
-    Object.keys(positions).forEach((key) => {
+    Object.keys(positionsObject).forEach((key) => {
       const div = document.createElement('div');
       div.className = 'positions menu';
       div.innerHTML = `<a>${key.toUpperCase()}</a>`;
@@ -222,22 +217,22 @@ async function renderPlayers() {
       const ul = document.createElement('ul');
       ul.setAttribute('data-pos', key);
 
-      positions[key].forEach((player_info) => {
-        console.log("key", key, positions[key]);
+      positionsObject[key].forEach((player) => {
+        console.log("key", key, positionsObject[key]);
         const li = document.createElement('li');
         const ul2 = document.createElement('ul');
         const divPlayer = document.createElement('div');
         divPlayer.setAttribute('draggable', 'true');
-        divPlayer.setAttribute('data-player', player_info.data.name);
+        divPlayer.setAttribute('data-player', player.data.name);
 
         const img = document.createElement('img');
         img.setAttribute('draggable', 'false');
-        const jerseyNumber = player_info.data.jersey;
-        const playerImage = player_info.data.imageURL || generateDefaultImage(jerseyNumber);
+        const jerseyNumber = player.data.jersey;
+        const playerImage = player.data.imageURL || generateDefaultImage(jerseyNumber);
         img.setAttribute('src', playerImage);
 
         const p = document.createElement('p');
-        p.textContent = player_info.data.name;
+        p.textContent = player.data.name;
         ul2.style.display = "flex";
         ul2.style.flexDirection = "column";
         li.style.alignItems = "center";
@@ -287,7 +282,6 @@ async function renderPlayers() {
       const playerNames = formationData[positionGroup];
       playerNames.forEach((playerName, index) => {
         const position = positionList.children[index];
-        console.log("position", position)
         if (playerName !== 'NO_PLAYER') {
           const player = getPlayerByName(playerName);
           if (player) {
@@ -323,9 +317,20 @@ async function renderPlayers() {
   }
   
   function getPlayerByName(playerName) {
-    console.log("player_info", player_info)
-    // Assuming loadedPlayers is a globally accessible array containing player objects
-    return player_info.find(player => player.data.name === playerName);
+    // Iterate over each position group in player_info
+    for (const positionGroup in player_info) {
+      if (player_info.hasOwnProperty(positionGroup)) {
+        // Find the player in the current position group
+        const player = player_info[positionGroup].find(p => p.data.name === playerName);
+        if (player) {
+          console.log("player",player)
+          // Return the player if found
+          return player;
+        }
+      }
+    }
+    // Return null if the player is not found in any position group
+    return null;
   }
   
 function updateFormation(formation) {
