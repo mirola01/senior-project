@@ -193,7 +193,7 @@ async function renderPlayers() {
     let token = await client.query(q.CurrentToken());
     token = token.value.id;
 
-    players = await fetch("/.netlify/functions/players_by_owner", {
+    let players = await fetch("/.netlify/functions/players_by_owner", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -318,10 +318,10 @@ async function renderPlayers() {
   
   function getPlayerByName(playerName) {
     // Iterate over each position group in player_info
-    for (const positionGroup in player_info) {
+    for (const positionGroup in positionsObject) {
       if (player_info.hasOwnProperty(positionGroup)) {
         // Find the player in the current position group
-        const player = player_info[positionGroup].find(p => p.data.name === playerName);
+        const player = positionsObject[positionGroup].find(p => p.data.name === playerName);
         if (player) {
           console.log("player",player)
           // Return the player if found
