@@ -194,18 +194,19 @@ async function renderPlayers() {
     let token = await client.query(q.CurrentToken());
     token = token.value.id;
 
-    players = await fetch("/.netlify/functions/players_by_owner", {
+    player_info = await fetch("/.netlify/functions/players_by_owner", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({ token, userId: decodedJWT["sub"] }),
     });
-    player_info = await players.json();
+    player_info = await player_info.json();
 
     const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
 
     player_info.data.forEach((player_info) => {
+      console.log("player_info",player_info)
       const pos = player_info.data.position;
       if (positions[pos]) {
         positions[pos].push(player_info);
@@ -221,7 +222,7 @@ async function renderPlayers() {
       const ul = document.createElement('ul');
       ul.setAttribute('data-pos', key);
 
-      positions[key].forEach((player) => {
+      positions[key].forEach((player_info) => {
         console.log("key", key, positions[key]);
         const li = document.createElement('li');
         const ul2 = document.createElement('ul');
