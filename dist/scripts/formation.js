@@ -12,6 +12,7 @@ const client = new faunadb.Client({
   scheme: "https",
 });
 var loadedPlayers = [];
+let player_info;
 document.addEventListener("DOMContentLoaded", function () {
   loadFormationFromFaunaDB(); 
 
@@ -193,21 +194,21 @@ async function renderPlayers() {
     let token = await client.query(q.CurrentToken());
     token = token.value.id;
 
-    let players = await fetch("/.netlify/functions/players_by_owner", {
+    players = await fetch("/.netlify/functions/players_by_owner", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
       body: JSON.stringify({ token, userId: decodedJWT["sub"] }),
     });
-    players = await players.json();
+    player_info = await players.json();
 
     const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
 
-    players.data.forEach((player) => {
-      const pos = player.data.position;
+    player_info.data.forEach((player_info) => {
+      const pos = player_info.data.position;
       if (positions[pos]) {
-        positions[pos].push(player);
+        positions[pos].push(player_info);
       }
     });
     console.log(positions)
@@ -226,16 +227,16 @@ async function renderPlayers() {
         const ul2 = document.createElement('ul');
         const divPlayer = document.createElement('div');
         divPlayer.setAttribute('draggable', 'true');
-        divPlayer.setAttribute('data-player', player.data.name);
+        divPlayer.setAttribute('data-player', player_info.data.name);
 
         const img = document.createElement('img');
         img.setAttribute('draggable', 'false');
-        const jerseyNumber = player.data.jersey;
-        const playerImage = player.data.imageURL || generateDefaultImage(jerseyNumber);
+        const jerseyNumber = player_info.data.jersey;
+        const playerImage = player_info.data.imageURL || generateDefaultImage(jerseyNumber);
         img.setAttribute('src', playerImage);
 
         const p = document.createElement('p');
-        p.textContent = player.data.name;
+        p.textContent = player_info.data.name;
         ul2.style.display = "flex";
         ul2.style.flexDirection = "column";
         li.style.alignItems = "center";
@@ -280,14 +281,10 @@ async function renderPlayers() {
 
 
   function renderPositions(formationData) {
-    console.log("formationData", formationData);
-  
     Object.keys(formationData).forEach((positionGroup) => {
-      console.log("PositionGroup", positionGroup)
       const positionList = document.querySelector(`.${positionGroup}`);
       const playerNames = formationData[positionGroup];
       playerNames.forEach((playerName, index) => {
-        console.log("playerName+index", playerName, index)
         const position = positionList.children[index];
         console.log("position", position)
         if (playerName !== 'NO_PLAYER') {
@@ -326,7 +323,7 @@ async function renderPlayers() {
   
   function getPlayerByName(playerName) {
     // Assuming loadedPlayers is a globally accessible array containing player objects
-    return loadedPlayers.find(player => player.data.name === playerName);
+    return loadedPlayers.find(player => player_info.data.name === playerName);
   }
   
 function updateFormation(formation) {
