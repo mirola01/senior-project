@@ -192,16 +192,12 @@ async function renderPlayers() {
       },
       body: JSON.stringify({ token, userId: decodedJWT["sub"] }),
     });
-    let playersData = await players.json();
-    // Store the fetched players in the global variable
-    loadedPlayers = playersData.data;
-    const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
-    console.log("LoadedPlayers", loadedPlayers)
+    players = await players.json();
 
-    loadedPlayers.forEach((player) => {
-      const pos = loadedPlayers.data.position;
-      console.log("pos", pos)
-      console.log("player", player)
+    const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
+
+    players.data.forEach((player) => {
+      const pos = player.data.position;
       if (positions[pos]) {
         positions[pos].push(player);
       }
