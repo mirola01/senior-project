@@ -199,7 +199,7 @@ async function renderPlayers() {
     console.log("LoadedPlayers", loadedPlayers)
 
     loadedPlayers.forEach((player) => {
-      const pos = loadedPlayers.position;
+      const pos = loadedPlayers.data.position;
       console.log("pos", pos)
       console.log("player", player)
       if (positions[pos]) {
