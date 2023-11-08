@@ -14,6 +14,14 @@ const client = new faunadb.Client({
 var loadedPlayers = [];
 document.addEventListener("DOMContentLoaded", function () {
   loadFormationFromFaunaDB(); 
+
+  document.getElementById('formationSelector').addEventListener('change', function() {
+    const selectedFormation = this.value;
+    document.getElementById('starting_11').className = selectedFormation;
+    updateFormation(selectedFormation);
+    makePlayersDraggable();
+    wc_team.dragDrap.init();
+  });
 });
 
 async function loadFormationFromFaunaDB() {
@@ -275,6 +283,7 @@ async function renderPlayers() {
     console.log("formationData", formationData);
   
     Object.keys(formationData).forEach((positionGroup) => {
+      console.log("PositionGroup", positionGroup)
       const positionList = document.querySelector(`.${positionGroup}`);
       const playerNames = formationData[positionGroup];
   
