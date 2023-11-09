@@ -4,28 +4,31 @@
 
 // Initialize Auth0 client as null
 let auth0 = null;
+
 // Initialize authentication status as false
 let isAuthenticated = false;
+
+// Initialize fauna_key as undefined
 let fauna_key;
 
 /**
- * Fetches Auth0 configuration from server.
- * @returns {Promise<Response>} A promise that resolves with the server response.
+ * Fetches Auth0 configuration from the server.
+ * @returns {Promise<Object>} A promise that resolves with the Auth0 configuration object.
  */
 const fetchAuthConfig = () => fetch('/.netlify/functions/auth_config');
 
 /**
- * Asynchronously configures the Auth0 client.
+ * Asynchronously configures the Auth0 client with the fetched configuration.
+ * Initializes the Auth0 client and stores the Fauna key in local storage.
  * @async
  */
 export const configureClient = async () => {
-    let config;
     try {
         const response = await fetchAuthConfig();
-        config = await response.json();
+        const config = await response.json();
         console.log('Auth0 Config:', config);
 
-        // Initialize Auth0 client
+        // Initialize Auth0 client with the configuration
         auth0 = await createAuth0Client({ 
             domain: config.domain,
             client_id: config.client_id,
@@ -35,33 +38,30 @@ export const configureClient = async () => {
         // Store Fauna key in local storage
         localStorage.setItem("fauna_key", config.fauna_key);
     } catch (e) {
-        if (config) { console.log('Auth0 config:', config); }
+        console.error('Error in Auth0 client configuration:', e);
     }
 };
 
 /**
- * Retrieves the Auth0 client.
- * @returns {Object} The Auth0 client.
+ * Retrieves the Auth0 client from local storage or the initialized variable.
+ * @returns {Object} The Auth0 client instance.
  */
 export const getAuth0 = () => {
-    let final_auth = window.localStorage.getItem("final_auth");
-    if (final_auth) {
-        return JSON.parse(final_auth);
-    }
-    return auth0;
+    const finalAuth = window.localStorage.getItem("final_auth");
+    return finalAuth ? JSON.parse(finalAuth) : auth0;
 };
 
 /**
- * Sets the Auth0 client.
- * @param {Object} new_auth - The new Auth0 client.
+ * Stores the Auth0 client in local storage.
+ * @param {Object} newAuth - The Auth0 client instance to store.
  */
-export const setAuth0 = (new_auth) => {
-    window.localStorage.setItem("final_auth", JSON.stringify(new_auth));
+export const setAuth0 = (newAuth) => {
+    window.localStorage.setItem("final_auth", JSON.stringify(newAuth));
 };
 
 /**
- * Sets the access token in local storage.
- * @param {string} token - The access token.
+ * Stores the access token in local storage.
+ * @param {string} token - The access token to store.
  */
 export const setToken = (token) => {
     localStorage.setItem("accessToken", token);
@@ -69,35 +69,29 @@ export const setToken = (token) => {
 
 /**
  * Retrieves the Fauna key from local storage.
- * @returns {string} The Fauna key.
+ * @returns {string} The stored FaunaDB key.
  */
 export const getFaunaKey = () => {
     return localStorage.getItem("fauna_key");
 };
 
 /**
- * @function
+ * Initiates the user login process by redirecting to the Auth0 login page.
  * @async
- * @name login
- * @description Initiates the user login process by redirecting to the Auth0 login page.
- * After successful login, the user will be redirected to the specified URI.
  * @example
  * login();
- * @returns {Promise<void>} A Promise that resolves when the login redirect is initiated.
+ * @returns {Promise<void>} A promise that resolves when the login redirect is initiated.
  */
 export const login = async () => {
     await auth0.loginWithRedirect({
-        redirect_uri: 'https://lineup-manager.netlify.app/player-database.html'
+        redirect_uri: window.location.origin + '/player-database.html'
     });
 };
 
 /**
- * @function
- * @name logout
- * @description Logs the user out by clearing the local storage and then redirecting to the specified URI.
+ * Logs the user out by clearing the local storage and redirecting to the home page.
  * @example
  * logout();
- * @returns {void}
  */
 export const logout = () => {
     let final_auth = window.localStorage.getItem("final_auth");
