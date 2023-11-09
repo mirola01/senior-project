@@ -1,7 +1,16 @@
+/**
+ * @file This module handles the user interactions for creating and managing a soccer team formation.
+ * It allows users to drag and drop players into positions, save their lineup, and clear it.
+ * It uses Auth0 for authentication and FaunaDB as the backend service.
+ */
+
 import * as Auth from "./auth.js";
 var faunadb = window.faunadb;
 var q = faunadb.query;
 
+/**
+ * Initializes drag and drop functionality and renders positions on DOMContentLoaded.
+ */
 document.addEventListener("DOMContentLoaded", function() {
   renderPositions();
   const formationSelector = document.getElementById("formationSelector");
@@ -15,6 +24,15 @@ document.addEventListener("DOMContentLoaded", function() {
     wc_team.dragDrap.init();
   });
   
+/**
+ * Updates the field with player positions according to the selected formation.
+ * It first clears the current player positions and then creates new positions
+ * based on the formation chosen. Each position is represented by a list item
+ * (`<li>`) element that is made draggable.
+ * 
+ * @param {string} formation - The selected formation in a 'X-X-X' string format, 
+ * where X indicates the number of players in each row on the field.
+ */
   function updateFormation(formation) {
     const defenders = document.querySelector('.df');
     const midfielders = document.querySelector('.md');
@@ -60,7 +78,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 
-
+/**
+ * A namespace for handling drag and drop functionality of the team's formation.
+ * @namespace
+ */
 const wc_team = {}; // Initialize wc_team if it doesn't exist
 
 wc_team.dragDrap = (function() {
@@ -164,6 +185,9 @@ wc_team.dragDrap = (function() {
   };
 })();
 
+/**
+ * Makes player divs draggable.
+ */
 function makePlayersDraggable() {
   // Select all player divs
   const playerDivs = document.querySelectorAll('.positions div');
@@ -251,6 +275,11 @@ async function renderPositions() {
     wc_team.dragDrap.init();
   }
 }
+/**
+ * Generates a default image for a player using their jersey number.
+ * @param {number} jerseyNumber - The jersey number of the player.
+ * @returns {string} The data URL of the generated image.
+ */
   function generateDefaultImage(jerseyNumber) {
     const canvas = document.createElement('canvas');
     canvas.width = 100;
@@ -276,7 +305,10 @@ async function renderPositions() {
     return dataURL;
   }
 
-  // Function to save lineup into Formation
+/**
+ * Saves the current lineup into the FaunaDB.
+ * This function captures the current formation and player positions from the UI and persists it in the database.
+ */
   async function saveLineup() {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
@@ -344,8 +376,10 @@ async function renderPositions() {
     }
   }
   
-
-  // Function to save lineup into Formation
+/**
+ * Clears the current lineup from the UI.
+ * This function removes all players from their positions and resets the lineup.
+ */
   async function clearLineup() {
     // Select player slots within the 'starting_11' div
     const playerElements = document.querySelectorAll('#starting_11 li');
@@ -372,6 +406,6 @@ async function renderPositions() {
   }  
 
 
-// Add click event listener for the 'Save Lineup' button
+// Event listener for the 'Save Lineup' and 'Clear Lineup' buttons.
 document.querySelector('.save-lineup').addEventListener('click', saveLineup);
 document.querySelector('.clear-lineup').addEventListener('click', clearLineup);
