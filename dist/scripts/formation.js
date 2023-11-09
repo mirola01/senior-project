@@ -12,8 +12,7 @@ const client = new faunadb.Client({
   scheme: "https",
 });
 const positionsObject = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
-const params = new URLSearchParams(window.location.search);
-formationId = params.get('id');
+let formationId;
 document.addEventListener("DOMContentLoaded", function () {
   loadFormationFromFaunaDB(); 
 
@@ -27,6 +26,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function loadFormationFromFaunaDB() {
+  const params = new URLSearchParams(window.location.search);
+  formationId = params.get('id');
   console.log("formationId", formationId)
   if (formationId) {
     try {
