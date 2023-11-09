@@ -319,7 +319,7 @@ async function renderPlayers() {
   function getPlayerByName(playerName) {
     // Iterate over each position group in player_info
     for (const positionGroup in positionsObject) {
-      if (player_info.hasOwnProperty(positionGroup)) {
+      if (positionsObject.hasOwnProperty(positionGroup)) {
         // Find the player in the current position group
         const player = positionsObject[positionGroup].find(p => p.data.name === playerName);
         if (player) {
