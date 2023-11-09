@@ -289,7 +289,7 @@ async function renderPlayers() {
             const playerElement = createPlayerElement(player.data);
             position.innerHTML = ''; // Clear any existing content
             position.appendChild(playerElement);
-            position.draggable = false;
+            position.className = "selected";
             position.style.opacity = 1;
           }
         } else {
@@ -301,17 +301,17 @@ async function renderPlayers() {
     });
   }
   function createPlayerElement(playerData) {
-    const li = document.createElement('li');
-    li.className = "playerDb"
-    li.draggable = false; // Player in the formation should not be draggable
+    const divPlayer = document.createElement('div');
+    divPlayer.setAttribute('data-player', playerData.name);
+    divPlayer.draggable = false; // Player in the formation should not be draggable
     console.log("playerData", playerData)
     const img = document.createElement('img');
     img.src = generateDefaultImage(playerData.jersey);
     img.alt = playerData.name;
     img.draggable = false; // Image should not be draggable
     
-    li.appendChild(img);    
-    return li;
+    divPlayer.appendChild(img);    
+    return divPlayer;
   }
   
   function getPlayerByName(playerName) {
