@@ -369,6 +369,7 @@ function updateFormation(formation) {
     li.draggable = true;
     forwards.appendChild(li);
   }
+  wc_team.dragDrap.init();
 }
 
   // Function to save lineup into Formation
