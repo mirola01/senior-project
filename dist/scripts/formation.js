@@ -12,6 +12,8 @@ const client = new faunadb.Client({
   scheme: "https",
 });
 const positionsObject = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
+const params = new URLSearchParams(window.location.search);
+formationId = params.get('id');
 document.addEventListener("DOMContentLoaded", function () {
   loadFormationFromFaunaDB(); 
 
@@ -25,8 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 async function loadFormationFromFaunaDB() {
-  const params = new URLSearchParams(window.location.search);
-  const formationId = params.get('id');
   console.log("formationId", formationId)
   if (formationId) {
     try {
@@ -289,6 +289,7 @@ async function renderPlayers() {
             position.innerHTML = ''; // Clear any existing content
             position.appendChild(playerElement);
             position.draggable = false;
+            position.style.opacity = 1;
           }
         } else {
           // Clear any existing content if the player is "NO_PLAYER"
@@ -323,8 +324,6 @@ async function renderPlayers() {
         // Find the player in the current position group
         const player = positionsObject[positionGroup].find(p => p.data.name === playerName);
         if (player) {
-          console.log("player",player)
-          // Return the player if found
           return player;
         }
       }
@@ -373,4 +372,110 @@ function updateFormation(formation) {
     li.draggable = true;
     forwards.appendChild(li);
   }
-}  
+}
+
+  // Function to save lineup into Formation
+  async function updateLineup() {
+    const accessToken = localStorage.getItem('accessToken');
+    if (accessToken) {
+      const decodedJWT = jwt_decode(accessToken);
+      const fauna_key = Auth.getFaunaKey();
+      var client = new faunadb.Client({
+        secret: fauna_key,
+        domain: 'db.us.fauna.com',
+        port: 443,
+        scheme: 'https'
+      });
+  
+      // Get selected formation from the dropdown
+  const selectedFormation = document.querySelector('#formationSelector').value;
+
+  // Initialize object to hold player positions based on the selected formation
+  let playersInFormation = {};
+  
+  if (selectedFormation === 'formation-4-4-2') {
+    playersInFormation = {
+      "gk": ["NO_PLAYER"],
+      "df": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "md": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "fw": ["NO_PLAYER", "NO_PLAYER"]
+    };
+  } else if (selectedFormation === 'formation-4-3-3') {
+    playersInFormation = {
+      "gk": ["NO_PLAYER"],
+      "df": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "md": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "fw": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER"]
+    };
+  } else if (selectedFormation === 'formation-3-5-2') {
+    playersInFormation = {
+      "gk": ["NO_PLAYER"],
+      "df": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "md": ["NO_PLAYER", "NO_PLAYER", "NO_PLAYER", "NO_PLAYER", "NO_PLAYER"],
+      "fw": ["NO_PLAYER", "NO_PLAYER"]
+    };
+  }
+  try {
+      // Extract players from the HTML
+      const playerElements = document.querySelectorAll('li');
+      playerElements.forEach((element) => {
+        const position = element.parentNode.className; // Getting the class of the parent <ul>, which should indicate the position (gk, df, md, fw)
+        const index = Array.from(element.parentNode.children).indexOf(element); // Getting the index of the li inside its parent ul
+        const playerName = element.querySelector('div') ? element.querySelector('div').getAttribute('data-player') : "NO_PLAYER"; 
+        if (playersInFormation[position]) {
+            playersInFormation[position][index] = playerName;
+        }
+      });
+      console.log("Formation", playersInFormation)
+  
+      let data = await client.query(
+        q.Update(q.Ref(q.Collection('Formation'), formationId), {
+          data: {
+            name: document.querySelector('.titleFormation').textContent,
+            formation: selectedFormation,
+            players: playersInFormation,  // Saving the players in each position
+            owner: decodedJWT['sub']
+          }
+        })
+      );
+
+      console.log("Formation", data);
+    } catch (err) {
+      console.error('Error:', err);
+    }
+  }
+}
+
+
+
+
+// Function to save lineup into Formation
+async function clearLineup() {
+  // Select player slots within the 'starting_11' div
+  const playerElements = document.querySelectorAll('#starting_11 li');
+
+  // Clear the content of each player slot
+  playerElements.forEach((element) => {
+    element.innerHTML = ''; // Remove any inner HTML (e.g., player names, icons, etc.)
+
+    if (element.classList.contains('selected')) {
+      element.classList.remove('selected'); // Remove 'selected' class if present
+    }
+    element.style.opacity = 0.4;
+  });
+  // Select all player divs
+  const playerDivs = document.querySelectorAll('.positions div');
+
+  // Loop through each player div and set draggable to true
+  playerDivs.forEach(div => {
+    div.draggable = true;
+  });
+
+  makePlayersDraggable();
+wc_team.dragDrap.init();
+}    
+
+// Add click event listener for the 'Save Lineup' button
+document.querySelector('.update-lineup').addEventListener('click', updateLineup);
+document.querySelector('.clear-lineup').addEventListener('click', clearLineup);
+

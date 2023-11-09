@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
   renderPositions();
   const formationSelector = document.getElementById("formationSelector");
   const startingEleven = document.getElementById("starting_11");
-  // Example JS to switch class based on the dropdown
+
   document.getElementById('formationSelector').addEventListener('change', function() {
     const selectedFormation = this.value;
     document.getElementById('starting_11').className = selectedFormation;
