@@ -302,30 +302,19 @@ async function renderPlayers() {
   }
   function createPlayerElement(playerData) {
     const li = document.createElement('li');
-    li.className = 'selected'; // Add the 'selected' class
-    li.style.opacity = '1';
-  
-    const div = document.createElement('div');
-    div.setAttribute('data-player', playerData.name);
-    div.draggable = false; // Set draggable to false here
-  
+    li.draggable = false; // Player in the formation should not be draggable
+    
     const img = document.createElement('img');
-    img.src = playerData.imageURL || generateDefaultImage(playerData.jersey);
+    img.src = generateDefaultImage(playerData.jersey);
     img.alt = playerData.name;
     img.draggable = false; // Image should not be draggable
-  
-    div.appendChild(img); // Append the image to the div
-    li.appendChild(div); // Append the div to the li
-  
-    const removeLink = document.createElement('a');
-    removeLink.className = 'remove'; // Add the 'remove' class
-    // You may want to add an event listener or href to the remove link depending on how it should function
-  
-    li.appendChild(removeLink); // Append the remove link to the li
-  
+    
+    const playerName = document.createElement('p');
+    playerName.textContent = playerData.name;
+    
+    li.appendChild(img);    
     return li;
   }
-  
   
   function getPlayerByName(playerName) {
     // Iterate over each position group in player_info
