@@ -303,14 +303,11 @@ async function renderPlayers() {
   function createPlayerElement(playerData) {
     const li = document.createElement('li');
     li.draggable = false; // Player in the formation should not be draggable
-    
+    console.log("playerData", playerData)
     const img = document.createElement('img');
     img.src = generateDefaultImage(playerData.jersey);
     img.alt = playerData.name;
     img.draggable = false; // Image should not be draggable
-    
-    const playerName = document.createElement('p');
-    playerName.textContent = playerData.name;
     
     li.appendChild(img);    
     return li;
