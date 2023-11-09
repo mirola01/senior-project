@@ -308,7 +308,6 @@ async function renderPlayers() {
     const img = document.createElement('img');
     img.src = generateDefaultImage(playerData.jersey);
     img.alt = playerData.name;
-    img.draggable = false; // Image should not be draggable
     
     divPlayer.appendChild(img);    
     return divPlayer;
@@ -321,6 +320,7 @@ async function renderPlayers() {
         // Find the player in the current position group
         const player = positionsObject[positionGroup].find(p => p.data.name === playerName);
         if (player) {
+          player.draggable = false;
           return player;
         }
       }
