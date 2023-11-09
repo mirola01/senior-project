@@ -302,6 +302,7 @@ async function renderPlayers() {
   }
   function createPlayerElement(playerData) {
     const li = document.createElement('li');
+    li.className = "playerDb"
     li.draggable = false; // Player in the formation should not be draggable
     console.log("playerData", playerData)
     const img = document.createElement('img');
