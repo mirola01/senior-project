@@ -1178,6 +1178,7 @@ input.delete-checkbox {
 th {
   position: sticky;
   top: 0;
+  background-color: white;
 }
 
 table.table-expand {
