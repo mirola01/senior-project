@@ -22,17 +22,19 @@
   },
   "homepage": "https://github.com/auth0-blog/FaunaDB-Auth0-demo#readme",
   "dependencies": {
+    "aws-sdk": "^2.1493.0",
     "axios": "^0.24.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.17.1",
     "express-openid-connect": "^2.17.0",
-    "faunadb": "^4.4.1",
+    "faunadb": "^4.8.0",
     "foundation-sites": "^6.8.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
     "passport": "^0.4.1",
-    "passport-auth0": "^1.4.0"
+    "passport-auth0": "^1.4.0",
+    "uuid": "^9.0.1"
   },
   "engines": {
     "node": "v16.13.0"

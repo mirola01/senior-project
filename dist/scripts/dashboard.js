@@ -1,18 +1,28 @@
+/**
+ * @file Handles the user dashboard operations in the soccer team management application.
+ * It fetches and displays formations specific to the authenticated user and 
+ * allows users to view details of each formation.
+ */
+
 import * as Auth from "./auth.js";
 var faunadb = window.faunadb;
 var q = faunadb.query;
 
-// Initialize variables
+// Global variables initialization using authenticated user's information
 const accessToken = localStorage.getItem("accessToken");
 const decodedJWT = jwt_decode(accessToken);
 const fauna_key = Auth.getFaunaKey();
 const client = new faunadb.Client({
-    secret: fauna_key,
-    domain: "db.us.fauna.com",
-    port: 443,
-    scheme: "https",
+  secret: fauna_key,
+  domain: "db.us.fauna.com",
+  port: 443,
+  scheme: "https",
 });
 
+/**
+ * DOMContentLoaded event listener to fetch and display formations
+ * based on the authenticated user's role after the DOM is fully loaded.
+ */
 document.addEventListener('DOMContentLoaded', async function() {
     if (accessToken) {
         let token = await client.query(q.CurrentToken());
@@ -30,6 +40,12 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
 });
 
+/**
+ * Fetches formations from FaunaDB based on the owner's token.
+ * 
+ * @param {string} token - The FaunaDB access token for the current user.
+ * @returns {Promise<Object>} A promise that resolves with the formations data.
+ */
 async function fetchFormations(token) {  
     let formations = await fetch("/.netlify/functions/formations_by_owner", {
         method: "POST",
@@ -44,7 +60,11 @@ async function fetchFormations(token) {
     return await formations.json();
 }
 
-
+/**
+ * Renders the fetched formations as HTML elements in the DOM.
+ * 
+ * @param {Object} response - The response object containing formations data.
+ */
 function displayFormations(response) {
     const formations = response.data;  // Access the "data" property of the response
     const formationsList = document.getElementById('formationsList');
@@ -71,7 +91,11 @@ function displayFormations(response) {
     });
 }
 
-
+/**
+ * Fetches and displays the details of a specific formation when a formation preview is clicked.
+ * 
+ * @param {string} formationId - The unique identifier for the formation.
+ */
 function showFormationDetails(formationId) {
     // Fetch formation details from FaunaDB based on the formationId
     client.query(q.Get(q.Ref(q.Collection('formations'), formationId)))

@@ -1,9 +1,16 @@
+/**
+ * @file Provides database interaction functions for creating and deleting player records in the soccer team management application.
+ * It utilizes FaunaDB as the backend database service.
+ */
+
 import * as Auth from "./auth.js";
 var faunadb = window.faunadb;
 var q = faunadb.query;
 
 /**
- * Function to create a new player
+ * Asynchronously creates a new player record in the FaunaDB 'Players' collection.
+ * It captures form input values from the UI and associates the new player with the current authenticated user.
+ * After the player is created, the page is reloaded to reflect the changes.
  */
 export const new_player = async () => {
   /**
@@ -55,7 +62,10 @@ export const new_player = async () => {
   }
 };
 /**
- * Function to delete a player by ID
+ * Asynchronously deletes a player record from the FaunaDB 'Players' collection by a given player ID.
+ * If the deletion is successful, the page is reloaded to reflect the changes.
+ *
+ * @param {string} playerId - The unique identifier of the player to be deleted.
  */
 export const delete_player = async (playerId) => {
   try {

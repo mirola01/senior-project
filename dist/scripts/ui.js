@@ -1,8 +1,18 @@
+/**
+ * @file Manages the user interface updates of the soccer team management application. 
+ * It checks the user's authentication status and role to conditionally render UI elements 
+ * and player information. It also includes a utility function to generate default player images.
+ */
 import * as Auth from "./auth.js";
 
 var faunadb = window.faunadb;
 var q = faunadb.query;
 
+/**
+ * Updates the user interface based on the user's authentication status and role.
+ * If authenticated, it fetches the player data and populates the UI accordingly.
+ * It also conditionally displays UI elements like the 'Add New' button based on the user role.
+ */
 export async function updateUI() {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
@@ -42,7 +52,7 @@ export async function updateUI() {
       });
       console.log("token+userId", token, decodedJWT["sub"])
       players = await players.json();
-
+      console.log("Players find image link", players)
       const tableBody = document.getElementById("player-tbody");
       tableBody.innerHTML = "";
       var htmlText = players["data"].map(function (o) {
@@ -101,6 +111,13 @@ export async function updateUI() {
   }
 }
 
+/**
+ * Generates a default image for players using a canvas element.
+ * The jersey number is rendered onto a gray square background.
+ * 
+ * @param {number} jerseyNumber - The jersey number to be displayed on the default image.
+ * @returns {string} A data URL representing the generated image.
+ */
 function generateDefaultImage(jerseyNumber) {
   const canvas = document.createElement('canvas');
   canvas.width = 100;

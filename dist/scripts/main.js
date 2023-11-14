@@ -1,12 +1,19 @@
-// Import modules
+/**
+ * @file Main entry point for the soccer team management application. It initializes the Auth0 client,
+ * handles the authentication process, and manages the main user interface elements and events.
+ */
+
+// Module imports
 import * as Auth from "./auth.js";
-import * as Database from "./database.js";
 import * as UI from "./ui.js";
-import * as Events from "./events.js";
 
-
+// Global variable for Auth0 client
 let auth0Client = null;
-// Initialize the Auth0 client when the window loads
+
+/**
+ * Initializes the application by configuring the Auth0 client and updating the UI accordingly.
+ * It processes the callback from Auth0 authentication and sets the token in local storage.
+ */
 window.onload = async () => {
   try {
     await Auth.configureClient();
@@ -31,8 +38,10 @@ window.onload = async () => {
 };
 
 
-
-// Handle authentication button click
+/**
+ * Handles the click event on the authentication button.
+ * It checks the text content of the button to determine whether to log in or log out the user.
+ */
 document.querySelector(".auth-btn").addEventListener("click", async (e) => {
   console.log("auth click");
   
@@ -55,6 +64,10 @@ const body_ = document.querySelector(".container");
 const form = document.querySelector(".form");
 form.setAttribute("tabindex", "-1"); // to manage focus
 
+/**
+ * Handles the click event on the 'Add New' button.
+ * It fades the container and displays a form for adding new entries.
+ */
 add_nw_btn.addEventListener("click", (e) => {
   console.log(e);
   body_.classList.add("container-fade");
@@ -63,6 +76,10 @@ add_nw_btn.addEventListener("click", (e) => {
   form.focus();
 });
 
+/**
+ * Handles the click event on the 'Close' button.
+ * It removes the faded effect from the container and hides the form.
+ */
 document.querySelector("#close-btn").addEventListener("click", (e) => {
   console.log(e);
   body_.classList.remove("container-fade");

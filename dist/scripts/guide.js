@@ -1,3 +1,12 @@
+/**
+ * @file Contains functionality to create a tabbed interface for the user guide section of the application.
+ * It uses jQuery to attach click event handlers on the tabs to show and hide content.
+ */
+
+/**
+ * Sets up the click event handlers for the tabs.
+ * When a tab is clicked, it becomes active and its associated content is displayed, while the other tabs and content are hidden.
+ */
 export function setupTabs() {
 
     $(".tab a").on("click", function (e) {
@@ -14,7 +23,11 @@ export function setupTabs() {
     });
   }
   
-  // Initialize tabs
+/**
+ * Initializes the tab functionality on document ready.
+ * It hides all tab content initially and then shows the first tab's content.
+ * The setupTabs function is called to ensure tabs are functional after the page has loaded.
+ */
   $(document).ready(function() {
     // Hide all tab content divs
     $(".tab-content > div").hide();

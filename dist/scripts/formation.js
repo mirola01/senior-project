@@ -1,7 +1,13 @@
+/**
+ * @file Manages the loading, display, and manipulation of soccer team formations.
+ * It interacts with FaunaDB to fetch and update formation data based on user interactions.
+ */
+
 import * as Auth from "./auth.js";
 var faunadb = window.faunadb;
 var q = faunadb.query;
-// Initialize variables
+
+// Global variables initialization
 const accessToken = localStorage.getItem("accessToken");
 const decodedJWT = jwt_decode(accessToken);
 const fauna_key = Auth.getFaunaKey();
@@ -13,6 +19,10 @@ const client = new faunadb.Client({
 });
 const positionsObject = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
 let formationId;
+/**
+ * Loads a specific formation from FaunaDB on DOMContentLoaded event.
+ * Attaches event listeners for formation selection and player drag-and-drop functionality.
+ */
 document.addEventListener("DOMContentLoaded", function () {
   loadFormationFromFaunaDB(); 
 
@@ -43,6 +53,13 @@ async function loadFormationFromFaunaDB() {
     }
   }
 }
+/**
+ * Fetches a specific formation's details from FaunaDB using the formation's unique ID.
+ * 
+ * @param {string} token - The FaunaDB access token for the current user.
+ * @param {string} formationId - The unique identifier for the formation.
+ * @returns {Promise<Object>} A promise that resolves with the formation data.
+ */
 async function fetchFormation(token, formationId) {
   let formations = await fetch("/.netlify/functions/formation_by_id", {
     method: "POST",
@@ -56,7 +73,11 @@ async function fetchFormation(token, formationId) {
   });
   return await formations.json();
 }
-
+/**
+ * Displays the formations on the user interface.
+ * 
+ * @param {Object} formationData - The data object containing details of the formation.
+ */
 function displayFormations(formationData) {
   console.log("formationData", formationData)
   const formationTitle = formationData.data.name;
@@ -74,8 +95,12 @@ function displayFormations(formationData) {
     renderPositions(players); // Call renderPositions here with the actual formation data
   }
 }
-const wc_team = {}; // Initialize wc_team if it doesn't exist
 
+const wc_team = {}; // Initialize wc_team if it doesn't exist
+/**
+ * A namespace for handling drag-and-drop functionality within the team's formation.
+ * @namespace
+ */
 wc_team.dragDrap = (function() {
   
   let position;
@@ -177,6 +202,9 @@ wc_team.dragDrap = (function() {
   };
 })();
 
+/**
+ * Renders players on the UI based on the formation data.
+ */
 async function renderPlayers() {
   console.log("renderPositions triggered");
   const accessToken = localStorage.getItem("accessToken");
@@ -251,6 +279,12 @@ async function renderPlayers() {
     wc_team.dragDrap.init();
   }
 }
+/**
+ * Generates a default image for players using a canvas element.
+ * 
+ * @param {number} jerseyNumber - The jersey number to display on the default image.
+ * @returns {string} - A data URL for the generated image.
+ */
   function generateDefaultImage(jerseyNumber) {
     const canvas = document.createElement('canvas');
     canvas.width = 100;
@@ -276,7 +310,11 @@ async function renderPlayers() {
     return dataURL;
   }
 
-
+/**
+ * Displays the player positions within a specific formation.
+ * 
+ * @param {Object} formationData - The data object containing players and their positions.
+ */
   function renderPositions(formationData) {
     Object.keys(formationData).forEach((positionGroup) => {
       const positionList = document.querySelector(`.${positionGroup}`);
@@ -300,6 +338,12 @@ async function renderPlayers() {
       });
     });
   }
+  /**
+ * Creates an HTML element for a player with the provided data.
+ * 
+ * @param {Object} playerData - The data object containing the player's details.
+ * @returns {HTMLElement} - The constructed player HTML element.
+ */
   function createPlayerElement(playerData) {
     const divPlayer = document.createElement('div');
     divPlayer.setAttribute('data-player', playerData.name);
@@ -312,7 +356,12 @@ async function renderPlayers() {
     divPlayer.appendChild(img);    
     return divPlayer;
   }
-  
+  /**
+ * Retrieves player information by name from the positions object.
+ * 
+ * @param {string} playerName - The name of the player to retrieve.
+ * @returns {Object|null} - The player object if found, otherwise null.
+ */
   function getPlayerByName(playerName) {
     // Iterate over each position group in player_info
     for (const positionGroup in positionsObject) {
@@ -328,7 +377,11 @@ async function renderPlayers() {
     // Return null if the player is not found in any position group
     return null;
   }
-  
+  /**
+ * Updates the UI to reflect a new formation structure when a different formation is selected.
+ * 
+ * @param {string} formation - The selected formation structure, e.g., "4-4-2".
+ */
 function updateFormation(formation) {
   const defenders = document.querySelector('.df');
   const midfielders = document.querySelector('.md');
@@ -372,7 +425,9 @@ function updateFormation(formation) {
   wc_team.dragDrap.init();
 }
 
-  // Function to save lineup into Formation
+/**
+ * Updates the current lineup in FaunaDB with the changes made on the UI.
+ */
   async function updateLineup() {
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
@@ -446,8 +501,9 @@ function updateFormation(formation) {
 
 
 
-
-// Function to save lineup into Formation
+/**
+ * Clears the current lineup from the UI, resetting all positions to their default state.
+ */
 async function clearLineup() {
   // Select player slots within the 'starting_11' div
   const playerElements = document.querySelectorAll('#starting_11 li');
@@ -473,7 +529,7 @@ async function clearLineup() {
 wc_team.dragDrap.init();
 }    
 
-// Add click event listener for the 'Save Lineup' button
+// Event listeners for the 'Save Lineup' and 'Clear Lineup' buttons.
 document.querySelector('.update-lineup').addEventListener('click', updateLineup);
 document.querySelector('.clear-lineup').addEventListener('click', clearLineup);
 
