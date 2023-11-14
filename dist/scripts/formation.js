@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     makePlayersDraggable();
     wc_team.dragDrap.init();
   });
+  
 });
 
 async function loadFormationFromFaunaDB() {
@@ -257,7 +258,7 @@ async function renderPlayers() {
         const img = document.createElement('img');
         img.setAttribute('draggable', 'false');
         const jerseyNumber = player.data.jersey;
-        const playerImage = player.data.imageURL || generateDefaultImage(jerseyNumber);
+        const playerImage = player.data.image || generateDefaultImage(jerseyNumber);
         img.setAttribute('src', playerImage);
 
         const p = document.createElement('p');
@@ -369,7 +370,6 @@ async function renderPlayers() {
         // Find the player in the current position group
         const player = positionsObject[positionGroup].find(p => p.data.name === playerName);
         if (player) {
-          player.draggable = false;
           return player;
         }
       }
@@ -526,7 +526,7 @@ async function clearLineup() {
   });
 
   makePlayersDraggable();
-wc_team.dragDrap.init();
+  wc_team.dragDrap.init();
 }    
 
 // Event listeners for the 'Save Lineup' and 'Clear Lineup' buttons.
