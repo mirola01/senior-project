@@ -37,24 +37,24 @@
   height: 150px;
 }
 
-.nav-links{
+.vertical {
   list-style: none;
   height: 80%;
 }
 
-.nav-links li{
+.page-menu{
   padding: 10px 0;
   height: 12%;
 }
 
-.nav-links li a{
+.page-menu a{
   color: #004AAD;
   text-decoration: none;
   padding: 10px 14px;
   display: flex;
 }
 
-.nav-links li a i{
+.page-menu a i{
   margin-right: 0px;
   width: 30%;
 }
@@ -72,12 +72,12 @@
   display: none;
   transition: top 0.5s;
 }
-.nav-links li a:hover p, .nav-links li a:hover i {
+.page-menu a:hover p, .page-menu a:hover i {
   color: #D8E4F4;
 }
 
 
-.nav-links li:hover .active{
+.page-menu:hover .active{
   display: block;
 }
 
@@ -96,13 +96,13 @@
   .logo-img{
       display: none;
   }
-  .nav-links li a p{
+  .page-menu a p{
       display: none;
   }
-  .nav-links li a i{
+  .page-menu a i{
       margin-right: 0;
   }
-  .nav-links li a{
+  .page-menu a{
       justify-content: center;
   }
 }
