@@ -6,7 +6,6 @@
 import * as Auth from "./auth.js";
 var faunadb = window.faunadb;
 var q = faunadb.query;
-import jwt_decode from "jwt-decode";
 
 /**
  * Asynchronously creates a new player record in the FaunaDB 'Players' collection.
