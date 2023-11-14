@@ -518,16 +518,7 @@ ul.bottom-nav {
   height: 47% !important;
 }
 
-#player-table thead {
-  height: 15%;
-}
 
-table#player-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 3%;
-  table-layout: fixed;
-}
 .tactical-guide {
   width: 99%;
   height: 100%;
@@ -1192,4 +1183,5 @@ th {
 table.table-expand {
   border-collapse: collapse;
   width: 100%;
+  table-layout: fixed;
 }
