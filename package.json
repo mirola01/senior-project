@@ -37,7 +37,7 @@
     "uuid": "^9.0.1"
   },
   "engines": {
-    "node": "v16.13.0"
+    "node": "v18.16.0"
   },
   "jest": {
     "testEnvironment": "jsdom"
