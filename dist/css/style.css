@@ -1176,3 +1176,20 @@ input.delete-checkbox {
   width: 25px;
   position: relative;
 }
+
+.player-table {
+  overflow-y: auto;
+  height: 67%;
+  margin: 2%;
+  width: 96%;
+}
+
+th {
+  position: sticky;
+  top: 0;
+}
+
+table.table-expand {
+  border-collapse: collapse;
+  width: 100%;
+}
