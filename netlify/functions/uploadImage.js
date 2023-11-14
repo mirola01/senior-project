@@ -5,8 +5,8 @@ const { v4: uuidv4 } = require('uuid');
 exports.handler = async (event) => {
     try {
         const s3 = new AWS.S3({
-            accessKeyId: process.env.AWS_ACCESS_KEY,
-            secretAccessKey: process.env.AWS_SECRET
+            accessKeyId: process.env.AWS_ACCKEY,
+            secretAccessKey: process.env.AWSS
         });
         const body = JSON.parse(event.body);
         const base64String = body.image;
