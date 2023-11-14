@@ -255,7 +255,7 @@ async function renderPositions() {
         const img = document.createElement('img');
         img.setAttribute('draggable', 'false');
         const jerseyNumber = player.data.jersey;
-        const playerImage = player.data.imageURL || generateDefaultImage(jerseyNumber);
+        const playerImage = o.data.image || generateDefaultImage(jerseyNumber);
         img.setAttribute('src', playerImage);
 
         const p = document.createElement('p');
