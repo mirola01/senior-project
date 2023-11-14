@@ -62,7 +62,7 @@ export async function updateUI() {
         checkbox.className = "delete-checkbox";
         const id = o["ref"] && o["ref"]["@ref"] ? o["ref"]["@ref"].id : "undefined";
         const jerseyNumber = o.data.jersey;
-        const playerImage = o.data.imageURL || generateDefaultImage(jerseyNumber);
+        const playerImage = o.data.image || generateDefaultImage(jerseyNumber);
 
         const label = document.createElement("label");
         label.htmlFor = o.ref.id;
