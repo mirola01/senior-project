@@ -224,6 +224,8 @@ async function renderPositions() {
     });
     players = await players.json();
 
+    
+
     const positions = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
 
     players.data.forEach((player) => {

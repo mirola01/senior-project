@@ -6,6 +6,7 @@
 import * as Auth from "./auth.js";
 var faunadb = window.faunadb;
 var q = faunadb.query;
+import jwt_decode from "jwt-decode";
 
 /**
  * Asynchronously creates a new player record in the FaunaDB 'Players' collection.
@@ -18,47 +19,74 @@ export const new_player = async () => {
    */
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
-    const decodedJWT = jwt_decode(accessToken);
-    /**
-     * Fetch players
-     */
-    const fauna_key = Auth.getFaunaKey();
-    var client = new faunadb.Client({
-      secret: fauna_key,
-      domain: 'db.us.fauna.com',
-      port: 443,
-      scheme: 'https'
-    });
+      const decodedJWT = jwt_decode(accessToken);
 
-    /**
-     * Check the role
-     */
-    let token = await client.query(q.CurrentToken());
-    token = token.value.id;
+      /**
+       * Initialize FaunaDB Client
+       */
+      const fauna_key = Auth.getFaunaKey();
+      var client = new faunadb.Client({
+          secret: fauna_key,
+          domain: 'db.us.fauna.com',
+          port: 443,
+          scheme: 'https'
+      });
 
-    console.log("token", token);
-    let user_role = decodedJWT["https://db.fauna.com/roles"][0];
-    console.log("user_role", user_role);
+      const q = faunadb.query;
 
-    /**
-     * Create a new player in the FaunaDB collection
-     */
-    let data = await client.query(
-        q.Create(q.Collection("Players"), {
-          data: {
-            name: document.querySelector('#playerName').value,
-            age: document.querySelector('#playerAge').value,
-            position: document.querySelector('#playerPosition').value,
-            jersey: document.querySelector('#playerJersey').value,
-            image: document.querySelector('#playerImage').value,
-            owner: decodedJWT["sub"]
+      /**
+       * Upload Image to S3 and Create Player in FaunaDB
+       */
+      const fileInput = document.querySelector('#playerImage');
+      if (fileInput.files.length > 0) {
+          const file = fileInput.files[0];
+          const reader = new FileReader();
+          reader.onloadend = async () => {
+              try {
+                  const base64String = reader.result.replace(/^data:image\/\w+;base64,/, "");
+
+                  // Call your Netlify function's endpoint
+                  const response = await fetch('/.netlify/functions/uploadImage', {
+                      method: 'POST',
+                      headers: {
+                          'Content-Type': 'application/json',
+                          'Authorization': `Bearer ${accessToken}`
+                      },
+                      body: JSON.stringify({ image: base64String })
+                  });
+
+                  const result = await response.json();
+                  if (response.ok) {
+                      // Use the returned image URL to create a new player in FaunaDB
+                      let data = await client.query(
+                          q.Create(q.Collection("Players"), {
+                              data: {
+                                  name: document.querySelector('#playerName').value,
+                                  age: document.querySelector('#playerAge').value,
+                                  position: document.querySelector('#playerPosition').value,
+                                  jersey: document.querySelector('#playerJersey').value,
+                                  image: result.imageUrl, // Using the returned image URL
+                                  owner: decodedJWT["sub"]
+                              }
+                          })
+                      );
+
+                      console.log(data);
+                      window.location.reload();
+                  } else {
+                      console.error('Error uploading image:', result.error);
+                  }
+              } catch (error) {
+                  console.error('Error:', error);
+              }
+          };
+
+          if (file) {
+              reader.readAsDataURL(file);
           }
-        })
-      ).then((ret) => console.log(ret))
-      .catch((err) => console.error('Error: %s', err))
-
-    console.log(data);
-    window.location.reload();
+      } else {
+          console.error('No image file selected.');
+      }
   }
 };
 /**
