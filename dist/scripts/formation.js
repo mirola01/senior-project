@@ -17,7 +17,7 @@ const client = new faunadb.Client({
   port: 443,
   scheme: "https",
 });
-const positionsObject = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
+let positionsObject = { Goalkeeper: [], Defender: [], Midfield: [], Forward: [] };
 let formationId;
 /**
  * Loads a specific formation from FaunaDB on DOMContentLoaded event.
