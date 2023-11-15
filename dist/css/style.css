@@ -679,7 +679,6 @@ div#\34 -3-3 {
   width: 65px;
   padding-bottom: 23px;
   z-index: 9;
-  left: 50%;
   transform-style: preserve-3d;
   transition: all 0.2s;
   cursor: pointer;
