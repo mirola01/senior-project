@@ -372,25 +372,20 @@ function createPlayerElement(playerData) {
  * @returns {Object|null} - The player object if found, otherwise null.
  */
 function getPlayerByName(playerName) {
-  const normalizeString = (str) => str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
-  const playerNameNormalized = normalizeString(playerName);
-  // Then use normalizeString for comparison inside the loop
-  console.log(playerNameNormalized)
-
-  for (const group in positionsObject) {
-    console.log("Inspecting group:", group);
-    positionsObject[group].forEach((player, index) => {
-      const playerNameInObject = player.data.name.trim().toLowerCase();
-      console.log(`Player #${index} in ${group}: ${playerNameInObject} (Raw: ${player.data.name}), Comparing with: ${playerNameNormalized}`);
-      if (playerNameInObject === playerNameNormalized) {
-        console.log("Match found:", player);
-        return player;
-      }
-    });
-  }
-
-
-  console.log("Player not found");
+  const playerNameNormalized = playerName.trim().toLowerCase();
+    
+    for (const group in positionsObject) {
+        // Find the player in the current group
+        const player = positionsObject[group].find(p => p.data.name.trim().toLowerCase() === playerNameNormalized);
+        
+        // If a player is found, return it immediately
+        if (player) {
+            return player;
+        }
+    }
+    
+    // If no player is found in any group, return null
+    return null;
 }
 /**
  * Updates the UI to reflect a new formation structure when a different formation is selected.
