@@ -373,13 +373,14 @@ function createPlayerElement(playerData) {
  */
 function getPlayerByName(playerName) {
   const playerNameNormalized = playerName.trim().toLowerCase();
-    
+    console.log("PlayerNormalized")
     for (const group in positionsObject) {
         // Find the player in the current group
         const player = positionsObject[group].find(p => p.data.name.trim().toLowerCase() === playerNameNormalized);
         
         // If a player is found, return it immediately
         if (player) {
+            console.log("player", player)
             return player;
         }
     }
