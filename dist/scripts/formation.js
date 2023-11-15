@@ -43,11 +43,11 @@ async function loadFormationFromFaunaDB() {
     try {
       let token = await client.query(q.CurrentToken());
       token = token.value.id;
+      renderPlayers(); 
       fetchFormation(token, formationId).then(formations => { // Pass the token here
         displayFormations(formations);
       });
       //wc_team.updateFormation(response.data); // Update the team formation with the data
-      renderPlayers(); // Then render the positions
     } catch (error) {
       console.error('Error fetching formation:', error);
     }
@@ -322,6 +322,7 @@ async function renderPlayers() {
       playerNames.forEach((playerName, index) => {
         const position = positionList.children[index];
         if (playerName !== 'NO_PLAYER') {
+          console.log("renderPositions", playerName);
           const player = getPlayerByName(playerName);
           if (player) {
             const playerElement = createPlayerElement(player.data);
@@ -365,9 +366,11 @@ async function renderPlayers() {
   function getPlayerByName(playerName) {
     // Iterate over each position group in player_info
     for (const positionGroup in positionsObject) {
+      console.log("positionGroup", positionGroup)
       if (positionsObject.hasOwnProperty(positionGroup)) {
         // Find the player in the current position group
         const player = positionsObject[positionGroup].find(p => p.data.name === playerName);
+        console.log("player in getPlayerByName", player)
         if (player) {
           return player;
         }
