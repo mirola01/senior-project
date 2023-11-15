@@ -29,6 +29,7 @@ let formationId;
  * Attaches event listeners for formation selection and player drag-and-drop functionality.
  */
 document.addEventListener("DOMContentLoaded", function () {
+  renderPlayers();
   loadFormationFromFaunaDB();
 
   document.getElementById('formationSelector').addEventListener('change', function () {
@@ -48,7 +49,6 @@ async function loadFormationFromFaunaDB() {
     try {
       let token = await client.query(q.CurrentToken());
       token = token.value.id;
-      renderPlayers();
       fetchFormation(token, formationId).then(formations => { // Pass the token here
         displayFormations(formations);
       });
@@ -359,7 +359,7 @@ function createPlayerElement(playerData) {
   divPlayer.draggable = false; // Player in the formation should not be draggable
   console.log("playerData", playerData)
   const img = document.createElement('img');
-  img.src = generateDefaultImage(playerData.jersey);
+  img.src = playerData.image || generateDefaultImage(playerData.jersey);
   img.alt = playerData.name;
 
   divPlayer.appendChild(img);
