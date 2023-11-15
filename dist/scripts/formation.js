@@ -367,6 +367,7 @@ async function renderPlayers() {
     // Iterate over each position group in player_info
     for (const positionGroup in positionsObject) {
       console.log("positionGroup", positionGroup)
+      console.log("positionsObject", positionsObject)
       if (positionsObject.hasOwnProperty(positionGroup)) {
         // Find the player in the current position group
         const player = positionsObject[positionGroup].find(p => p.data.name === playerName);
