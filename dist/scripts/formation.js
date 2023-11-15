@@ -39,7 +39,6 @@ document.addEventListener("DOMContentLoaded", function () {
 async function loadFormationFromFaunaDB() {
   const params = new URLSearchParams(window.location.search);
   formationId = params.get('id');
-  console.log("formationId", formationId)
   if (formationId) {
     try {
       let token = await client.query(q.CurrentToken());
