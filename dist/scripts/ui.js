@@ -52,33 +52,24 @@ export async function updateUI() {
       });
       console.log("token+userId", token, decodedJWT["sub"])
       players = await players.json();
-      console.log("Players find image link", players)
-      const tableBody = document.getElementById("player-tbody");
-      tableBody.innerHTML = "";
-      var htmlText = players["data"].map(function (o) {
-        console.log("Current object:", o);  
-        const checkbox = document.createElement("input");
-        checkbox.type = "checkbox";
-        checkbox.className = "delete-checkbox";
-        const id = o["ref"] && o["ref"]["@ref"] ? o["ref"]["@ref"].id : "undefined";
-        const jerseyNumber = o.data.jersey;
-        const playerImage = o.data.image || generateDefaultImage(jerseyNumber);
-
-        const label = document.createElement("label");
-        label.htmlFor = o.ref.id;
-        label.textContent = "Checkbox Label";
-
-        return `
-      <tr class="table-expand-row-content">
-          <td><img src="${playerImage}" alt="Player Image" class="playerImage"></td> 
-          <td>${o.data.name}</td>
-          <td>${o.data.age}</td>
-          <td>${o.data.position}</td>
-          <td>${jerseyNumber} <span class="expand-icon"></span></td>
-          <td><input type="checkbox" class="delete-checkbox" data-id="${id}"></td>
-      </tr>`;
+      players["data"].forEach(player => {
+        const playerCard = document.createElement("div");
+        playerCard.className = "player card";
+        playerCard.innerHTML = `
+          <div class="pic">
+            <img src="${player.data.image || generateDefaultImage(player.data.jersey)}" alt="Player Image">
+          </div>
+          <div class="info">
+            <div class="name">${player.data.name}</div>
+            <div class="position">${player.data.position}</div>
+            <div class="team">${player.data.team}</div> <!-- Assuming you have team data -->
+          </div>
+          <div class="jersey">
+            <div class="number">#${player.data.jersey}</div>
+          </div>
+        `;
+        playersContainer.appendChild(playerCard);
       });
-      tableBody.innerHTML = htmlText.join("");
 
     } else {
       document.querySelector("#add-new-btn").style.display = "none";
