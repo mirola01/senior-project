@@ -36,7 +36,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectedFormation = this.value;
     document.getElementById('starting_11').className = selectedFormation;
     updateFormation(selectedFormation);
-    makePlayersDraggable();
     wc_team.dragDrap.init();
   });
 
@@ -541,7 +540,6 @@ async function clearLineup() {
     div.draggable = true;
   });
 
-  makePlayersDraggable();
   wc_team.dragDrap.init();
 }
 
