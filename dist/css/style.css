@@ -1187,12 +1187,6 @@ body {
   font-family: 'Lato', sans-serif;
 }
 
-.players {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height: fit-content;
-}
 
 .player.card {
   background: #fff;
@@ -1203,7 +1197,7 @@ body {
   transition: transform 0.3s ease-in-out;
   height: fit-content;
   flex-direction: row;
-  padding: 5px;
+  padding: 6px;
 }
 
 .player.card:hover {
@@ -1229,13 +1223,6 @@ body {
   color: #555;
 }
 
-.player .jersey {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f4f4f4;
-  padding: 10px;
-}
 
 .player .jersey .number {
   font-size: 1.5rem;
@@ -1266,8 +1253,15 @@ div.content {
 }
 .players {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: row;
   align-items: center;
+  max-height: 600px;
+  overflow-y: auto;
+  width: 80%;
+  overflow-x: hidden;
+  padding: inherit;
 }
 .card {
   background: #fff;
@@ -1297,20 +1291,23 @@ div.content {
   justify-content: center;
   align-items: center;
   margin-left: 7px;
+  width: 7%;
+  place-self: center;
 }
 .player .pic img {
-  width: 115px;
+  width: 78px;
   height: 80px;
   border-radius: 50%;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   background: #e8eaec;
 }
 .player .jersey {
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   flex-grow: 2;
-  width: 100px;
+  display: flex;
+  background-color: #f4f4f4;
+  width: 22px;
+  margin-right: 20px;
 }
 .player .jersey .number {
   font-family: Bevan;
@@ -1347,6 +1344,16 @@ div.content {
 
 
 .pic {
-    width: fit-content;
+    width: auto;
     height: fit-content;
+}
+.extra {
+  flex-direction: row-reverse;
+}
+
+.delete {
+  width: auto;
+  height: auto;
+  align-self: center;
+  margin-right: 8px;
 }
