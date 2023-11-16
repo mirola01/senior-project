@@ -492,10 +492,10 @@ button#btn-logout {
   display: flex;
 }
 select#playerPosition {place-self: center;margin-left: 10px;}
-
+ /*
 .card-container {
   display: none;
-  /* display: grid; */
+  display: grid; 
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   margin-top: 10%;
@@ -508,7 +508,7 @@ select#playerPosition {place-self: center;margin-left: 10px;}
   padding: 8px;
   max-height: 20vh;
   text-overflow: ellipsis;
-}
+}*/
 ul.bottom-nav {
   height: 25%;
 }
