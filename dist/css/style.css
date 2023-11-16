@@ -1394,3 +1394,9 @@ div.content {
 .player-container:hover .player-name {
   display: block;
 }
+
+.grid-container {
+  position: absolute;
+  width: auto;
+  margin: 15px;
+}
