@@ -30,13 +30,13 @@ let formationId;
  */
 document.addEventListener("DOMContentLoaded", function () {
   renderPlayers();
-  wc_team.dragDrap.init();
   loadFormationFromFaunaDB();
 
   document.getElementById('formationSelector').addEventListener('change', function () {
     const selectedFormation = this.value;
     document.getElementById('starting_11').className = selectedFormation;
     updateFormation(selectedFormation);
+    makePlayersDraggable();
     wc_team.dragDrap.init();
   });
 
@@ -96,6 +96,8 @@ function displayFormations(formationData) {
     matchingOption.selected = true;
     document.getElementById('starting_11').className = formationName;
     renderPositions(players); // Call renderPositions here with the actual formation data
+    makePlayersDraggable();
+    wc_team.dragDrap.init();
   }
 }
 
@@ -128,6 +130,7 @@ wc_team.dragDrap = (function () {
   };
 
   const dragStart = (e) => {
+    if (!e.target.draggable) return;
     dragSrc = e;
     e.dataTransfer.setData("text/html", e.target.outerHTML);
     e.dataTransfer.effectAllowed = "copy";
@@ -512,6 +515,22 @@ async function updateLineup() {
       console.error('Error:', err);
     }
   }
+}
+/**
+ * Makes player divs draggable if they are not in the starting_11 formation.
+ */
+function makePlayersDraggable() {
+  // Select all player divs
+  const playerDivs = document.querySelectorAll('.positions div');
+
+  // Loop through each player div
+  playerDivs.forEach(div => {
+    // Check if the player is not in the starting_11
+    const isInStarting11 = document.querySelector(`#starting_11 [data-player="${div.dataset.player}"]`);
+    
+    // Set draggable to true only if the player is not in starting_11
+    div.draggable = !isInStarting11;
+  });
 }
 
 
