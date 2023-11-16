@@ -364,7 +364,6 @@ function createPlayerElement(playerData) {
   const divPlayer = document.createElement('div');
   divPlayer.setAttribute('data-player', playerData.name);
   divPlayer.draggable = false; // Player in the formation should not be draggable
-  console.log("playerData", playerData)
   const img = document.createElement('img');
   img.src = playerData.image || generateDefaultImage(playerData.jersey);
   img.alt = playerData.name;
@@ -380,12 +379,9 @@ function createPlayerElement(playerData) {
  */
 function getPlayerByName(playerName) {
   const playerNameNormalized = playerName.trim().toLowerCase();
-    console.log("PlayerNormalized", playerNameNormalized)
     for (const group in positionsObject) {
-        console.log("PlayerNormalized", playerNameNormalized)
         // Find the player in the current group
         const player = positionsObject[group].find(p => p.data.name.trim().toLowerCase() === playerNameNormalized);
-        console.log("player", player)
         // If a player is found, return it immediately
         if (player) {
             return player;
@@ -497,7 +493,6 @@ async function updateLineup() {
           playersInFormation[position][index] = playerName;
         }
       });
-      console.log("Formation", playersInFormation)
 
       let data = await client.query(
         q.Update(q.Ref(q.Collection('Formation'), formationId), {
@@ -510,7 +505,6 @@ async function updateLineup() {
         })
       );
 
-      console.log("Formation", data);
     } catch (err) {
       console.error('Error:', err);
     }
