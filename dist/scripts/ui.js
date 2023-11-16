@@ -142,14 +142,17 @@ function generateDefaultImage(jerseyNumber) {
   return dataURL;
 }
 
-const delete_btn = document.querySelector('#delete-btn');
-/**
- * Global click event listener that checks if the clicked element is a delete checkbox.
- * If so, it prompts the user for confirmation and proceeds to delete the player if confirmed.
- */
-delete_btn.addEventListener('click', async function (e) {
-    const playerId = e.target.getAttribute('data-id');
-    if (confirm('Are you sure you want to delete this player?')) {
-      await delete_player(playerId);
-    }
+document.addEventListener('DOMContentLoaded', function () {
+  const delete_btn = document.querySelector('#delete-btn');
+
+  if (delete_btn) {
+      delete_btn.addEventListener('click', async function (e) {
+          const playerId = e.target.getAttribute('data-id');
+          if (confirm('Are you sure you want to delete this player?')) {
+              await delete_player(playerId);
+          }
+      });
+  } else {
+      console.log('Delete button not found. Skipping event listener setup.');
+  }
 });
