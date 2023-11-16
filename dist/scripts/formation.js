@@ -341,6 +341,7 @@ function renderPositions(formationData) {
           const playerDiv = document.querySelector(`div[data-player="${playerName}"]`);
           if (playerDiv) {
             playerDiv.setAttribute('draggable', 'false');
+            console.log(`Player ${playerName} set to not draggable.`);
           }
         }
       } else {
