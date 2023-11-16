@@ -247,16 +247,16 @@ async function renderPlayers() {
       }
     });
     const sectionElement = document.querySelector('section');
-    Object.keys(positions).forEach((key) => {
+    Object.keys(positionsObject).forEach((key) => {
       const div = document.createElement('div');
       div.className = 'positions menu';
       div.innerHTML = `<a>${key.toUpperCase()}</a>`;
-  
+
       const ul = document.createElement('ul');
       ul.className = 'scrollable-menu'; // Add a class for styling
       ul.setAttribute('data-pos', key);
-  
-      positions[key].forEach((player) => {
+
+      positionsObject[key].forEach((player) => {
         const li = document.createElement('li');
         const divPlayer = document.createElement('div');
         divPlayer.className = 'player-container'; // Add a class for styling
@@ -280,6 +280,7 @@ async function renderPlayers() {
       div.appendChild(ul);
       sectionElement.appendChild(div);
     });
+    wc_team.dragDrap.init();
   }
 }
 /**
