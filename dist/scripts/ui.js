@@ -63,11 +63,18 @@ export async function updateUI() {
           <div class="info">
             <div class="name">${player.data.name}</div>
             <div class="position">${player.data.position}</div>
-            <div class="team">${player.data.team}</div> <!-- Assuming you have team data -->
+            <div class="logo"><img src="images/logo-icon.png" alt="Logo Image"></div> 
           </div>
-          <div class="jersey">
-            <div class="number">#${player.data.jersey}</div>
+          
+          <div class="extra">
+            <div class="delete">
+              <i class="fas fa-trash"></i>
+            </div>
+            <div class="jersey">
+              <div class="number">#${player.data.jersey}</div>
+            </div>
           </div>
+
         `;
         playersContainer.appendChild(playerCard);
       });
@@ -134,3 +141,15 @@ function generateDefaultImage(jerseyNumber) {
 
   return dataURL;
 }
+
+const delete_btn = document.querySelector('#delete-btn');
+/**
+ * Global click event listener that checks if the clicked element is a delete checkbox.
+ * If so, it prompts the user for confirmation and proceeds to delete the player if confirmed.
+ */
+delete_btn.addEventListener('click', async function (e) {
+    const playerId = e.target.getAttribute('data-id');
+    if (confirm('Are you sure you want to delete this player?')) {
+      await delete_player(playerId);
+    }
+});
