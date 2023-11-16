@@ -30,6 +30,7 @@ let formationId;
  */
 document.addEventListener("DOMContentLoaded", function () {
   renderPlayers();
+  wc_team.dragDrap.init();
   loadFormationFromFaunaDB();
 
   document.getElementById('formationSelector').addEventListener('change', function () {
@@ -281,7 +282,6 @@ async function renderPlayers() {
       div.appendChild(ul);
       sectionElement.appendChild(div);
     });
-    wc_team.dragDrap.init();
   }
 }
 /**
@@ -437,6 +437,7 @@ function updateFormation(formation) {
     li.draggable = true;
     forwards.appendChild(li);
   }
+  wc_team.dragDrap.init();
 }
 
 /**
