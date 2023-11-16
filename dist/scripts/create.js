@@ -198,7 +198,7 @@ function makePlayersDraggable() {
   });
 }
 
-async function renderPositions() {
+function renderPositions() {
   console.log("renderPositions triggered");
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
@@ -248,32 +248,37 @@ async function renderPositions() {
       const div = document.createElement('div');
       div.className = 'positions menu';
       div.innerHTML = `<a>${key.toUpperCase()}</a>`;
-  
+
       const ul = document.createElement('ul');
-      ul.className = 'scrollable-menu'; // Add a class for styling
       ul.setAttribute('data-pos', key);
-  
+
       positions[key].forEach((player) => {
+        console.log("key", key, positions[key]);
         const li = document.createElement('li');
+        const ul2 = document.createElement('ul');
         const divPlayer = document.createElement('div');
-        divPlayer.className = 'player-container'; // Add a class for styling
         divPlayer.setAttribute('draggable', 'true');
         divPlayer.setAttribute('data-player', player.data.name);
-  
+
         const img = document.createElement('img');
-        img.setAttribute('src', player.data.image || generateDefaultImage(player.data.jersey));
         img.setAttribute('draggable', 'false');
-  
+        const jerseyNumber = player.data.jersey;
+        const playerImage = player.data.image || generateDefaultImage(jerseyNumber);
+        img.setAttribute('src', playerImage);
+
         const p = document.createElement('p');
-        p.className = 'player-name'; // Add a class for styling
         p.textContent = player.data.name;
-  
+        ul2.style.display = "flex";
+        ul2.style.flexDirection = "column";
+        li.style.alignItems = "center";
+
         divPlayer.appendChild(img);
-        divPlayer.appendChild(p); // Append p inside divPlayer
         li.appendChild(divPlayer);
-        ul.appendChild(li);
+        ul2.appendChild(li);
+        ul2.appendChild(p);
+        ul.appendChild(ul2);
       });
-  
+
       div.appendChild(ul);
       sectionElement.appendChild(div);
     });
