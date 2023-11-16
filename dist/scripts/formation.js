@@ -379,6 +379,8 @@ function getPlayerByName(playerName) {
         console.log("player", player)
         // If a player is found, return it immediately
         if (player) {
+            const playerDiv = document.getElementById('starting_11').querySelector(`div[data-player="${playerName}"]`);
+            playerDiv.setAttribute('draggable', 'false');
             return player;
         }
     }
