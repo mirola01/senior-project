@@ -675,14 +675,10 @@ div#\34 -3-3 {
 .player {
   transition: all 0.2s;
   position: absolute;
-  height: 88px;
   width: 65px;
-  padding-bottom: 23px;
-  z-index: 9;
   /* left: 50%; */
   transform-style: preserve-3d;
   transition: all 0.2s;
-  cursor: pointer;
 }
 
 .player__placeholder {
@@ -1193,8 +1189,9 @@ body {
 
 .players {
   display: flex;
-  justify-content: center;
-  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  height: fit-content;
 }
 
 .player.card {
@@ -1202,10 +1199,11 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin: 10px;
-  overflow: hidden;
-  width: 70%; /* You can adjust this based on your preference */
+  width: 75%; /* You can adjust this based on your preference */
   transition: transform 0.3s ease-in-out;
-  height: 300px;
+  height: fit-content;
+  flex-direction: row;
+  padding: 5px;
 }
 
 .player.card:hover {
@@ -1220,7 +1218,6 @@ body {
 }
 
 .player .info {
-  padding: 15px;
 }
 
 .player .info .name {
@@ -1299,10 +1296,11 @@ div.content {
   flex-grow: 1;
   justify-content: center;
   align-items: center;
+  margin-left: 7px;
 }
 .player .pic img {
-  width: 120px;
-  height: 99px;
+  width: 115px;
+  height: 80px;
   border-radius: 50%;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   background: #e8eaec;
@@ -1316,7 +1314,7 @@ div.content {
 }
 .player .jersey .number {
   font-family: Bevan;
-  font-size: 64px;
+  font-size: 47px;
   z-index: 5;
 }
 .player .jersey span {
@@ -1329,6 +1327,8 @@ div.content {
   flex-direction: column;
   align-items: flex-start;
   flex-grow: 4;
+  height:fit-content;
+  vertical-align: middle;
 }
 .player .info .name {
   font-weight: 700;
