@@ -84,11 +84,9 @@ async function fetchFormation(token, formationId) {
  * @param {Object} formationData - The data object containing details of the formation.
  */
 function displayFormations(formationData) {
-  console.log("formationData", formationData)
   const formationTitle = formationData.data.name;
   const formationName = formationData.data.formation;
   const players = formationData.data.players;
-  console.log("formationName", formationName)
   const formationSelector = document.getElementById('formationSelector');
 
   // Find the option with the matching value
