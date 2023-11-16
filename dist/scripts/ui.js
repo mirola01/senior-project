@@ -53,6 +53,8 @@ export async function updateUI() {
       console.log("token+userId", token, decodedJWT["sub"])
       players = await players.json();
       const playersContainer = document.querySelector('.players');
+      // Clear existing content in the container
+      playersContainer.innerHTML = '';
       players["data"].forEach(player => {
         const playerCard = document.createElement("div");
         playerCard.className = "player card";
