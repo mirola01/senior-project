@@ -1366,7 +1366,7 @@ div.content {
 
 .player-container {
   position: relative;
-  display: inline-block;
+  display: table-cell;
   margin: 10px;
 }
 
@@ -1385,7 +1385,10 @@ div.content {
   color: white;
   padding: 5px;
   border-radius: 5px; /* Optional for rounded corners */
-  white-space: nowrap;
+  font-size: 8px;
+  white-space: initial;
+  text-align: center;
+  width: 40px;
 }
 
 .player-container:hover .player-name {
