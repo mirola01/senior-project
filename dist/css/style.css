@@ -1262,6 +1262,7 @@ div.content {
   width: 80%;
   overflow-x: hidden;
   padding: inherit;
+  align-self: center;
 }
 .card {
   background: #fff;

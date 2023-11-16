@@ -336,6 +336,12 @@ function renderPositions(formationData) {
           position.appendChild(playerElement);
           position.className = "selected";
           position.style.opacity = 1;
+
+          // Make player non-draggable if they are in the starting 11
+          const playerDiv = document.querySelector(`div[data-player="${playerName}"]`);
+          if (playerDiv) {
+            playerDiv.setAttribute('draggable', 'false');
+          }
         }
       } else {
         // Clear any existing content if the player is "NO_PLAYER"
@@ -379,8 +385,6 @@ function getPlayerByName(playerName) {
         console.log("player", player)
         // If a player is found, return it immediately
         if (player) {
-            const playerDiv = document.getElementById('starting_11').querySelector(`div[data-player="${playerName}"]`);
-            playerDiv.setAttribute('draggable', 'false');
             return player;
         }
     }
