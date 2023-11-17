@@ -84,7 +84,7 @@ export const getFaunaKey = () => {
  */
 export const login = async () => {
     await auth0.loginWithRedirect({
-        redirect_uri: window.location.origin + '/player-database.html'
+        redirect_uri: window.location.origin + '/dashboard.html'
     });
 };
 
