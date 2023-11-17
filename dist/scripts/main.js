@@ -32,7 +32,7 @@ window.onload = async () => {
       console.log("Authentificated");
       // Use replaceState to redirect the user away and remove the querystring parameters
       window.history.replaceState({}, document.title, "/dashboard.html");
-      dashboard()
+      dashboard();
     }
 
   } catch (e) {
