@@ -23,8 +23,8 @@ const client = new faunadb.Client({
  * DOMContentLoaded event listener to fetch and display formations
  * based on the authenticated user's role after the DOM is fully loaded.
  */
-document.addEventListener('DOMContentLoaded', async function() {
-    console.log("1", accessToken)
+
+export async function initializeDashboard() {
     if (accessToken) {
         console.log("access", decodedJWT)
         let token = await client.query(q.CurrentToken());
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             // Handle other roles if needed
         }
     }
-});
+}
 
 /**
  * Fetches formations from FaunaDB based on the owner's token.
