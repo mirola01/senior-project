@@ -23,7 +23,9 @@ window.onload = async () => {
       // Process the login state
       await auth0.handleRedirectCallback();
       Auth.setAuth0(auth0);
+      console.log("auth0",auth0)
       const accessToken = await auth0.getTokenSilently();
+      console.log("accesstoken", accessToken)
       Auth.setToken(accessToken);
       console.log("Authentificated");
 
