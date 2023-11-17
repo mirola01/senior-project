@@ -24,7 +24,8 @@ window.onload = async () => {
       await auth0.handleRedirectCallback();
       Auth.setAuth0(auth0);
       const accessToken = await auth0.getTokenSilently();
-      Auth.setToken(accessToken);
+      const decodedJWT = jwt_decode(accessToken);
+      Auth.setToken(decodedJWT);
       console.log("Authentificated");
 
       // Use replaceState to redirect the user away and remove the querystring parameters
