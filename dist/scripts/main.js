@@ -20,24 +20,31 @@ window.onload = async () => {
     await Auth.configureClient();
     const auth0 = Auth.getAuth0();
     const query = window.location.search;
+
     if (query.includes("code=") && query.includes("state=")) {
       // Process the login state
       await auth0.handleRedirectCallback();
       Auth.setAuth0(auth0);
-      console.log("auth0",auth0)
+      console.log("auth0", auth0);
       const accessToken = await auth0.getTokenSilently();
-      console.log("accesstoken", accessToken)
+      console.log("accesstoken", accessToken);
       Auth.setToken(accessToken);
-      console.log("Authentificated");
+      console.log("Authenticated");
+
       // Use replaceState to redirect the user away and remove the querystring parameters
       window.history.replaceState({}, document.title, "/dashboard.html");
     }
-    dashboard.initializeDashboard();
+
+    // Check if the current page is 'dashboard.html'
+    if (window.location.pathname.endsWith('dashboard.html')) {
+      dashboard.initializeDashboard();
+    }
 
   } catch (e) {
     console.error("Initialization failed:", e);
   }
 };
+
 
 
 /**
