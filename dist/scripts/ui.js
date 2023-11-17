@@ -13,6 +13,8 @@ var q = faunadb.query;
  * If authenticated, it fetches the player data and populates the UI accordingly.
  * It also conditionally displays UI elements like the 'Add New' button based on the user role.
  */
+window.onload = updateUI;
+
 export async function updateUI() {
   const accessToken = localStorage.getItem("accessToken");
   if (accessToken) {
