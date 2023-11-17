@@ -22,6 +22,7 @@ const client = new faunadb.Client({
  */
 
 export async function initializeDashboard() {
+    console.log("1")
     const accessToken = localStorage.getItem("accessToken");
 
     if (accessToken) {
@@ -33,7 +34,7 @@ export async function initializeDashboard() {
         let user_role = decodedJWT["https://db.fauna.com/roles"][0];
 
         if (user_role === "user" || user_role === undefined) {
-            fetchFormations(token).then(formations => {  // Pass the token here
+            fetchFormations(token, decodedJWT).then(formations => {  // Pass the token here
                 displayFormations(formations);
             });
     }} catch (error) {
@@ -52,7 +53,7 @@ export async function initializeDashboard() {
  * @param {string} token - The FaunaDB access token for the current user.
  * @returns {Promise<Object>} A promise that resolves with the formations data.
  */
-async function fetchFormations(token) {  
+async function fetchFormations(token, decodedJWT) {  
     let formations = await fetch("/.netlify/functions/formations_by_owner", {
         method: "POST",
         headers: {
