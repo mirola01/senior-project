@@ -279,6 +279,11 @@ async function renderPositions() {
     });
     wc_team.dragDrap.init();
   }
+  else {
+    console.log("No access token found.");
+    window.location.href = 'https://lineup-manager.netlify.app/';
+    return; 
+    }
 }
 /**
  * Generates a default image for a player using their jersey number.

@@ -110,8 +110,10 @@ export async function updateUI() {
 
     }
   } else {
-    console.log("not auth");
-  }
+    console.log("No access token found.");
+    window.location.href = 'https://lineup-manager.netlify.app/';
+    return; 
+    }
 }
 
 /**

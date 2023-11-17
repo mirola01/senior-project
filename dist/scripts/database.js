@@ -87,6 +87,11 @@ export const new_player = async () => {
           console.error('No image file selected.');
       }
   }
+  else {
+    console.log("No access token found.");
+    window.location.href = 'https://lineup-manager.netlify.app/';
+    return; 
+    }
 };
 /**
  * Asynchronously deletes a player record from the FaunaDB 'Players' collection by a given player ID.
