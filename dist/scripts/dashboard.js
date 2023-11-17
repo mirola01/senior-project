@@ -75,6 +75,7 @@ async function fetchFormations(token, decodedJWT) {
 function displayFormations(response) {
     const formations = response.data;  // Access the "data" property of the response
     const formationsList = document.getElementById('formationsList');
+    formationsList.innerHTML = '';
     formations.forEach(formation => {
         const formationDiv = document.createElement('div');
         formationDiv.className = 'large-4 medium-4 cell formation-preview';
