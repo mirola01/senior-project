@@ -5,6 +5,8 @@
 
 // Module imports
 import * as Auth from "./auth.js";
+import * as dashboard from "./dashboard.js";
+
 
 // Global variable for Auth0 client
 let auth0Client = null;
@@ -29,6 +31,7 @@ window.onload = async () => {
       console.log("Authentificated");
       // Use replaceState to redirect the user away and remove the querystring parameters
       window.history.replaceState({}, document.title, "/dashboard.html");
+      dashboard.initializeDashboard();
     }
 
   } catch (e) {
