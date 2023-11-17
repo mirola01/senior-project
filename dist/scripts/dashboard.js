@@ -24,6 +24,7 @@ const client = new faunadb.Client({
 export async function initializeDashboard() {
     console.log("1")
     const accessToken = localStorage.getItem("accessToken");
+    
 
     if (accessToken) {
     try {
@@ -43,7 +44,8 @@ export async function initializeDashboard() {
     }
     } else {
     console.log("No access token found.");
-    // Handle the absence of a token (e.g., redirect to login)
+    window.location.href = 'https://lineup-manager.netlify.app/';
+    return; 
     }
 }
 
