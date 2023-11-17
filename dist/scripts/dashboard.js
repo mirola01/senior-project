@@ -8,9 +8,6 @@ import * as Auth from "./auth.js";
 var faunadb = window.faunadb;
 var q = faunadb.query;
 
-// Global variables initialization using authenticated user's information
-const accessToken = localStorage.getItem("accessToken");
-const decodedJWT = jwt_decode(accessToken);
 const fauna_key = Auth.getFaunaKey();
 const client = new faunadb.Client({
   secret: fauna_key,
@@ -25,8 +22,11 @@ const client = new faunadb.Client({
  */
 
 export async function initializeDashboard() {
+    const accessToken = localStorage.getItem("accessToken");
+
     if (accessToken) {
-        console.log("access", decodedJWT)
+    try {
+        const decodedJWT = jwt_decode(accessToken);
         let token = await client.query(q.CurrentToken());
         token = token.value.id;
 
@@ -36,9 +36,13 @@ export async function initializeDashboard() {
             fetchFormations(token).then(formations => {  // Pass the token here
                 displayFormations(formations);
             });
-        } else {
-            // Handle other roles if needed
-        }
+    }} catch (error) {
+        console.error("Error decoding token:", error);
+        // Handle decoding errors (e.g., malformed token)
+    }
+    } else {
+    console.log("No access token found.");
+    // Handle the absence of a token (e.g., redirect to login)
     }
 }
 
