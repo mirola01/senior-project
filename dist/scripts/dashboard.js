@@ -25,7 +25,7 @@ const client = new faunadb.Client({
  */
 document.addEventListener('DOMContentLoaded', async function() {
     if (accessToken) {
-        const decodedJWT = jwt_decode(accessToken);
+        console.log("access", decodedJWT)
         let token = await client.query(q.CurrentToken());
         token = token.value.id;
 
