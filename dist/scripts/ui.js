@@ -60,7 +60,7 @@ export async function updateUI() {
       playersContainer.innerHTML = '';
       players["data"].forEach(player => {
         console.log("This is player", player);
-        console.log("This is player ref", player.ref)
+        console.log("This is player ref", player.ref["@ref"].id);
         const playerCard = document.createElement("div");
         playerCard.className = "player card";
         playerCard.innerHTML = `
@@ -75,7 +75,7 @@ export async function updateUI() {
           
           <div class="extra">
             <div class="delete">
-              <i class="fas fa-trash" onclick="deletePlayer('${player.ref}')"></i>
+              <i class="fas fa-trash" onclick="deletePlayer('${player.ref["@ref"].id}')"></i>
             </div>
             <div class="jersey">
               <div class="number">#${player.data.jersey}</div>
