@@ -98,6 +98,7 @@ export const logout = () => {
     if (final_auth_str) {
         const final_auth = JSON.parse(final_auth_str);
         if (final_auth && final_auth.logout) {
+            localStorage.clear();
             final_auth.logout({
                 returnTo: 'https://lineup-manager.netlify.app'
             });
