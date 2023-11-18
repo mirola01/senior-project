@@ -154,7 +154,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   playersContainer.addEventListener('click', function (e) {
       // Check if a delete icon was clicked
+      console.log("Delete hit")
       if (e.target.classList.contains('fa-trash')) {
+          console.log("in went in the if")
           // Get the closest player card and extract its data-id attribute
           const playerCard = e.target.closest('.player');
           const playerId = playerCard.getAttribute('data-id');
