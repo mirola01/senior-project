@@ -4,6 +4,7 @@
  * and player information. It also includes a utility function to generate default player images.
  */
 import * as Auth from "./auth.js";
+import { delete_player } from './database.js';
 
 var faunadb = window.faunadb;
 var q = faunadb.query;
@@ -148,12 +149,19 @@ function generateDefaultImage(jerseyNumber) {
   return dataURL;
 }
 
-document.querySelector('.players').addEventListener('click', function(e) {
-  if (e.target.closest('.delete')) {
-      const playerId = e.target.closest('.player').getAttribute('data-id');
-      if (playerId && confirm('Are you sure you want to delete this player?')) {
-          delete_player(playerId);
-      }
-  }
-});
+document.addEventListener('DOMContentLoaded', function () {
+  const playersContainer = document.querySelector('.players');
 
+  playersContainer.addEventListener('click', function (e) {
+      // Check if a delete icon was clicked
+      if (e.target.classList.contains('fa-trash')) {
+          // Get the closest player card and extract its data-id attribute
+          const playerCard = e.target.closest('.player');
+          const playerId = playerCard.getAttribute('data-id');
+
+          if (playerId && confirm('Are you sure you want to delete this player?')) {
+              delete_player(playerId);
+          }
+      }
+  });
+});
