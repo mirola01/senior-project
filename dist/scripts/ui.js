@@ -148,17 +148,12 @@ function generateDefaultImage(jerseyNumber) {
   return dataURL;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  const delete_btn = document.querySelector('#delete-btn');
-
-  if (delete_btn) {
-      delete_btn.addEventListener('click', async function (e) {
-          const playerId = e.target.getAttribute('data-id');
-          if (confirm('Are you sure you want to delete this player?')) {
-              await delete_player(playerId);
-          }
-      });
-  } else {
-      console.log('Delete button not found. Skipping event listener setup.');
+document.querySelector('.players').addEventListener('click', function(e) {
+  if (e.target.closest('.delete')) {
+      const playerId = e.target.closest('.player').getAttribute('data-id');
+      if (playerId && confirm('Are you sure you want to delete this player?')) {
+          delete_player(playerId);
+      }
   }
 });
+
