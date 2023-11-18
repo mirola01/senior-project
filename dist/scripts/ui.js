@@ -59,8 +59,6 @@ export async function updateUI() {
       // Clear existing content in the container
       playersContainer.innerHTML = '';
       players["data"].forEach(player => {
-        console.log("This is player", player);
-        console.log("This is player ref", player.ref["@ref"].id);
         const playerCard = document.createElement("div");
         playerCard.className = "player card";
         playerCard.innerHTML = `
@@ -152,8 +150,6 @@ function generateDefaultImage(jerseyNumber) {
 }
 
 window.deletePlayer = function(event) {
-  console.log("Event target:", event.target);
-    const playerId = event.target.getAttribute('data-id');
     console.log("Attempting to delete player with ID:", playerId);
     if (confirm('Are you sure you want to delete this player?')) {
         delete_player(playerId);
