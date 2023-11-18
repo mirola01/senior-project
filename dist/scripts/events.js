@@ -5,18 +5,6 @@
 
 import { new_player, delete_player } from './database.js';
 
-/**
- * Global click event listener that checks if the clicked element is a delete checkbox.
- * If so, it prompts the user for confirmation and proceeds to delete the player if confirmed.
- */
-document.addEventListener('click', async function (e) {
-    if (e.target && e.target.classList.contains('delete-checkbox')) {
-      const playerId = e.target.getAttribute('data-id');
-      if (confirm('Are you sure you want to delete this player?')) {
-        await delete_player(playerId);
-      }
-    }
-});
 
 /**
  * Attaches a click event listener to the 'Add Player' button, if it exists.
