@@ -149,9 +149,10 @@ function generateDefaultImage(jerseyNumber) {
   return dataURL;
 }
 
-window.deletePlayer = function(playerId) {
-  console.log("1")
-  if (confirm('Are you sure you want to delete this player?')) {
-      delete_player(playerId); // Assuming delete_player is your function to handle deletion
-  }
+window.deletePlayer = function(event) {
+    const playerId = event.target.getAttribute('data-id');
+    console.log("Attempting to delete player with ID:", playerId);
+    if (confirm('Are you sure you want to delete this player?')) {
+        delete_player(playerId);
+    }
 };
