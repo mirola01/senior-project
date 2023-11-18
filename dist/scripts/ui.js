@@ -4,7 +4,7 @@
  * and player information. It also includes a utility function to generate default player images.
  */
 import * as Auth from "./auth.js";
-import { delete_player } from './database.js';
+import { delete_player, new_player } from './database.js';
 
 var faunadb = window.faunadb;
 var q = faunadb.query;
@@ -155,3 +155,11 @@ window.deletePlayer = function(playerId) {
         delete_player(playerId);
     }
 };
+/**
+ * Attaches a click event listener to the 'Add Player' button, if it exists.
+ * When clicked, it triggers the `new_player` function to add a new player.
+ */
+const add_btn = document.querySelector('#add-player');
+if (add_btn) { // Check if the button actually exists
+  add_btn.addEventListener('click', new_player);
+}

@@ -32,11 +32,11 @@ window.onload = async () => {
       console.log("Authenticated");
 
       // Use replaceState to redirect the user away and remove the querystring parameters
-      window.history.replaceState({}, document.title, "/dashboard.html");
+      window.history.replaceState({}, document.title, "/dashboard");
     }
 
     // Check if the current page is 'dashboard.html'
-    if (window.location.pathname.endsWith('dashboard.html')) {
+    if (window.location.pathname.endsWith('dashboard')) {
       dashboard.initializeDashboard();
     }
 
