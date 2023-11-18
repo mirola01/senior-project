@@ -59,6 +59,8 @@ export async function updateUI() {
       // Clear existing content in the container
       playersContainer.innerHTML = '';
       players["data"].forEach(player => {
+        console.log("This is player", player);
+        console.log("This is player ref", player.ref)
         const playerCard = document.createElement("div");
         playerCard.className = "player card";
         playerCard.innerHTML = `
@@ -73,7 +75,7 @@ export async function updateUI() {
           
           <div class="extra">
             <div class="delete">
-              <i class="fas fa-trash" onclick="deletePlayer('${player.data.id}')"></i>
+              <i class="fas fa-trash" onclick="deletePlayer('${player.ref}')"></i>
             </div>
             <div class="jersey">
               <div class="number">#${player.data.jersey}</div>
@@ -150,6 +152,7 @@ function generateDefaultImage(jerseyNumber) {
 }
 
 window.deletePlayer = function(event) {
+  console.log("Event target:", event.target);
     const playerId = event.target.getAttribute('data-id');
     console.log("Attempting to delete player with ID:", playerId);
     if (confirm('Are you sure you want to delete this player?')) {
