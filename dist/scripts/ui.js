@@ -73,7 +73,7 @@ export async function updateUI() {
           
           <div class="extra">
             <div class="delete">
-              <i class="fas fa-trash"></i>
+              <i class="fas fa-trash" onclick="deletePlayer('${player.data.id}')"></i>
             </div>
             <div class="jersey">
               <div class="number">#${player.data.jersey}</div>
@@ -149,19 +149,9 @@ function generateDefaultImage(jerseyNumber) {
   return dataURL;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-  const playersContainer = document.querySelector('.players');
+function deletePlayer(playerId) {
+  if (confirm('Are you sure you want to delete this player?')) {
+      delete_player(playerId); // Assuming delete_player is your function to handle deletion
+  }
+}
 
-  playersContainer.addEventListener('click', function (e) {
-      // Check if the click event is within an element with the 'delete' class
-      if (e.target.closest('.delete')) {
-          // Find the closest player card and get its data-id attribute
-          const playerCard = e.target.closest('.player');
-          const playerId = playerCard.getAttribute('data-id');
-
-          if (playerId && confirm('Are you sure you want to delete this player?')) {
-              delete_player(playerId);
-          }
-      }
-  });
-});
