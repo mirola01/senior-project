@@ -153,12 +153,9 @@ document.addEventListener('DOMContentLoaded', function () {
   const playersContainer = document.querySelector('.players');
 
   playersContainer.addEventListener('click', function (e) {
-      // Log the actual clicked element for debugging
-      console.log('Clicked element:', e.target);
-
-      // Check if a delete icon or its parent was clicked
+      // Check if the click event is within an element with the 'delete' class
       if (e.target.closest('.delete')) {
-          console.log("inside if")
+          // Find the closest player card and get its data-id attribute
           const playerCard = e.target.closest('.player');
           const playerId = playerCard.getAttribute('data-id');
 
