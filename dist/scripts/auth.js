@@ -94,11 +94,14 @@ export const login = async () => {
  * logout();
  */
 export const logout = () => {
-    const final_auth = window.localStorage.getItem("final_auth");
-    if (final_auth) {
-        final_auth.logout({
-            returnTo: 'https://lineup-manager.netlify.app'
-        });
+    const final_auth_str = window.localStorage.getItem("final_auth");
+    if (final_auth_str) {
+        const final_auth = JSON.parse(final_auth_str);
+        if (final_auth && final_auth.logout) {
+            final_auth.logout({
+                returnTo: 'https://lineup-manager.netlify.app'
+            });
+        }
     }
     auth0.logout({
         returnTo: 'https://lineup-manager.netlify.app'
