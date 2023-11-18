@@ -96,7 +96,7 @@ export const login = async () => {
 export const logout = () => {
     const final_auth_str = window.localStorage.getItem("final_auth");
     console.log(final_auth_str)
-    if (final_auth_str) {
+    if (final_auth_str !== "") {
         const final_auth = JSON.parse(final_auth_str);
         if (final_auth && final_auth.logout) {
             window.localStorage.clear();
