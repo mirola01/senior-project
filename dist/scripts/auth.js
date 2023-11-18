@@ -105,6 +105,7 @@ export const logout = () => {
             });
         }
     }
+    window.localStorage.clear();
     auth0.logout({
         returnTo: 'https://lineup-manager.netlify.app'
     });
