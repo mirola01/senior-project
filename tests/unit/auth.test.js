@@ -1,5 +1,18 @@
 const { configureClient } = require('…/…/dist/scripts/auth'); // Import the relevant functions
 
+const user = {
+  email: "lmirorodrigo@gmai.com",
+  email_verified: true,
+  sub: "google-oauth2|102291571763260774886",
+};
+
+const adminUser = {
+  email: "mirola01@luther.edu",
+  email_verified: true,
+  sub: "google-oauth2|376153054506909769",
+  "https:/db.fauna.com/roles": ["admin", "writer_admin"],
+};
+
 // Mocking the fetch function
 global.fetch = jest.fn(() =>
   Promise.resolve({

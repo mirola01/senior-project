@@ -24,8 +24,6 @@ const client = new faunadb.Client({
 export async function initializeDashboard() {
     console.log("1")
     const accessToken = localStorage.getItem("accessToken");
-    
-
     if (accessToken) {
     try {
         const decodedJWT = jwt_decode(accessToken);
