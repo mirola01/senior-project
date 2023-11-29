@@ -172,7 +172,7 @@ img {
 }
 
 .lineup-controls {
-  margin-top: -85px;
+  margin-top: -176px;
   height: 10%;
   width: 46%;
 }
@@ -846,8 +846,7 @@ div#\34 -3-3 {
 
 /* ==================== */
 .sec-pos {
-  width: 50%;
-  margin-left: auto;
+  width: auto;
   background: #ccc;
   padding: 0 10px 0 10px;
   border-radius: 5px;
@@ -873,7 +872,7 @@ div#\34 -3-3 {
 .sec-pos ul li {
   width: 40px;
   height: 40px;
-  margin: 10px;
+  margin: 8px;
   background: #eee;
   border-radius: 100px;
   overflow: hidden;
@@ -1417,17 +1416,20 @@ div.content {
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 5px;
+  height: auto;
   background-color: #f9f9f9;
 }
 
 .notes-section h3 {
   margin-bottom: 10px;
   color: #004aad;
+  height: fit-content;
+  font-size: larger;
 }
 
 #gameNotes {
   width: 100%;
-  height: 150px;
+  height: 67px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -1451,4 +1453,12 @@ div.content {
 
 .save-lineup:hover {
     background-color: #003580;
+}
+.side {
+  width: 50%;
+  margin-left: auto;
+}
+
+.positions a {
+  padding: 4px;
 }
