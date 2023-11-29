@@ -1,6 +1,7 @@
 /**
  * @fileoverview This module provides utilities for Auth0 authentication and FaunaDB integration.
  */
+import { createAuth0Client } from '@auth0/auth0-spa-js';
 
 // Initialize Auth0 client as null
 let auth0 = null;

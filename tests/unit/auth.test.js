@@ -1,49 +1,36 @@
-const { configureClient } = require('…/…/dist/scripts/auth'); // Import the relevant functions
+const { configureClient, setToken, getFaunaKey } = require('../../dist/scripts/auth');
 
-const user = {
-  email: "lmirorodrigo@gmai.com",
-  email_verified: true,
-  sub: "google-oauth2|102291571763260774886",
-};
+describe('Auth Module Tests', () => {
+    beforeEach(() => {
+        // Clear mock calls before each test
+        localStorage.getItem.mockClear();
+        localStorage.setItem.mockClear();
 
-const adminUser = {
-  email: "mirola01@luther.edu",
-  email_verified: true,
-  sub: "google-oauth2|376153054506909769",
-  "https:/db.fauna.com/roles": ["admin", "writer_admin"],
-};
+        // Mock fetch response
+        fetch.mockResolvedValue({
+            json: () => Promise.resolve({
+                domain: "dev-n84gx3uanib6ojpf.us.auth0.com",
+                client_id: "Xe6t07ETgQBkSvipbSCCFRbxaBmeDMEC",
+                audience: "https://db.fauna.com/db/ywhfa3yj6yyr1",
+                fauna_key: "fnAFOF01yxAASegxSMrTHFl72bpUPsUmoW9aNNO7"
+            })
+        });
+    });
 
-// Mocking the fetch function
-global.fetch = jest.fn(() =>
-  Promise.resolve({
-    json: () => Promise.resolve({
-      domain: "dev-n84gx3uanib6ojpf.us.auth0.com",
-      client_id: "Xe6t07ETgQBkSvipbSCCFRbxaBmeDMEC",
-      audience: "https://db.fauna.com/db/ywhfa3yj6yyr1",
-      fauna_key: "fnAFOF01yxAASegxSMrTHFl72bpUPsUmoW9aNNO7"
-    })
-  })
-);
+    test('configureClient sets up Auth0 client correctly', async () => {
+        await configureClient();
+        expect(fetch).toHaveBeenCalled();
+        expect(localStorage.setItem).toHaveBeenCalledWith("fauna_key", "fnAFOF01yxAASegxSMrTHFl72bpUPsUmoW9aNNO7");
+    });
 
-// Mocking localStorage
-global.localStorage = {
-  setItem: jest.fn(),
-  getItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
-};
+    test('setToken and getFaunaKey work correctly', () => {
+        const token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjFwdDJJZlM5SllPZ1pvdVRHOUdRTCJ9...";
+        setToken(token);
+        expect(localStorage.setItem).toHaveBeenCalledWith("accessToken", token);
 
-describe('Auth Module', () => {
-  beforeEach(() => {
-    fetch.mockClear();
-    localStorage.clear();
-  });
+        localStorage.getItem.mockReturnValue(token); // Ensure getItem returns the mock token
 
-  it('configures client correctly', async () => {
-    await configureClient();
-    expect(localStorage.setItem).toHaveBeenCalledWith("fauna_key", "fnAFOF01yxAASegxSMrTHFl72bpUPsUmoW9aNNO7");
-    // ... other assertions for auth0 client initialization
-  });
-
-  // ... other tests
+        const retrievedToken = getFaunaKey();
+        expect(retrievedToken).toBe(token);
+    });
 });

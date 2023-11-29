@@ -371,13 +371,14 @@ async function saveLineup() {
       }
     });
     console.log("Formation", playersInFormation)
-
+    const notes = document.getElementById('gameNotes').value;
     let data = await client.query(
         q.Create(q.Collection('Formation'), {
           data: {
             name: document.querySelector('.titleFormation').textContent,
             formation: selectedFormation,
             players: playersInFormation, // Saving the players in each position
+            notes: notes,
             owner: decodedJWT['sub']
           }
         })

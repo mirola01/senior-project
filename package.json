@@ -22,6 +22,8 @@
   },
   "homepage": "https://github.com/auth0-blog/FaunaDB-Auth0-demo#readme",
   "dependencies": {
+    "@auth0/auth0-spa-js": "^2.1.2",
+    "auth0-spa-js": "^1.6.5",
     "aws-sdk": "^2.1493.0",
     "axios": "^0.24.0",
     "cors": "^2.8.5",
@@ -40,7 +42,10 @@
     "node": "v18.16.0"
   },
   "jest": {
-    "testEnvironment": "jsdom"
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ]
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
