@@ -520,6 +520,8 @@ ul.bottom-nav {
 
 .grid-container {
   margin: 1%;
+  position: absolute;
+  width: auto;
 }
 .tactical-guide {
   width: 99%;
@@ -1402,11 +1404,6 @@ div.content {
   display: block;
 }
 
-.grid-container {
-  position: absolute;
-  width: auto;
-  margin: 15px;
-}
 .callout.formation-callout h3 {
   color: white;
 }
