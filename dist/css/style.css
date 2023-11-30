@@ -518,10 +518,13 @@ ul.bottom-nav {
   height: 47% !important;
 }
 
-
+.grid-container {
+  margin: 1%;
+}
 .tactical-guide {
   width: 99%;
-  height: 100%;
+  height: auto;
+  background-color: white;
   padding: 2%;
   align-items: center;
 }
