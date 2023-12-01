@@ -72,9 +72,13 @@
   display: none;
   transition: top 0.5s;
 }
+
 .page-menu a:hover p, .page-menu a:hover i {
-  color: #D8E4F4;
+  background-color: #D8E4F4; /* Background color */
+  padding: 10px; /* Add padding to create space around the text/icon */
+  border-radius: 5px; /* Optional: to create rounded corners for the box */
 }
+
 
 
 .page-menu:hover .active{
