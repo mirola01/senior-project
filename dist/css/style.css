@@ -1418,11 +1418,11 @@ div.content {
 }
 
 .callout.formation-callout h3 {
-  color: #004aad;
+  color: #14679e;
 }
 
 .callout.formation-callout p {
-  color: #004aad;
+  color: #14679e;
 }
 .notes-section {
   margin-top: 20px;
@@ -1476,7 +1476,7 @@ div.content {
   padding: 4px;
 }
 .card-actions {
-  border-top: 1px solid #004aad;
+  border-top: 1px solid #14679e;
   display: flex;
   -webkit-box-pack: justify;
   align-content: center;
@@ -1485,7 +1485,7 @@ div.content {
   width: 100%;
   cursor: pointer;
 }
-.card-actions i {margin-top: 6px;color: #004aad;border: 2px solid transparent;padding: 4px;transition: transform 0.3s ease;width: 30px;}
+.card-actions i {margin-top: 6px;color: #14679e;border: 2px solid transparent;padding: 4px;transition: transform 0.3s ease;width: 30px;}
 .card-actions i:hover {
 background: #fefffe70;
 border: 2px solid #fefffe70;
