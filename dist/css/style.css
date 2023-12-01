@@ -1177,7 +1177,7 @@ h1 {
   left: 0;
   right: 0;
   bottom: 0;
-  background: url('images/logo-icon.png') no-repeat center center;
+  background: url('../images/logo-icon.png') no-repeat center center;
   background-size: cover; /* Adjust as needed */
   opacity: 0.5; /* 50% transparency */
   z-index: -1; /* Place it behind the content */
