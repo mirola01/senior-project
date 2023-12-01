@@ -69,16 +69,17 @@
         <h1>Add a Player</h1>
       </div>
       <div class="input-container ic1">
-        <input id="playerName" class="input" type="text" placeholder="Name" />
+        <input id="playerName" class="input" type="text" placeholder="Name" required />
         <div class="cut"></div>
       </div>
       <div class="input-container ic2">
-        <input id="playerAge" class="input" type="number" min="1" max="100" placeholder="Age" />
+        <input id="playerAge" class="input" type="number" min="1" max="100" placeholder="Age" required />
         <div class="cut"></div>
       </div>
       <div class="input-container ic3">
         <label for="playerPosition">Choose a position:</label>
-        <select id="playerPosition" name="playerPosition">
+        <select id="playerPosition" name="playerPosition" required>
+          <option value="">Select a position</option>
           <option value="Goalkeeper">Goalkeeper</option>
           <option value="Defender">Defender</option>
           <option value="Midfield">Midfield</option>
@@ -86,19 +87,19 @@
         </select>
         <div class="cut"></div>
       </div>
-
+    
       <div class="input-container ic4">
-        <input id="playerJersey" class="input" type="number" min="1" max="99" placeholder="Jersey Number" />
+        <input id="playerJersey" class="input" type="number" min="1" max="99" placeholder="Jersey Number" required />
         <div class="cut"></div>
       </div>
-
+    
       <div class="input-container ic5">
         <label for="playerImage">Upload an image:</label>
-        <input id="playerImage" type="file" accept="image/*">
+        <input id="playerImage" type="file" accept="image/*" required>
         <div class="cut"></div>
       </div>
       <button type="submit" class="submit" id="add-player">submit</button>
-    </div>
+    </div>    
     <div class="container">
       <div class="topbar">
         <div id="search-bar">
