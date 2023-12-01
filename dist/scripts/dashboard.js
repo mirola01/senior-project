@@ -81,13 +81,13 @@ function displayFormations(response) {
       const formationDiv = document.createElement('div');
       formationDiv.className = 'large-4 medium-4 cell formation-preview';
       formationDiv.innerHTML = `
-        <div class="callout formation-callout" data-formation-id="${formation.ref['@ref'].id}">
+        <div class="callout formation-callout" data-formation-id="${formation.ref['@ref'].id}" style="background-image: url('images/logo-icon.png');">
             <a href="formation.html?id=${formation.ref['@ref'].id}"><h3>${formation.data.name.trim()}</h3></a>
             <p>${formation.data.formation}</p>
             <div class="card-actions">
                 <i class="fa fa-eye"></i>
                 <i class="fa fa-edit"></i>
-                <i class="fa fa-trash" onclick="deleteFormation('${formation.ref['@ref'].id}')></i>
+                <i class="fa fa-trash" onclick="deleteFormation('${formation.ref['@ref'].id}')"></i>
             </div>
         </div>
       `;
@@ -95,8 +95,6 @@ function displayFormations(response) {
       formationsList.appendChild(formationDiv);
     });
   }
-  
-
     // Add click event to each formation
     document.querySelectorAll('.formation-callout').forEach(item => {
         item.addEventListener('click', function() {
