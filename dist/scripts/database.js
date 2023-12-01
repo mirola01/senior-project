@@ -100,29 +100,48 @@ export const new_player = async () => {
  * @param {string} playerId - The unique identifier of the player to be deleted.
  */
 export const delete_player = async (playerId) => {
-  try {
-    console.log("playerid", playerId)
-    const fauna_key = Auth.getFaunaKey();
-    var client = new faunadb.Client({
-      secret: fauna_key,
-      domain: 'db.us.fauna.com',
-      port: 443,
-      scheme: 'https'
-    });
-    
-
-      /**
-       * Delete the player from the FaunaDB collection
-       */
-      await client.query(
-        q.Delete(q.Ref(q.Collection("Players"), playerId))
-      );
-
-      // Optionally, display a success message or perform any other necessary actions
-      console.log(`Player with ID ${playerId} deleted successfully.`);
-      window.location.reload();
+    try {
+        console.log("playerid", playerId)
+        const fauna_key = Auth.getFaunaKey();
+        var client = new faunadb.Client({
+        secret: fauna_key,
+        domain: 'db.us.fauna.com',
+        port: 443,
+        scheme: 'https'
+        });
+        /**
+        * Delete the player from the FaunaDB collection
+        */
+        await client.query(
+            q.Delete(q.Ref(q.Collection("Players"), playerId))
+        );
+        // Optionally, display a success message or perform any other necessary actions
+        console.log(`Player with ID ${playerId} deleted successfully.`);
+        window.location.reload();
     }
    catch (error) {
     console.error('Error deleting player:', error);
   }
+};
+
+export const deleteFormation = async (formationId) => {
+    try {
+        console.log("playerid", playerId)
+        const fauna_key = Auth.getFaunaKey();
+        var client = new faunadb.Client({
+        secret: fauna_key,
+        domain: 'db.us.fauna.com',
+        port: 443,
+        scheme: 'https'
+        });
+        await client.query(
+            q.Delete(q.Ref(q.Collection("Formations"), formationId))
+        );
+        // Optionally, display a success message or perform any other necessary actions
+        console.log(`Formation with ID ${formationId} deleted successfully.`);
+        window.location.reload();
+  }
+ catch (error) {
+  console.error('Error deleting player:', error);
+}
 };

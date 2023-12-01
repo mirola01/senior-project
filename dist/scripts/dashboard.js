@@ -73,22 +73,25 @@ async function fetchFormations(token, decodedJWT) {
  * @param {Object} response - The response object containing formations data.
  */
 function displayFormations(response) {
-    const formations = response.data;  // Access the "data" property of the response
+    const formations = response.data;
     const formationsList = document.getElementById('formationsList');
     formationsList.innerHTML = '';
+  
     formations.forEach(formation => {
-        const formationDiv = document.createElement('div');
-        formationDiv.className = 'large-4 medium-4 cell formation-preview';
-        formationDiv.innerHTML = `
-    <div class="callout formation-callout" data-formation-id="${formation.ref['@ref'].id}">
-        <a href="formation.html?id=${formation.ref['@ref'].id}"><h3>${formation.data.name.trim()}</h3></a>
-        <p>${formation.data.formation}</p>
-        <!-- Add more fields as needed -->
-    </div>
-`;
-
-        formationsList.appendChild(formationDiv);
+      const formationDiv = document.createElement('div');
+      formationDiv.className = 'large-4 medium-4 cell formation-preview';
+      formationDiv.innerHTML = `
+        <div class="callout formation-callout" data-formation-id="${formation.ref['@ref'].id}">
+            <a href="formation.html?id=${formation.ref['@ref'].id}"><h3>${formation.data.name.trim()}</h3></a>
+            <p>${formation.data.formation}</p>
+            <span class="delete-formation-icon" onclick="deleteFormation('${formation.ref['@ref'].id}')">X</span>
+        </div>
+      `;
+  
+      formationsList.appendChild(formationDiv);
     });
+  }
+  
 
     // Add click event to each formation
     document.querySelectorAll('.formation-callout').forEach(item => {
@@ -118,3 +121,11 @@ function showFormationDetails(formationId) {
         })
         .catch(error => console.error('Error fetching formation details:', error.message));
 }
+
+document.querySelectorAll('.delete-formation-icon').forEach(item => {
+    item.addEventListener('click', function() {
+      const formationId = this.closest('.formation-callout').getAttribute('data-formation-id');
+      deleteFormation(formationId); // Function to be implemented
+    });
+  });
+  

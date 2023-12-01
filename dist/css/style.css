@@ -1465,3 +1465,10 @@ div.content {
 .positions a {
   padding: 4px;
 }
+.formation-callout:hover .delete-formation-icon {
+  display: inline;
+}
+.delete-formation-icon {
+  cursor: pointer;
+  /* Add more styling as needed */
+}

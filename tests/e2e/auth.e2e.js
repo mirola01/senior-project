@@ -59,11 +59,6 @@ describe('UI Module Tests', () => {
 
         await updateUI();
 
-        // Test if certain elements are displayed or hidden based on the role
-        // ... Add your assertions here
-
-        // Test if player data is rendered correctly
-        // ... Add your assertions here
     });
 
     // Add more tests for different roles, unauthenticated state, etc.
