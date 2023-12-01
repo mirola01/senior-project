@@ -100,7 +100,7 @@ function displayFormations(response) {
             showFormationDetails(formationId);
         });
     });
-}
+
 
 /**
  * Fetches and displays the details of a specific formation when a formation preview is clicked.
