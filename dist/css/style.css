@@ -1167,7 +1167,20 @@ h1 {
   background-color: white;
   border-color: #1779ba;
   align-items: center;
+  position: relative;
   box-shadow: 0 2px 6px 0, 0 24px 20px -34px;
+}
+.callout.formation-callout::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('images/logo-icon.png') no-repeat center center;
+  background-size: cover; /* Adjust as needed */
+  opacity: 0.5; /* 50% transparency */
+  z-index: -1; /* Place it behind the content */
 }
 
 input.delete-checkbox {
@@ -1408,11 +1421,11 @@ div.content {
 }
 
 .callout.formation-callout h3 {
-  color: white;
+  color: #004aad;
 }
 
 .callout.formation-callout p {
-  color: white;
+  color: #004aad;
 }
 .notes-section {
   margin-top: 20px;
@@ -1466,7 +1479,7 @@ div.content {
   padding: 4px;
 }
 .card-actions {
-  border-top: 1px solid white;
+  border-top: 1px solid #004aad;
   display: flex;
   -webkit-box-pack: justify;
   align-content: center;
@@ -1475,14 +1488,7 @@ div.content {
   width: 100%;
   cursor: pointer;
 }
-.card-actions i {
-margin-top: 6px;
-color: white;
-border: 2px solid transparent;
-padding: 4px;
-transition: transform 0.3s ease;
-width: 30px;
-}
+.card-actions i {margin-top: 6px;color: #004aad;border: 2px solid transparent;padding: 4px;transition: transform 0.3s ease;width: 30px;}
 .card-actions i:hover {
 background: #fefffe70;
 border: 2px solid #fefffe70;
