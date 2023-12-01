@@ -84,7 +84,11 @@ function displayFormations(response) {
         <div class="callout formation-callout" data-formation-id="${formation.ref['@ref'].id}">
             <a href="formation.html?id=${formation.ref['@ref'].id}"><h3>${formation.data.name.trim()}</h3></a>
             <p>${formation.data.formation}</p>
-            <span class="delete-formation-icon" onclick="deleteFormation('${formation.ref['@ref'].id}')">X</span>
+            <div class="card-actions">
+                <i class="fa fa-eye"></i>
+                <i class="fa fa-edit"></i>
+                <i class="fa fa-trash" onclick="deleteFormation('${formation.ref['@ref'].id}')></i>
+            </div>
         </div>
       `;
   
