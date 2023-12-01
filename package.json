@@ -42,10 +42,11 @@
     "node": "v18.16.0"
   },
   "jest": {
-    "testEnvironment": "jsdom",
+    "preset": "jest-playwright-preset",
     "setupFilesAfterEnv": [
       "<rootDir>/jest.setup.js"
-    ]
+    ],
+    "testEnvironment": "jest-playwright-preset/lib/PlaywrightEnvironment.js"
   },
   "devDependencies": {
     "@babel/core": "^7.23.0",
@@ -54,9 +55,11 @@
     "docdash": "^2.0.2",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "jest-playwright-preset": "^4.0.0",
     "jsdoc": "^4.0.2",
     "jsdoc-babel": "^0.5.0",
     "nodemon": "^3.0.1",
+    "playwright": "^1.40.1",
     "sinon": "^16.1.0"
   }
 }
