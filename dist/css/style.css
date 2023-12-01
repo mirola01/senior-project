@@ -1465,3 +1465,27 @@ div.content {
 .positions a {
   padding: 4px;
 }
+.card-actions {
+  border-top: 1px solid white;
+  display: flex;
+  -webkit-box-pack: justify;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  cursor: pointer;
+}
+.card-actions i {
+margin-top: 6px;
+color: white;
+border: 2px solid transparent;
+padding: 4px;
+transition: transform 0.3s ease;
+width: 30px;
+}
+.card-actions i:hover {
+background: #fefffe70;
+border: 2px solid #fefffe70;
+border-radius: 4px;
+transform: scale(1.1); /* Scale the icon up to 110% of its original size */
+}
