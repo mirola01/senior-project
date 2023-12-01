@@ -1165,10 +1165,8 @@ h1 {
   width: auto;
   height: auto;
   background-color: white;
-  border-color: #1779ba;
-  align-items: center;
   position: relative;
-  box-shadow: 0 2px 6px 0, 0 24px 20px -34px;
+  box-shadow: 0 2px 6px 0, 0 22px 23px -41px;
 }
 .callout.formation-callout::after {
   content: '';
@@ -1176,10 +1174,10 @@ h1 {
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: 1px;
   background: url('../images/logo-icon.png') no-repeat center center;
   background-size: cover; /* Adjust as needed */
-  opacity: 0.5; /* 50% transparency */
+  opacity: 0.8; /* 50% transparency */
   z-index: -1; /* Place it behind the content */
 }
 
