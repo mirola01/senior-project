@@ -418,18 +418,39 @@ async function clearLineup() {
 function downloadPitchSnapshot() {
   const element = document.querySelector('.pitch'); // Select the element with the 'pitch' class
 
-  html2canvas(element).then(canvas => {
-    const imageURL = canvas.toDataURL('image/png');
-    const downloadLink = document.createElement('a');
-    downloadLink.href = imageURL;
-    downloadLink.download = "PitchSnapshot.png"; // Name of the file to be downloaded
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
+  // Options for html2canvas
+  const options = {
+      useCORS: true, // Allow loading of images from external domains
+      logging: true, // Enable logging for debugging
+      onclone: (clonedDoc) => {
+          // Manipulate the cloned document before rendering
+          const imgs = clonedDoc.querySelectorAll('img');
+          imgs.forEach(img => {
+              // Update the src attribute to the full URL (if it's hosted on AWS)
+              if (img.src.includes("aws.com")) {
+                  const fullUrl = img.src;
+                  img.setAttribute('src', fullUrl);
+              }
+          });
+      }
+  };
+
+  html2canvas(element, options).then(canvas => {
+      const imageURL = canvas.toDataURL('image/png');
+      const downloadLink = document.createElement('a');
+      downloadLink.href = imageURL;
+      downloadLink.download = "PitchSnapshot.png"; // Name of the file to be downloaded
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
   }).catch(error => {
-    console.error('Error capturing the canvas:', error);
+      console.error('Error capturing the canvas:', error);
   });
 }
+
+// Add this function to a button's event listener
+document.querySelector('.download-snapshot').addEventListener('click', downloadPitchSnapshot);
+
 
 // Add this function to a button's event listener
 document.querySelector('.download-snapshot').addEventListener('click', downloadPitchSnapshot);
