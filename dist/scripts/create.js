@@ -420,12 +420,12 @@ function downloadLineupSnapshot() {
 
   html2canvas(element).then(canvas => {
     // Create an image from the canvas
-    const imageURL = canvas.toDataURL('image/png');
+    const imageURL = canvas.toDataURL('image/jpg');
 
     // Create a temporary link to trigger the download
     const downloadLink = document.createElement('a');
     downloadLink.href = imageURL;
-    downloadLink.download = "SoccerLineupSnapshot.png"; // Name of the file to be downloaded
+    downloadLink.download = "SoccerLineupSnapshot.jpg"; // Name of the file to be downloaded
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
