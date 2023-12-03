@@ -415,27 +415,24 @@ async function clearLineup() {
   makePlayersDraggable();
   wc_team.dragDrap.init();
 }
-function downloadLineupSnapshot() {
-  const element = document.getElementById('starting_11'); // The element containing the lineup
+function downloadPitchSnapshot() {
+  const element = document.querySelector('.pitch'); // Select the element with the 'pitch' class
 
   html2canvas(element).then(canvas => {
-    // Create an image from the canvas
-    const imageURL = canvas.toDataURL('image/jpg');
-
-    // Create a temporary link to trigger the download
+    const imageURL = canvas.toDataURL('image/png');
     const downloadLink = document.createElement('a');
     downloadLink.href = imageURL;
-    downloadLink.download = "SoccerLineupSnapshot.jpg"; // Name of the file to be downloaded
+    downloadLink.download = "PitchSnapshot.png"; // Name of the file to be downloaded
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
   }).catch(error => {
     console.error('Error capturing the canvas:', error);
-});
+  });
 }
 
 // Add this function to a button's event listener
-document.querySelector('.download-snapshot').addEventListener('click', downloadLineupSnapshot);
+document.querySelector('.download-snapshot').addEventListener('click', downloadPitchSnapshot);
 
 
 // Event listener for the 'Save Lineup' and 'Clear Lineup' buttons.
