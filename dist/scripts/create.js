@@ -429,7 +429,9 @@ function downloadLineupSnapshot() {
     document.body.appendChild(downloadLink);
     downloadLink.click();
     document.body.removeChild(downloadLink);
-  });
+  }).catch(error => {
+    console.error('Error capturing the canvas:', error);
+});
 }
 
 // Add this function to a button's event listener
