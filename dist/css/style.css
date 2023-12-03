@@ -182,7 +182,8 @@ img {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: auto;
+  width: 29%;
+  font-size: smaller;
 }
 
 .lineup-controls button:hover {
@@ -1460,9 +1461,7 @@ div.content {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: smaller;
 }
 
 .save-lineup:hover {
