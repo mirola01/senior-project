@@ -17,7 +17,7 @@ exports.handler = async function(event) {
         let page = await browser.newPage();
 
         // Navigate to the specified URL
-        await page.goto('YOUR_WEBPAGE_URL');
+        await page.goto('https://lineup-manager.netlify.app/create');
 
         // Wait for the pitch element to load
         await page.waitForSelector('.pitch');
