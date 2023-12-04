@@ -417,22 +417,23 @@ async function clearLineup() {
 }
 
 function downloadPitchSnapshot() {
-    var element = document.querySelector('.pitch'); // The element you want to capture
-    var canvas = document.createElement('canvas');
+  var element = document.querySelector('.pitch');
+  var canvas = document.createElement('canvas');
 
-    rasterizeHTML.drawHTML(element.innerHTML, canvas)
-        .then(function (renderResult) {
-            var imageURL = canvas.toDataURL('image/png');
-            var downloadLink = document.createElement('a');
-            downloadLink.href = imageURL;
-            downloadLink.download = "PitchSnapshot.png"; // Set the filename for the downloaded image
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-        })
-        .catch(function (error) {
-            console.error('Error capturing the canvas:', error);
-        });
+  // Using the outer HTML of the pitch element
+  rasterizeHTML.drawHTML(element.outerHTML, canvas)
+      .then(function (renderResult) {
+          var imageURL = canvas.toDataURL('image/png');
+          var downloadLink = document.createElement('a');
+          downloadLink.href = imageURL;
+          downloadLink.download = "PitchSnapshot.png"; // Filename for the downloaded image
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+      })
+      .catch(function (error) {
+          console.error('Error capturing the canvas:', error);
+      });
 }
 
 // Attach this function to the button responsible for downloading the snapshot
