@@ -5,7 +5,6 @@
  */
 
 import * as Auth from "./auth.js";
-var rasterizeHTML = require('rasterizehtml');
 var faunadb = window.faunadb;
 var q = faunadb.query;
 
