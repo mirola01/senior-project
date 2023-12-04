@@ -417,26 +417,8 @@ async function clearLineup() {
 }
 function downloadPitchSnapshot() {
   const element = document.querySelector('.pitch'); // Select the element with the 'pitch' class
-
-  // Options for html2canvas
-  const options = {
-      useCORS: true, // Allow loading of images from external domains
-      logging: true, // Enable logging for debugging
-      allowTaint : true,
-      onclone: (clonedDoc) => {
-          // Manipulate the cloned document before rendering
-          const imgs = clonedDoc.querySelectorAll('img');
-          imgs.forEach(img => {
-              // Update the src attribute to the full URL (if it's hosted on AWS)
-              if (img.src.includes("aws.com")) {
-                  const fullUrl = img.src;
-                  img.setAttribute('src', fullUrl);
-              }
-          });
-      }
-  };
-
-  html2canvas(element, options).then(canvas => {
+  html2canvas(element, {allowTaint: true,
+    useCORS: true}).then(canvas => {
       const imageURL = canvas.toDataURL('image/png');
       const downloadLink = document.createElement('a');
       downloadLink.href = imageURL;
