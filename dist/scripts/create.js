@@ -435,7 +435,7 @@ function preloadImagesAndSnapshot() {
       img.src = images[i].src;
   }
 }
-document.getElementById('download-lineup').addEventListener('click', async function() {
+document.getElementById('download-snapshot').addEventListener('click', async function() {
   try {
       const response = await fetch('/.netlify/functions/downloadPitch', {
           method: 'GET', // or 'POST' if applicable
