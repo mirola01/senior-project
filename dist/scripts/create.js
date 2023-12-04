@@ -5,6 +5,7 @@
  */
 
 import * as Auth from "./auth.js";
+var rasterizeHTML = require('rasterizehtml');
 var faunadb = window.faunadb;
 var q = faunadb.query;
 
@@ -415,36 +416,28 @@ async function clearLineup() {
   makePlayersDraggable();
   wc_team.dragDrap.init();
 }
+
 function downloadPitchSnapshot() {
-  const element = document.querySelector('.pitch'); // The element representing the pitch
+    var element = document.querySelector('.pitch'); // The element you want to capture
+    var canvas = document.createElement('canvas');
 
-  // Update the source of all images to the Base64 strings stored in local storage
-  const images = element.querySelectorAll('img');
-  images.forEach(img => {
-    const storedImage = localStorage.getItem('image_' + img.id); // Retrieve the stored image using a unique key
-    if (storedImage) {
-      img.src = storedImage; // Update the src attribute to the locally stored image
-    }
-  });
-
-  // Use html2canvas to take a snapshot of the pitch
-  html2canvas(element).then(canvas => {
-    const imageURL = canvas.toDataURL('image/png');
-    const downloadLink = document.createElement('a');
-    downloadLink.href = imageURL;
-    downloadLink.download = "PitchSnapshot.png"; // Set the filename for the downloaded image
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  }).catch(error => {
-    console.error('Error capturing the canvas:', error);
-  });
+    rasterizeHTML.drawHTML(element.innerHTML, canvas)
+        .then(function (renderResult) {
+            var imageURL = canvas.toDataURL('image/png');
+            var downloadLink = document.createElement('a');
+            downloadLink.href = imageURL;
+            downloadLink.download = "PitchSnapshot.png"; // Set the filename for the downloaded image
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        })
+        .catch(function (error) {
+            console.error('Error capturing the canvas:', error);
+        });
 }
 
 // Attach this function to the button responsible for downloading the snapshot
 document.querySelector('.download-snapshot').addEventListener('click', downloadPitchSnapshot);
-
-
 
 // Event listener for the 'Save Lineup' and 'Clear Lineup' buttons.
 document.querySelector('.save-lineup').addEventListener('click', saveLineup);
