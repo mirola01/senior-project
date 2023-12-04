@@ -415,20 +415,42 @@ async function clearLineup() {
   makePlayersDraggable();
   wc_team.dragDrap.init();
 }
-function downloadPitchSnapshot() {
-  var element = document.querySelector('.pitch'); // The element you want to capture
-  var rect = element.getBoundingClientRect(); // Gets the size of the element and its position relative to the viewport
+function preloadImagesAndSnapshot() {
+  var element = document.querySelector('.pitch');
+  var images = element.getElementsByTagName('img');
+  var imagesToLoad = images.length;
+  var loadedImages = 0;
 
+  function imageLoaded() {
+      loadedImages++;
+      if (loadedImages === imagesToLoad) {
+          takeSnapshot();
+      }
+  }
+
+  for (var i = 0; i < imagesToLoad; i++) {
+      var img = new Image();
+      img.onload = imageLoaded;
+      img.onerror = imageLoaded; // In case some images fail to load, we still proceed with the snapshot.
+      img.src = images[i].src;
+  }
+}
+
+function takeSnapshot() {
+  var element = document.querySelector('.pitch');
   var canvas = document.createElement('canvas');
-  canvas.width = rect.width; // Set canvas width
-  canvas.height = rect.height; // Set canvas height
+  var context = canvas.getContext('2d');
+  var rect = element.getBoundingClientRect();
+
+  canvas.width = rect.width;
+  canvas.height = rect.height;
 
   rasterizeHTML.drawHTML(element.outerHTML, canvas)
       .then(function (renderResult) {
           var imageURL = canvas.toDataURL('image/png');
           var downloadLink = document.createElement('a');
           downloadLink.href = imageURL;
-          downloadLink.download = "PitchSnapshot.png"; // Set the filename for the downloaded image
+          downloadLink.download = "PitchSnapshot.png";
           document.body.appendChild(downloadLink);
           downloadLink.click();
           document.body.removeChild(downloadLink);
@@ -438,7 +460,7 @@ function downloadPitchSnapshot() {
       });
 }
 
-document.querySelector('.download-snapshot').addEventListener('click', downloadPitchSnapshot);
+document.querySelector('.download-snapshot').addEventListener('click', preloadImagesAndSnapshot);
 
 
 // Event listener for the 'Save Lineup' and 'Clear Lineup' buttons.
