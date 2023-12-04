@@ -422,6 +422,7 @@ function downloadPitchSnapshot() {
   const options = {
       useCORS: true, // Allow loading of images from external domains
       logging: true, // Enable logging for debugging
+      allowTaint : false,
       onclone: (clonedDoc) => {
           // Manipulate the cloned document before rendering
           const imgs = clonedDoc.querySelectorAll('img');
