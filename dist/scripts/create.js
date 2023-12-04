@@ -415,71 +415,24 @@ async function clearLineup() {
   makePlayersDraggable();
   wc_team.dragDrap.init();
 }
-function preloadImagesAndSnapshot() {
-  var element = document.querySelector('.pitch');
-  var images = element.getElementsByTagName('img');
-  var imagesToLoad = images.length;
-  var loadedImages = 0;
+function downloadPitchSnapshot() {
+  const element = document.querySelector('.pitch'); // Select the element with the 'pitch' class
 
-  function imageLoaded() {
-      loadedImages++;
-      if (loadedImages === imagesToLoad) {
-          takeSnapshot();
-      }
-  }
-
-  for (var i = 0; i < imagesToLoad; i++) {
-      var img = new Image();
-      img.onload = imageLoaded;
-      img.onerror = imageLoaded; // In case some images fail to load, we still proceed with the snapshot.
-      img.src = images[i].src;
-  }
-}
-function capturePitch() {
-  return new Promise((resolve, reject) => {
-      try {
-          html2canvas(document.querySelector(".pitch")).then(canvas => {
-              const base64image = canvas.toDataURL("image/png");
-              resolve(base64image);
-          });
-      } catch (error) {
-          reject(error);
-      }
+  html2canvas(element).then(canvas => {
+    const imageURL = canvas.toDataURL('image/png');
+    const downloadLink = document.createElement('a');
+    downloadLink.href = imageURL;
+    downloadLink.download = "PitchSnapshot.png"; // Name of the file to be downloaded
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  }).catch(error => {
+    console.error('Error capturing the canvas:', error);
   });
 }
 
-document.getElementById('download-snapshot').addEventListener('click', async function() {
-  try {
-      const pitchImage = await capturePitch();
-
-      const response = await fetch('/.netlify/functions/downloadPitch', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ image: pitchImage })
-      });
-
-      if (response.ok) {
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(blob);
-
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = 'pitch-snapshot.png';
-          document.body.appendChild(link);
-          link.click();
-
-          window.URL.revokeObjectURL(url);
-          document.body.removeChild(link);
-      } else {
-          console.error('Error downloading the lineup');
-      }
-  } catch (error) {
-      console.error('Error:', error);
-  }
-});
-
+// Add this function to a button's event listener
+document.querySelector('.download-snapshot').addEventListener('click', downloadPitchSnapshot);
 
 
 // Event listener for the 'Save Lineup' and 'Clear Lineup' buttons.
