@@ -416,35 +416,30 @@ async function clearLineup() {
   wc_team.dragDrap.init();
 }
 function downloadPitchSnapshot() {
-  var element = document.querySelector('.pitch');
+  var element = document.querySelector('.pitch'); // The element you want to capture
+  var rect = element.getBoundingClientRect(); // Gets the size of the element and its position relative to the viewport
+
   var canvas = document.createElement('canvas');
-  var context = canvas.getContext('2d');
+  canvas.width = rect.width; // Set canvas width
+  canvas.height = rect.height; // Set canvas height
 
-  // Get the computed style of the element
-  var pitchStyle = window.getComputedStyle(element);
-
-  // Set the canvas dimensions based on the computed style
-  canvas.width = parseInt(pitchStyle.width, 10);
-  canvas.height = parseInt(pitchStyle.height, 10);
-
-  // Now render the element onto the canvas
   rasterizeHTML.drawHTML(element.outerHTML, canvas)
-  .then(function (renderResult) {
-    var imageURL = canvas.toDataURL('image/png');
-    var downloadLink = document.createElement('a');
-    downloadLink.href = imageURL;
-    downloadLink.download = "PitchSnapshot.png"; // Filename for the downloaded image
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-})
-.catch(function (error) {
-    console.error('Error capturing the canvas:', error);
-});
+      .then(function (renderResult) {
+          var imageURL = canvas.toDataURL('image/png');
+          var downloadLink = document.createElement('a');
+          downloadLink.href = imageURL;
+          downloadLink.download = "PitchSnapshot.png"; // Set the filename for the downloaded image
+          document.body.appendChild(downloadLink);
+          downloadLink.click();
+          document.body.removeChild(downloadLink);
+      })
+      .catch(function (error) {
+          console.error('Error capturing the canvas:', error);
+      });
 }
 
-// Attach this function to the button responsible for downloading the snapshot
 document.querySelector('.download-snapshot').addEventListener('click', downloadPitchSnapshot);
+
 
 // Event listener for the 'Save Lineup' and 'Clear Lineup' buttons.
 document.querySelector('.save-lineup').addEventListener('click', saveLineup);
