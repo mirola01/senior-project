@@ -442,6 +442,9 @@ function takeSnapshot() {
   var context = canvas.getContext('2d');
   var rect = element.getBoundingClientRect();
 
+console.log(rect.width);
+console.log(rect.height);
+
   canvas.width = rect.width;
   canvas.height = rect.height;
 
