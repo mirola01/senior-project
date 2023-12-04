@@ -435,35 +435,34 @@ function preloadImagesAndSnapshot() {
       img.src = images[i].src;
   }
 }
-
-function takeSnapshot() {
-  var element = document.querySelector('.pitch');
-  var canvas = document.createElement('canvas');
-  var context = canvas.getContext('2d');
-  var rect = element.getBoundingClientRect();
-
-console.log(rect.width);
-console.log(rect.height);
-
-  canvas.width = rect.width;
-  canvas.height = rect.height;
-
-  rasterizeHTML.drawHTML(element.outerHTML, canvas)
-      .then(function (renderResult) {
-          var imageURL = canvas.toDataURL('image/png');
-          var downloadLink = document.createElement('a');
-          downloadLink.href = imageURL;
-          downloadLink.download = "PitchSnapshot.png";
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
-          document.body.removeChild(downloadLink);
-      })
-      .catch(function (error) {
-          console.error('Error capturing the canvas:', error);
+document.getElementById('download-lineup').addEventListener('click', async function() {
+  try {
+      const response = await fetch('/.netlify/functions/downloadPitch', {
+          method: 'GET', // or 'POST' if applicable
       });
-}
 
-document.querySelector('.download-snapshot').addEventListener('click', preloadImagesAndSnapshot);
+      if (response.ok) {
+          const blob = await response.blob();
+          const url = window.URL.createObjectURL(blob);
+
+          // Create a link and set the URL as the href
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = 'pitch-snapshot.png'; // or your preferred filename
+          document.body.appendChild(link);
+          link.click();
+
+          // Clean up
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(link);
+      } else {
+          console.error('Error downloading the lineup');
+      }
+  } catch (error) {
+      console.error('Error:', error);
+  }
+});
+
 
 
 // Event listener for the 'Save Lineup' and 'Clear Lineup' buttons.

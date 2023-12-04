@@ -26,6 +26,7 @@
     "auth0-spa-js": "^1.6.5",
     "aws-sdk": "^2.1493.0",
     "axios": "^0.24.0",
+    "chrome-aws-lambda": "^10.1.0",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.17.1",
@@ -36,6 +37,8 @@
     "jwt-decode": "^3.1.2",
     "passport": "^0.4.1",
     "passport-auth0": "^1.4.0",
+    "puppeteer": "^21.5.2",
+    "puppeteer-core": "^10.4.0",
     "uuid": "^9.0.1"
   },
   "engines": {
