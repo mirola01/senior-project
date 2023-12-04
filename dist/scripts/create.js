@@ -435,24 +435,41 @@ function preloadImagesAndSnapshot() {
       img.src = images[i].src;
   }
 }
+function capturePitch() {
+  return new Promise((resolve, reject) => {
+      try {
+          html2canvas(document.querySelector(".pitch")).then(canvas => {
+              const base64image = canvas.toDataURL("image/png");
+              resolve(base64image);
+          });
+      } catch (error) {
+          reject(error);
+      }
+  });
+}
+
 document.getElementById('download-snapshot').addEventListener('click', async function() {
   try {
+      const pitchImage = await capturePitch();
+
       const response = await fetch('/.netlify/functions/downloadPitch', {
-          method: 'GET', // or 'POST' if applicable
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ image: pitchImage })
       });
 
       if (response.ok) {
           const blob = await response.blob();
           const url = window.URL.createObjectURL(blob);
 
-          // Create a link and set the URL as the href
           const link = document.createElement('a');
           link.href = url;
-          link.download = 'pitch-snapshot.png'; // or your preferred filename
+          link.download = 'pitch-snapshot.png';
           document.body.appendChild(link);
           link.click();
 
-          // Clean up
           window.URL.revokeObjectURL(url);
           document.body.removeChild(link);
       } else {

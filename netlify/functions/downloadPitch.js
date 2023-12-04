@@ -1,47 +1,45 @@
-const chromium = require('chrome-aws-lambda');
-const puppeteer = require('puppeteer-core');
+const AWS = require('aws-sdk');
+const { v4: uuidv4 } = require('uuid');
 
-exports.handler = async function(event) {
-    let browser = null;
+exports.handler = async (event) => {
+    // Configure AWS SDK with your credentials
+    const s3 = new AWS.S3({
+        accessKeyId: process.env.AWS_ACCKEY,
+        secretAccessKey: process.env.AWSS
+    });
 
     try {
-        // Launch the browser
-        browser = await puppeteer.launch({
-            args: chromium.args,
-            defaultViewport: chromium.defaultViewport,
-            executablePath: await chromium.executablePath,
-            headless: chromium.headless,
-        });
+        // Parse the request body to get the Base64 encoded image
+        const body = JSON.parse(event.body);
+        const base64Image = body.image.replace(/^data:image\/\w+;base64,/, "");
+        const buffer = Buffer.from(base64Image, 'base64');
 
-        // Open a new page
-        let page = await browser.newPage();
+        // Define the key for the image to be saved in the S3 bucket
+        const imageKey = `images/${uuidv4()}.png`;
 
-        // Navigate to the specified URL
-        await page.goto('https://lineup-manager.netlify.app/create');
+        // Set up parameters for S3 upload
+        const uploadParams = {
+            Bucket: process.env.S3_BUCKET_NAME,
+            Key: imageKey,
+            Body: buffer,
+            ContentType: 'image/png',
+            ContentEncoding: 'base64' // necessary for decoding the Base64 image
+        };
 
-        // Wait for the pitch element to load
-        await page.waitForSelector('.pitch');
+        // Upload the image to S3
+        const s3Response = await s3.upload(uploadParams).promise();
 
-        // Take a screenshot of the pitch area
-        const pitchElement = await page.$('.pitch');
-        const screenshot = await pitchElement.screenshot({ encoding: 'base64' });
-
+        // Respond with the URL of the uploaded image
         return {
             statusCode: 200,
-            body: screenshot,
-            isBase64Encoded: true,
-            headers: {
-                'Content-Type': 'image/png',
-            },
+            body: JSON.stringify({ imageUrl: s3Response.Location })
         };
     } catch (error) {
+        console.error('Error in downloadPitch function:', error);
         return {
             statusCode: 500,
-            body: JSON.stringify({ error: 'Screenshot failed' }),
+            body: JSON.stringify({ error: 'An error occurred during the process' })
         };
-    } finally {
-        if (browser !== null) {
-            await browser.close();
-        }
     }
 };
+
