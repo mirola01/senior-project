@@ -415,25 +415,32 @@ async function clearLineup() {
   makePlayersDraggable();
   wc_team.dragDrap.init();
 }
-
 function downloadPitchSnapshot() {
   var element = document.querySelector('.pitch');
   var canvas = document.createElement('canvas');
+  var context = canvas.getContext('2d');
 
-  // Using the outer HTML of the pitch element
+  // Get the computed style of the element
+  var pitchStyle = window.getComputedStyle(element);
+
+  // Set the canvas dimensions based on the computed style
+  canvas.width = parseInt(pitchStyle.width, 10);
+  canvas.height = parseInt(pitchStyle.height, 10);
+
+  // Now render the element onto the canvas
   rasterizeHTML.drawHTML(element.outerHTML, canvas)
-      .then(function (renderResult) {
-          var imageURL = canvas.toDataURL('image/png');
-          var downloadLink = document.createElement('a');
-          downloadLink.href = imageURL;
-          downloadLink.download = "PitchSnapshot.png"; // Filename for the downloaded image
-          document.body.appendChild(downloadLink);
-          downloadLink.click();
-          document.body.removeChild(downloadLink);
-      })
-      .catch(function (error) {
-          console.error('Error capturing the canvas:', error);
-      });
+  .then(function (renderResult) {
+    var imageURL = canvas.toDataURL('image/png');
+    var downloadLink = document.createElement('a');
+    downloadLink.href = imageURL;
+    downloadLink.download = "PitchSnapshot.png"; // Filename for the downloaded image
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+})
+.catch(function (error) {
+    console.error('Error capturing the canvas:', error);
+});
 }
 
 // Attach this function to the button responsible for downloading the snapshot
