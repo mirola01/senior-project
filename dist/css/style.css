@@ -1175,10 +1175,6 @@ h1 {
 .callout.formation-callout::before {
   content: '';
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
   background-image: url('../images/logo-icon.png');
   background-size: cover;
   background-repeat: no-repeat;
