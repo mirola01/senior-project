@@ -39,7 +39,7 @@ export const new_player = async () => {
       });
 
       const q = faunadb.query;
-
+      const playerData = getPlayerData();
       /**
        * Upload Image to S3 and Create Player in FaunaDB
        */
@@ -67,10 +67,10 @@ export const new_player = async () => {
                       let data = await client.query(
                           q.Create(q.Collection("Players"), {
                               data: {
-                                  name: document.querySelector('#playerName').value,
-                                  age: document.querySelector('#playerAge').value,
-                                  position: document.querySelector('#playerPosition').value,
-                                  jersey: document.querySelector('#playerJersey').value,
+                                  name: document.querySelector('#playerName').value || playerData.name,
+                                  age: document.querySelector('#playerAge').value || playerData.age,
+                                  position: document.querySelector('#playerPosition').value || playerData.position,
+                                  jersey: document.querySelector('#playerJersey').value || playerData.jersey,
                                   image: result.imageUrl, // Using the returned image URL
                                   owner: decodedJWT["sub"]
                               }
@@ -166,3 +166,12 @@ export const deleteFormation = async (formationId) => {
   console.error('Error deleting player:', error);
 }
 };
+
+const getPlayerData = () => {
+    return {
+        name: "Hector",
+        age: 33,
+        position: "Defender",
+        jersey: 10
+    };
+  };
