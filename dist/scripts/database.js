@@ -3,7 +3,7 @@
  * It utilizes FaunaDB as the backend database service.
  */
 
-import * as Auth from "./auth.js";
+//import * as Auth from "./auth.js";
 let faunadb;
 if (typeof window !== "undefined") {
     // Running in a browser environment
