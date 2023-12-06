@@ -1166,7 +1166,7 @@ h1 {
 .callout.formation-callout {
   width: auto;
   height: auto;
-  background-image: url('images/logo.png');
+  background-image: url('../images/logo.png');
   background-size: cover; 
   background-repeat: no-repeat;
   background-position: center;
