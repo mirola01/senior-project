@@ -91,7 +91,21 @@ export const new_player = async () => {
               reader.readAsDataURL(file);
           }
       } else {
-          console.error('No image file selected.');
+        let data = await client.query(
+            q.Create(q.Collection("Players"), {
+                data: {
+                    name: document.querySelector('#playerName').value,
+                    age: document.querySelector('#playerAge').value,
+                    position: document.querySelector('#playerPosition').value,
+                    jersey: document.querySelector('#playerJersey').value,
+                    image: "", 
+                    owner: decodedJWT["sub"]
+                }
+            })
+        );
+
+        console.log(data);
+        window.location.reload();
       }
   }
   else {
