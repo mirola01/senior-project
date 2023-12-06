@@ -28,13 +28,13 @@
 
 .logo{
   display: block;
-  height: 120px;
-  width: 150px;
+  height: 116px;
+  width: 170px;
 }
 
 .logo-img{
-  width: 150px;
-  height: 150px;
+  width: 170px;
+  height: 170px;
 }
 
 .vertical {
@@ -43,8 +43,8 @@
 }
 
 .page-menu{
-  padding: 10px 0;
-  height: 12%;
+  padding: 19px 0;
+  height: 16%;
 }
 
 .page-menu a{
@@ -182,7 +182,8 @@ img {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  width: auto;
+  width: 29%;
+  font-size: smaller;
 }
 
 .lineup-controls button:hover {
@@ -1139,11 +1140,12 @@ button.auth-btn {
   color: #004AAD;
   text-decoration: none;
   display: flex;
-  margin-left: -7px;
 }
 i.fas.fa-sign-out-alt {
   margin-right: 0px;
-  width: 30%;
+  width: 27%;
+  vertical-align: middle;
+  text-align: left;
 }
 h1 {
   height: auto;
@@ -1460,9 +1462,7 @@ div.content {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-size: smaller;
 }
 
 .save-lineup:hover {
@@ -1492,4 +1492,14 @@ background: #fefffe70;
 border: 2px solid #fefffe70;
 border-radius: 4px;
 transform: scale(1.1); /* Scale the icon up to 110% of its original size */
+}
+
+button.auth-btn {
+    vertical-align: middle;
+    display: flex;
+    padding: .7rem 1rem;
+}
+
+ul.vertical.menu.icon-left {
+    margin-top: 30px;
 }
