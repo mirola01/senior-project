@@ -1169,18 +1169,21 @@ h1 {
   box-shadow: 0 2px 6px 0, 0 22px 23px -41px;
   width: auto;
   height: auto;
-
+  background: red; 
 }
 
 .callout.formation-callout::before {
   content: '';
   position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background-image: url('../images/logo-icon.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  opacity: 0.5; /* Adjust the opacity as needed */
-  z-index: -1; /* Position the image behind the content */
+  opacity: 0.5;
 }
 
 .callout.formation-callout::after {
