@@ -1522,3 +1522,10 @@ ul.vertical.menu.icon-left {
 a.button {
   background-color: #00439e;
 }
+input#playerImage {
+  height: auto;
+}
+
+.cut {
+  height: auto;
+}
