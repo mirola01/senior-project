@@ -4,7 +4,14 @@
  */
 
 import * as Auth from "./auth.js";
-var faunadb = window.faunadb;
+let faunadb;
+if (typeof window !== "undefined") {
+    // Running in a browser environment
+    faunadb = window.faunadb;
+  } else {
+    // Running in a non-browser environment (e.g., Node.js)
+    faunadb = require("faunadb");
+  }
 var q = faunadb.query;
 
 /**
