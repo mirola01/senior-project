@@ -1554,3 +1554,7 @@ button.download-snapshot {
     right: 3px;
     top: -2px;
 }
+.large-4.medium-4.cell.formation-preview {
+  height: auto;
+  margin-bottom: 2%;
+}
