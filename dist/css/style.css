@@ -866,23 +866,22 @@ div#\34 -3-3 {
 .sec-pos ul {
   padding: 0px;
   margin: 0px;
-  width: auto;
   clear: left;
-  display: inline-block;
+  display: inline-flex;
+   /* Aligns children (li) in a row */
+   /* Enables horizontal scrolling */
   flex-direction: row;
-  display: flex;
 }
 .sec-pos ul li {
-  width: 40px;
+  width: 40px !important;
   height: 40px;
   margin: 8px;
   background: #eee;
   border-radius: 100px;
-  overflow: hidden;
   float: left;
   box-shadow: 0px 2px 2px 0px #999;
+  overflow-y: clip;
 }
-
 .sec-pos div#fm li {
   border-radius: 5px;
   width: auto;
