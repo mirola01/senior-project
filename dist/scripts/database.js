@@ -156,7 +156,7 @@ export const deleteFormation = async (formationId) => {
         scheme: 'https'
         });
         await client.query(
-            q.Delete(q.Ref(q.Collection("Formations"), formationId))
+            q.Delete(q.Ref(q.Collection("Formation"), formationId))
         );
         // Optionally, display a success message or perform any other necessary actions
         console.log(`Formation with ID ${formationId} deleted successfully.`);
