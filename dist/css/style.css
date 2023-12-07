@@ -117,7 +117,7 @@
 .lineup {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 92%;
   padding: 1%;
   flex-wrap: wrap;
   flex-direction: row;
@@ -126,7 +126,7 @@
 
 
 .topbar h1 {
-  width: 40%;
+  width: auto;
 }
 
 .topbar-icons {
@@ -169,8 +169,8 @@ img {
 }
 
 .lineup-controls {
-  margin-top: -176px;
-  height: 10%;
+  margin-top: -153px;
+  height: 24%;
   width: 46%;
 }
 
@@ -241,10 +241,11 @@ span {
 
 .topbar {
   height: 45px;
+  width: auto;
   display: flex;
   flex-direction: row;
   align-items: center;
-  align-self: normal;
+  align-self: baseline;
   justify-content: space-around;
   margin: 1em;
 }
@@ -1485,7 +1486,10 @@ div.content {
 }
 .side {
   width: 50%;
+  height: fit-content;
   margin-left: auto;
+  display: flow;
+  margin-top: -59px;
 }
 
 .positions a {
@@ -1527,4 +1531,13 @@ input#playerImage {
 
 .cut {
   height: auto;
+}
+button.save-lineup {height: fit-content;}
+
+button.clear-lineup {
+    height: fit-content;
+}
+
+button.download-snapshot {
+    height: fit-content;
 }
