@@ -96,6 +96,14 @@ function displayFormations(response) {
   
       formationsList.appendChild(formationDiv);
     });
+    const deleteButtons = document.querySelectorAll('.fa-trash');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevents triggering parent's click event
+            const formationId = this.id;
+            deleteFormation(formationId);
+        });
+    });
   }
   
     // Add click event to each formation
@@ -127,14 +135,3 @@ function showFormationDetails(formationId) {
         .catch(error => console.error('Error fetching formation details:', error.message));
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-    const deleteButtons = document.querySelectorAll('.fa.fa-trash');
-    console.log(deleteButtons)
-    deleteButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            const formationId = this.id;
-            console.log("id" + formationId);
-            deleteFormation(formationId);
-        });
-    });
-});
