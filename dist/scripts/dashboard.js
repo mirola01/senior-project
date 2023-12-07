@@ -5,6 +5,8 @@
  */
 
 import * as Auth from "./auth.js";
+import {deleteFormation} from "./database.js";
+
 var faunadb = window.faunadb;
 var q = faunadb.query;
 
