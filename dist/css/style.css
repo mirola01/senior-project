@@ -1560,3 +1560,6 @@ button.download-snapshot {
 .page-menu p {
   align-self: center;
 }
+.grid-container {
+  width: 77%;
+}
