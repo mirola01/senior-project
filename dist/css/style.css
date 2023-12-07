@@ -1174,12 +1174,12 @@ h1 {
   position: relative;
 }
 
-
 .callout.formation-callout {
   position: relative;
-  z-index: 1; /* Ensuring this is above the background */
+  z-index: 1;
+  box-shadow: 0 2px 6px 0, 0 21px 23px -40px;
+  border-radius: 9px;
 }
-
 input.delete-checkbox {
   width: 25px;
   position: relative;
