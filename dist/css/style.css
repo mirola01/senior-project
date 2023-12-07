@@ -1174,18 +1174,6 @@ h1 {
   position: relative;
 }
 
-.background-image {
-  position: absolute;
-  top: -80px;
-  right: -5px;
-  left: 165px;
-  background-image: url(../images/logo-icon.png);
-  background-size: 119px;
-  background-repeat: no-repeat;
-  background-position: center;
-  opacity: 0.5;
-  z-index: -1; /* Behind the content but above the base layer */
-}
 
 .callout.formation-callout {
   position: relative;
