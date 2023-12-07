@@ -7,39 +7,23 @@
  * Sets up the click event handlers for the tabs.
  * When a tab is clicked, it becomes active and its associated content is displayed, while the other tabs and content are hidden.
  */
-export function setupTabs() {
-  $(".tab a").on("click", function (e) {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', () => {
+  const tabs = document.querySelectorAll('.tab a');
+  const contents = document.querySelectorAll('.tab-content > div');
 
-    $(this).parent().addClass("active-tac");
-    $(this).parent().siblings().removeClass("active-tac");
+  tabs.forEach(tab => {
+      tab.addEventListener('click', function (e) {
+          e.preventDefault();
 
-    const target = $(this).attr("href"); // Get the href attribute
+          // Toggle active class on tabs
+          tabs.forEach(t => t.parentElement.classList.remove('active-tac'));
+          tab.parentElement.classList.add('active-tac');
 
-    $(".tab-content > div").not(target).hide(); // Hide other tabs' content
-    $(target).fadeIn(600); // Fade in the clicked tab's content
+          // Hide all content divs and show the clicked one
+          const targetContent = document.querySelector(tab.getAttribute('href'));
+          contents.forEach(content => content.style.display = 'none');
+          targetContent.style.display = '';
+
+      });
   });
-}
-
-/**
- * Initializes the tab functionality on document ready.
- * It hides all tab content initially and then shows the first tab's content.
- * The setupTabs function is called to ensure tabs are functional after the page has loaded.
- */
-$(document).ready(function () {
-  const accessToken = localStorage.getItem("accessToken");
-
-  if (!accessToken) {
-    console.log("No access token found.");
-    window.location.href = 'https://lineup-manager.netlify.app/';
-    return;
-  }
-  // Hide all tab content divs
-  $(".tab-content > div").hide();
-
-  // Show the first one
-  $(".tab-content > div:first-child").show();
-
-  // Run the setupTabs function
-  setupTabs();
 });
