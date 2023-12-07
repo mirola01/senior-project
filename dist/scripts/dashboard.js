@@ -101,7 +101,6 @@ function displayFormations(response) {
         button.addEventListener('click', function(event) {
             event.stopPropagation(); // Prevents triggering parent's click event
             const formationId = this.id;
-            console.log("id" + formationId);
             deleteFormation(formationId);
         });
     });

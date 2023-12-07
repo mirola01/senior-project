@@ -147,7 +147,7 @@ export const delete_player = async (playerId) => {
 
 export const deleteFormation = async (formationId) => {
     try {
-        console.log("playerid", playerId)
+        console.log("playerid", formationId)
         const fauna_key = Auth.getFaunaKey();
         var client = new faunadb.Client({
         secret: fauna_key,
