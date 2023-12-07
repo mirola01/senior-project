@@ -1170,27 +1170,26 @@ h1 {
   text-align: center;
   margin-right: 1% !important;
 }
-.callout.formation-callout {
+.formation-preview-container {
   position: relative;
-  overflow: hidden; 
-  box-shadow: 0 2px 6px 0, 0 22px 23px -41px;
-  width: auto;
-  height: auto;
-  background: white; 
 }
 
-.callout.formation-callout::before {
-  content: '';
+.background-image {
   position: absolute;
   top: -80px;
-  bottom: 0;
   right: -5px;
   left: 165px;
-  background-image: url('../images/logo-icon.png');
+  background-image: url(../images/logo-icon.png);
   background-size: 119px;
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0.5;
+  z-index: -1; /* Behind the content but above the base layer */
+}
+
+.callout.formation-callout {
+  position: relative;
+  z-index: 1; /* Ensuring this is above the background */
 }
 
 .callout.formation-callout::after {
