@@ -8,18 +8,16 @@
  * When a tab is clicked, it becomes active and its associated content is displayed, while the other tabs and content are hidden.
  */
 export function setupTabs() {
-
   $(".tab a").on("click", function (e) {
     e.preventDefault();
 
     $(this).parent().addClass("active-tac");
     $(this).parent().siblings().removeClass("active-tac");
 
-    const target = $(this).attr("href"); // Declare target with const
+    const target = $(this).attr("href"); // Get the href attribute
 
-    $(".tab-content > div").not(target).hide();
-
-    $(target).fadeIn(600);
+    $(".tab-content > div").not(target).hide(); // Hide other tabs' content
+    $(target).fadeIn(600); // Fade in the clicked tab's content
   });
 }
 
