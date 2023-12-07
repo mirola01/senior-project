@@ -128,7 +128,7 @@ function showFormationDetails(formationId) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const deleteButtons = document.querySelectorAll('.fa-trash');
+    const deleteButtons = document.querySelectorAll('.fa.fa-trash');
     deleteButtons.forEach(button => {
         button.addEventListener('click', function(event) {
             console.log("event" + event);
