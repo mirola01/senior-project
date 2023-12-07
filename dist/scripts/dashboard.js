@@ -127,10 +127,12 @@ function showFormationDetails(formationId) {
         .catch(error => console.error('Error fetching formation details:', error.message));
 }
 
-document.querySelectorAll('.delete-formation-icon').forEach(item => {
-    item.addEventListener('click', function() {
-      const formationId = this.closest('.formation-callout').getAttribute('data-formation-id');
-      deleteFormation(formationId); // Function to be implemented
+document.addEventListener('DOMContentLoaded', () => {
+    const deleteButtons = document.querySelectorAll('.fa-trash');
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const formationId = this.getAttribute('data-formation-id');
+            deleteFormation(formationId);
+        });
     });
-  });
-  
+});
