@@ -45,66 +45,67 @@
     </div>
   </div>
   <main>
-    <div class="topbar">
-      <h1 class="titleFormation" contenteditable="true">
-        Untitled
-      </h1>
-    </div>
-    <div class="lineup">
-      <div class="stage">
-        <div class="world">
-          <div class="team"></div>
-        </div>
+    <div class="container">
+      <div class="topbar">
+        <h1 class="titleFormation" contenteditable="true">
+          Untitled
+        </h1>
       </div>
-
-      <!-- ==================== -->
-
-      <div class="pitch">
-        <img src="images/pitch.jpg" alt="Soccer pitch">
-        <div id="starting_11" class="formation-4-4-2">
-          <ul class="gk">
-            <li id="pos1"></li>
-          </ul>
-          <ul class="df">
-            <li id="pos2" draggable="true"></li>
-            <li id="pos3" draggable="true"></li>
-            <li id="pos4" draggable="true"></li>
-            <li id="pos5" draggable="true"></li>
-          </ul>
-          <ul class="md">
-            <li id="pos6" draggable="true"></li>
-            <li id="pos7" draggable="true"></li>
-            <li id="pos8" draggable="true"></li>
-            <li id="pos9" draggable="true"></li>
-          </ul>
-          <ul class="fw">
-            <li id="pos10" draggable="true"></li>
-            <li id="pos11" draggable="true"></li>
-          </ul>
+      <div class="lineup">
+        <div class="stage">
+          <div class="world">
+            <div class="team"></div>
+          </div>
         </div>
+
+        <!-- ==================== -->
+
+        <div class="pitch">
+          <img src="images/pitch.jpg" alt="Soccer pitch">
+          <div id="starting_11" class="formation-4-4-2">
+            <ul class="gk">
+              <li id="pos1"></li>
+            </ul>
+            <ul class="df">
+              <li id="pos2" draggable="true"></li>
+              <li id="pos3" draggable="true"></li>
+              <li id="pos4" draggable="true"></li>
+              <li id="pos5" draggable="true"></li>
+            </ul>
+            <ul class="md">
+              <li id="pos6" draggable="true"></li>
+              <li id="pos7" draggable="true"></li>
+              <li id="pos8" draggable="true"></li>
+              <li id="pos9" draggable="true"></li>
+            </ul>
+            <ul class="fw">
+              <li id="pos10" draggable="true"></li>
+              <li id="pos11" draggable="true"></li>
+            </ul>
+          </div>
+        </div>
+        <div class="side">
+      <section class="sec-pos">
+      </section>
+      <!-- Notes Section -->
+      <div class="notes-section">
+        <h3>Game Notes</h3>
+        <textarea id="gameNotes" placeholder="Enter plays, strategies, or important notes for the game"></textarea>
+    </div>
+  </div>
       </div>
-      <div class="side">
-    <section class="sec-pos">
-    </section>
-    <!-- Notes Section -->
-    <div class="notes-section">
-      <h3>Game Notes</h3>
-      <textarea id="gameNotes" placeholder="Enter plays, strategies, or important notes for the game"></textarea>
-  </div>
-</div>
+      <div class="lineup-controls">
+        <select id="formationSelector">
+          <option value="formation-4-4-2">4-4-2</option>
+          <option value="formation-4-3-3">4-3-3</option>
+          <option value="formation-3-5-2">3-5-2</option>
+        </select>
+        <button class="save-lineup">Update Lineup</button>
+        <button class="clear-lineup">Clear Lineup</button>
+        <button class="download-snapshot">Download Lineup</button>
+      </div>
     </div>
-    <div class="lineup-controls">
-      <select id="formationSelector">
-        <option value="formation-4-4-2">4-4-2</option>
-        <option value="formation-4-3-3">4-3-3</option>
-        <option value="formation-3-5-2">3-5-2</option>
-      </select>
-      <button class="save-lineup">Update Lineup</button>
-      <button class="clear-lineup">Clear Lineup</button>
-      <button class="download-snapshot">Download Lineup</button>
     </div>
-  </div>
-  </div>
   </main>
   <script type="module" src="scripts/formation.js"></script>
   <script type="module" src="scripts/main.js"></script>
