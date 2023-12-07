@@ -90,7 +90,7 @@ function displayFormations(response) {
                 <i class="fa fa-trash" onclick="deleteFormation('${formation.ref['@ref'].id}')"></i>
             </div>
         </div>
-        <div class="background-image"></div>
+        <div class="logo-dash"><img src="images/logo-icon.png" alt="Logo Image"></div> 
       `;
   
       formationsList.appendChild(formationDiv);
