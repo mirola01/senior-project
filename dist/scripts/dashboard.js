@@ -97,6 +97,7 @@ function displayFormations(response) {
       formationsList.appendChild(formationDiv);
     });
     const deleteButtons = document.querySelectorAll('.fa-trash');
+    console.log("Delete" + deleteButtons);
     deleteButtons.forEach(button => {
         button.addEventListener('click', function(event) {
             event.stopPropagation(); // Prevents triggering parent's click event
