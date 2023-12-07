@@ -1180,19 +1180,6 @@ h1 {
   z-index: 1; /* Ensuring this is above the background */
 }
 
-.callout.formation-callout::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 1px;
-  background: url('../images/logo-icon.png') no-repeat center center;
-  background-size: cover; /* Adjust as needed */
-  opacity: 0.8; /* 50% transparency */
-  z-index: -1; /* Place it behind the content */
-}
-
 input.delete-checkbox {
   width: 25px;
   position: relative;
