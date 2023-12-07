@@ -89,7 +89,7 @@ function displayFormations(response) {
             <p>${formation.data.formation}</p>
             <div class="card-actions">
                 <i class="fa fa-edit"></i>
-                <i class="fa fa-trash" onclick="deleteFormation('${formation.ref['@ref'].id}')"></i>
+                <i class="fa fa-trash" id="${formation.ref['@ref'].id}"></i>
             </div>
         </div>
       `;
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const deleteButtons = document.querySelectorAll('.fa-trash');
     deleteButtons.forEach(button => {
         button.addEventListener('click', function() {
-            const formationId = this.getAttribute('data-formation-id');
+            const formationId = this.getElementById('data-formation-id');
             deleteFormation(formationId);
         });
     });
