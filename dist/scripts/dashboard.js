@@ -88,7 +88,6 @@ function displayFormations(response) {
             <a href="formation.html?id=${formation.ref['@ref'].id}"><h3>${formation.data.name.trim()}</h3></a>
             <p>${formation.data.formation}</p>
             <div class="card-actions">
-                <i class="fa fa-eye"></i>
                 <i class="fa fa-edit"></i>
                 <i class="fa fa-trash" onclick="deleteFormation('${formation.ref['@ref'].id}')"></i>
             </div>
