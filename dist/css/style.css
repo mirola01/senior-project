@@ -1547,3 +1547,16 @@ button.clear-lineup {
 button.download-snapshot {
     height: fit-content;
 }
+.adders {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.large-6.medium-6.cell {
+  width: 40%;
+  margin: 1%;
+}
+.page-menu p {
+  align-self: center;
+}
