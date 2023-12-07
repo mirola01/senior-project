@@ -582,10 +582,6 @@ justify-content: center;
   color: #ffffff;
 }
 
-.tab-content > div:last-child {
-  display: none;
-}
-
 .tactical-guide h1 {
   text-align: center;
   font-weight: 300;
