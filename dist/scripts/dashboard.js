@@ -130,8 +130,9 @@ function showFormationDetails(formationId) {
 document.addEventListener('DOMContentLoaded', () => {
     const deleteButtons = document.querySelectorAll('.fa-trash');
     deleteButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const formationId = this.getElementById('data-formation-id');
+        button.addEventListener('click', function(event) {
+            event.stopPropagation(); // Prevents triggering parent's click event
+            const formationId = this.id;
             deleteFormation(formationId);
         });
     });
