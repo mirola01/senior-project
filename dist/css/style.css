@@ -1418,10 +1418,12 @@ div.content {
 
 .callout.formation-callout h3 {
   color: #00439e;
+  height: auto;
 }
 
 .callout.formation-callout p {
   color: #00439e;
+  height: auto;
 }
 .notes-section {
   margin-top: 20px;
@@ -1484,6 +1486,8 @@ div.content {
   justify-content: space-around;
   width: 100%;
   cursor: pointer;
+  height: auto;
+  margin-top: 25px;
 }
 .card-actions i {margin-top: 6px;color: #00439e;border: 2px solid transparent;padding: 4px;transition: transform 0.3s ease;width: 30px;}
 .card-actions i:hover {
