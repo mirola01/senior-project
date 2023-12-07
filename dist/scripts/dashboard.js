@@ -129,10 +129,9 @@ function showFormationDetails(formationId) {
 
 document.addEventListener('DOMContentLoaded', () => {
     const deleteButtons = document.querySelectorAll('.fa.fa-trash');
+    console.log(deleteButtons)
     deleteButtons.forEach(button => {
         button.addEventListener('click', function(event) {
-            console.log("event" + event);
-            event.stopPropagation(); // Prevents triggering parent's click event
             const formationId = this.id;
             console.log("id" + formationId);
             deleteFormation(formationId);
