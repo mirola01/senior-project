@@ -104,6 +104,13 @@ function displayFormations(response) {
             deleteFormation(formationId);
         });
     });
+    const editButtons = document.querySelectorAll('.fa-edit');
+    editButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const formationId = this.closest('.formation-callout').getAttribute('data-formation-id');
+            window.location.href = `formation.html?id=${formationId}`;
+        });
+    });
   }
   
     // Add click event to each formation
