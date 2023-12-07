@@ -89,8 +89,9 @@ function displayFormations(formationData) {
   titleElement.textContent = formationTitle;
 
   const formationNotes = formationData.data.notes;
-  const gameNotes = document.querySelector('.gameNotes');
-  gameNotes.textContent = formationNotes;
+  const gameNotes = document.getElementById('gameNotes'); // Use getElementById for ID selection
+  gameNotes.value = formationNotes; // Set the value property for textarea
+
 
   const formationName = formationData.data.formation;
   const players = formationData.data.players;
