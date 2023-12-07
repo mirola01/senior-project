@@ -1422,7 +1422,9 @@ div.content {
   color: black;
   height: auto;
 }
-
+button.update-lineup {
+  height: fit-content;
+}
 .callout.formation-callout p {
   color: #00439e;
   height: auto;

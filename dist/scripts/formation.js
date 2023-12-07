@@ -87,6 +87,11 @@ function displayFormations(formationData) {
   const formationTitle = formationData.data.name;
   const titleElement = document.querySelector('.titleFormation');
   titleElement.textContent = formationTitle;
+
+  const formationNotes = formationData.data.notes;
+  const gameNotes = document.querySelector('.gameNotes');
+  gameNotes.textContent = formationNotes;
+
   const formationName = formationData.data.formation;
   const players = formationData.data.players;
   const formationSelector = document.getElementById('formationSelector');
