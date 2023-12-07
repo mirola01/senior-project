@@ -124,9 +124,11 @@
   align-items: center;
 }
 
-
 .topbar h1 {
   width: auto;
+  font-size: revert-layer;
+  margin-left: 70px;
+  z-index: 1;
 }
 
 .topbar-icons {
