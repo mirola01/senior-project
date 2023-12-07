@@ -1541,3 +1541,14 @@ button.download-snapshot {
 .grid-container {
   width: 77%;
 }
+.logo-dash img {width: 90px;}
+
+.logo-dash {
+    z-index: -1;
+    height: auto;
+    width: 90px;
+    opacity: 0.4;
+    position: absolute;
+    right: 3px;
+    top: -2px;
+}
