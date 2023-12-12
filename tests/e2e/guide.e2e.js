@@ -7,7 +7,7 @@
     const accessToken = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjFwdDJJZlM5SllPZ1pvdVRHOUdRTCJ9'; 
   
     beforeAll(async () => {
-      browser = await chromium.launch();
+        browser = await chromium.launch();
     });
   
     afterAll(async () => {
@@ -33,27 +33,31 @@
       await context.close();
     });
   
-    test('Initial tab state', async () => {
-        const firstTabContent = await page.$('.tab-content > div:first-child');
-        expect(firstTabContent).toBeTruthy();
-        
-        // Using Playwright's isVisible method for visibility check
-        const isVisible = await firstTabContent.isVisible();
-        expect(isVisible).toBeTruthy();
-      }, 30000); // Optional increased timeout
-    
-      test('Tab interaction and content visibility', async () => {
-        const tabIds = ['4-4-2', '4-3-3', '3-5-2'];
-        for (const tabId of tabIds) {
-          await page.click(`#f-${tabId}`);
-          await page.waitForTimeout(500);
-          const isTabVisible = await page.evaluate((id) => {
-            const tabContent = document.querySelector(`#f-${id}`);
-            return tabContent && getComputedStyle(tabContent).display !== 'none';
-          }, tabId);
-          expect(isTabVisible).toBeTruthy();
-        }
-      }, 30000);
+    test("Initial Tab State - First Tab Active and Visible", async () => {
+      const firstTabContent = await page.isVisible('#f-4-4-2');
+      expect(firstTabContent).toBeTruthy();
     });
 
+    test("Tab Click Functionality Test", async () => {
+      await page.click('#f1');
+      const isVisible = await page.isVisible('#f-4-3-3');
+      expect(isVisible).toBeTruthy();
+      const isNotVisible = await page.isVisible('#f-4-4-2');
+      expect(isNotVisible).toBeFalsy();
+
+      const isActive = await page.$eval('#f1', el => el.classList.contains('active-tac'));
+      expect(isActive).toBeTruthy();
+    });
+
+    test("Access Token Verification - Redirects if No Token", async () => {
+      await context.clearCookies();
+      await context.clearLocalStorage();
+
+      await page.reload();
+      
+      const isRedirected = page.url().includes('https://lineup-manager.netlify.app/');
+      expect(isRedirected).toBeTruthy();
+    });
+      
+    });
   

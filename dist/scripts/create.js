@@ -370,22 +370,28 @@ async function saveLineup() {
         playersInFormation[position][index] = playerName;
       }
     });
-    console.log("Formation", playersInFormation)
     const notes = document.getElementById('gameNotes').value;
+    try {
     let data = await client.query(
         q.Create(q.Collection('Formation'), {
           data: {
             name: document.querySelector('.titleFormation').textContent,
             formation: selectedFormation,
             players: playersInFormation, // Saving the players in each position
-            notes: notes,
+            notes: notes || "",
             owner: decodedJWT['sub']
           }
         })
       ).then((ret) => console.log(ret))
       .catch((err) => console.error('Error:', err));
+      displayMessage("Lineup saved successfully.", "success");
+
+  }catch (error) {
+    // Display error message
+    displayMessage("Failed to save lineup.", "error");
+    console.error('Error:', error);
   }
-}
+}}
 
 /**
  * Clears the current lineup from the UI.
@@ -414,6 +420,8 @@ async function clearLineup() {
 
   makePlayersDraggable();
   wc_team.dragDrap.init();
+  displayMessage("Lineup cleared successfully.", "success");
+
 }
 function downloadLineupSnapshot() {
   const element = document.getElementById('starting_11'); // The element containing the lineup
@@ -430,6 +438,16 @@ function downloadLineupSnapshot() {
     downloadLink.click();
     document.body.removeChild(downloadLink);
   });
+}
+/**
+ * Function to display a message on the UI.
+ * @param {string} message - The message to be displayed.
+ * @param {string} type - The type of message ('success' or 'error').
+ */
+function displayMessage(message, type) {
+  const messageElement = document.getElementById('messageDisplay'); // Assuming an element with this ID exists
+  messageElement.textContent = message;
+  messageElement.className = type; // Use different classes for styling success/error messages
 }
 
 // Add this function to a button's event listener
