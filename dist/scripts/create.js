@@ -418,27 +418,9 @@ async function clearLineup() {
     div.draggable = true;
   });
 
-  makePlayersDraggable();
   wc_team.dragDrap.init();
-  displayMessage("Lineup cleared successfully.", "success");
-
 }
-function downloadLineupSnapshot() {
-  const element = document.getElementById('starting_11'); // The element containing the lineup
 
-  html2canvas(element).then(canvas => {
-    // Create an image from the canvas
-    const imageURL = canvas.toDataURL('image/png');
-
-    // Create a temporary link to trigger the download
-    const downloadLink = document.createElement('a');
-    downloadLink.href = imageURL;
-    downloadLink.download = "SoccerLineupSnapshot.png"; // Name of the file to be downloaded
-    document.body.appendChild(downloadLink);
-    downloadLink.click();
-    document.body.removeChild(downloadLink);
-  });
-}
 /**
  * Function to display a message on the UI.
  * @param {string} message - The message to be displayed.
@@ -449,10 +431,6 @@ function displayMessage(message, type) {
   messageElement.textContent = message;
   messageElement.className = type; // Use different classes for styling success/error messages
 }
-
-// Add this function to a button's event listener
-document.querySelector('.download-snapshot').addEventListener('click', downloadLineupSnapshot);
-
 
 // Event listener for the 'Save Lineup' and 'Clear Lineup' buttons.
 document.querySelector('.save-lineup').addEventListener('click', saveLineup);

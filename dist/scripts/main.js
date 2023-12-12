@@ -67,7 +67,6 @@ document.querySelector(".auth-btn").addEventListener("click", async (e) => {
 });
 // UI elements
 const add_nw_btn = document.querySelector("#add-new-btn");
-add_nw_btn.setAttribute("aria-label", "Add new Button");
 
 const body_ = document.querySelector(".container");
 const form = document.querySelector(".form");
