@@ -1515,12 +1515,7 @@ input#playerImage {
   height: auto;
   width: auto;
 }
-#labelImage {
-  width: 20px;
-}
-.cut {
-  height: auto;
-}
+
 button.save-lineup {height: fit-content;}
 
 button.clear-lineup {
