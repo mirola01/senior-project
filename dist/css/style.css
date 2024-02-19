@@ -107,7 +107,7 @@
 .container {
   height: 92%;
   width: 100%;
-  padding: 2em;
+  padding: 1.5em;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -171,7 +171,7 @@ img {
 }
 
 .lineup-controls {
-  margin-top: -153px;
+  margin-top: -105px;
   height: 24%;
   width: 46%;
 }
@@ -232,12 +232,12 @@ span {
   padding: 0 4px 0 6px;
   color: #004AAD;
 }
-.pitch {float: left;width: 40%;perspective: 1000px;perspective-origin: 50% 50%;height: auto;margin-top: -189px;}
+.pitch {float: left;width: 41%;perspective: 1000px;perspective-origin: 50% 50%;height: auto;margin-top: -217px;}
 .pitch img {
   align-content: center;
   transform: rotateX(50deg);
   margin-left: 6%;
-  width: 313px;
+  width: 316px;
 }
 
 
@@ -949,28 +949,28 @@ canvas {
 /* Default 4-4-2 Formation */
 .formation-4-4-2 .gk li {
   /* Goalkeeper position */
-  top: 120px;
-  left: 158px;
+  top: 115px;
+  left: 146px;
 }
 .formation-4-4-2 .df li:nth-child(1) {
   /* First Defender */
   top: 171px;
-  left: 64px;
+  left: 58px;
 }
 #starting_11.formation-4-4-2 .df li:nth-child(2) {
   /* Second Defender */
   top: 151px;
-  left: 124px;
+  left: 112px;
 }
 #starting_11.formation-4-4-2 .df li:nth-child(3) {
   /* Third Defender */
   top: 151px;
-  left: 202px;
+  left: 189px;
 }
 #starting_11.formation-4-4-2 .df li:nth-child(4) {
   /* Fourth Defender */
   top: 171px;
-  left: 260px;
+  left: 246px;
 }
 #starting_11.formation-4-4-2 .md li:nth-child(1) {
   /* First Midfielder */
@@ -1004,68 +1004,68 @@ canvas {
 }
 
 
-/* Default 4-4-2 Formation */
+/* Default 4-3-3 Formation */
 .formation-4-3-3 .gk li {
   /* Goalkeeper position */
-  top: 120px;
-  left: 158px;
+  top: 115px;
+  left: 146px;
 }
 .formation-4-3-3 .df li:nth-child(1) {
   /* First Defender */
   top: 171px;
-  left: 64px;
+  left: 58px;
 }
 #starting_11.formation-4-3-3 .df li:nth-child(2) {
   /* Second Defender */
   top: 151px;
-  left: 124px;
+  left: 112px;
 }
 #starting_11.formation-4-3-3 .df li:nth-child(3) {
   /* Third Defender */
   top: 151px;
-  left: 202px;
+  left: 189px;
 }
 #starting_11.formation-4-3-3 .df li:nth-child(4) {
   /* Fourth Defender */
   top: 171px;
-  left: 260px;
+  left: 246px;
 }
 #starting_11.formation-4-3-3 .md li:nth-child(1) {
   /* First Midfielder */
   top: 235px;
-  left: 100px;
+  left: 91px;
 }
 #starting_11.formation-4-3-3 .md li:nth-child(2) {
   /* Second Midfielder */
   top: 205px;
-  left: 161px;
+  left: 146px;
 }
 #starting_11.formation-4-3-3 .md li:nth-child(3) {
   /* Third Midfielder */
   top: 235px;
-  left: 223px;
+  left: 207px;
 }
 #starting_11.formation-4-3-3 .fw li:nth-child(1) {
   /* Fourth Midfielder */
-  top: 289px;
-  left: 61px;
+  top: 279px;
+  left: 36px;
 }
 #starting_11.formation-4-3-3 .fw li:nth-child(2) {
   /* First Forward */
-  top: 312px;
-  left: 161px;
+  top: 297px;
+  left: 146px;
 }
 #starting_11.formation-4-3-3 .fw li:nth-child(3) {
   /* Second Forward */
-  top: 289px;
-  left: 266px;
+  top: 278px;
+  left: 265px;
 }
 
 /* Default 3-5-2 Formation */
 .formation-3-5-2 .gk li {
   /* Goalkeeper position */
-  top: 120px;
-  left: 158px;
+  top: 115px;
+  left: 146px;
 }
 .formation-3-5-2 .df li:nth-child(1) {
   /* First Defender */
@@ -1075,7 +1075,7 @@ canvas {
 #starting_11.formation-3-5-2 .df li:nth-child(2) {
   /* Second Defender */
   top: 162px;
-  left: 158px;
+  left: 146px;
 }
 #starting_11.formation-3-5-2 .df li:nth-child(3) {
   /* Third Defender */
@@ -1246,10 +1246,6 @@ body {
 }
 
 
-.player .jersey .number {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
 html,
 body {
   margin: 0;
@@ -1334,7 +1330,8 @@ div.content {
 }
 .player .jersey .number {
   font-family: Bevan;
-  font-size: 47px;
+  font-weight: bold;
+  font-size: 35px;
   z-index: 5;
 }
 .player .jersey span {
