@@ -975,33 +975,33 @@ canvas {
 }
 #starting_11.formation-4-4-2 .md li:nth-child(1) {
   /* First Midfielder */
-  top: 236px;
-  left: 49px;
+  top: 232px;
+  left: 40px;
 }
 #starting_11.formation-4-4-2 .md li:nth-child(2) {
   /* Second Midfielder */
-  top: 236px;
-  left: 111px;
+  top: 222px;
+  left: 109px;
 }
 #starting_11.formation-4-4-2 .md li:nth-child(3) {
   /* Third Midfielder */
-  top: 236px;
-  left: 212px;
+  top: 222px;
+  left: 191px;
 }
 #starting_11.formation-4-4-2 .md li:nth-child(4) {
   /* Fourth Midfielder */
-  top: 236px;
-  left: 278px;
+  top: 232px;
+  left: 260px;
 }
 #starting_11.formation-4-4-2 .fw li:nth-child(1) {
   /* First Forward */
-  top: 298px;
-  left: 116px;
+  top: 292px;
+  left: 98px;
 }
 #starting_11.formation-4-4-2 .fw li:nth-child(2) {
   /* Second Forward */
-  top: 298px;
-  left: 216px;
+  top: 292px;
+  left: 210px;
 }
 
 
@@ -1135,6 +1135,7 @@ ul#starting_11 .selected img {
   padding-top: 3%;
   height: auto;
   width: 100%;
+  font-size: 14px;
 }
 
 .sec-pos h1 {height: auto;font-size: x-large;text-align: center;}
@@ -1589,3 +1590,5 @@ button.auth-btn {
   padding: 0;
   padding-left: 17px;
 }
+
+.positions.menu a {padding-left: 0;padding-bottom: 5px;}
