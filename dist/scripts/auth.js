@@ -95,19 +95,23 @@ export const login = async () => {
  * logout();
  */
 export const logout = () => {
-    const final_auth_str = window.localStorage.getItem("final_auth");
-    console.log(final_auth_str)
-    if (final_auth_str !== "") {
-        const final_auth = JSON.parse(final_auth_str);
+    try {
+        const final_auth_str = window.localStorage.getItem("final_auth");
+        const final_auth = final_auth_str ? JSON.parse(final_auth_str) : null;
         if (final_auth && final_auth.logout) {
             window.localStorage.clear();
             final_auth.logout({
                 returnTo: 'https://lineup-manager.netlify.app'
             });
+        } else if (auth0) {
+            window.localStorage.clear();
+            auth0.logout({
+                returnTo: 'https://lineup-manager.netlify.app'
+            });
         }
+    } catch (error) {
+        console.error("Logout Error:", error);
     }
     window.localStorage.clear();
-    auth0.logout({
-        returnTo: 'https://lineup-manager.netlify.app'
-    });
 };
+
