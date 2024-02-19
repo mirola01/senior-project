@@ -127,7 +127,7 @@
 .topbar h1 {
   width: auto;
   font-size: revert-layer;
-  margin-left: 70px;
+  margin-left: 32px;
   z-index: 1;
 }
 
@@ -1039,7 +1039,7 @@ canvas {
 #starting_11.formation-4-3-3 .md li:nth-child(2) {
   /* Second Midfielder */
   top: 205px;
-  left: 146px;
+  left: 151px;
 }
 #starting_11.formation-4-3-3 .md li:nth-child(3) {
   /* Third Midfielder */
@@ -1081,7 +1081,7 @@ canvas {
 #starting_11.formation-3-5-2 .df li:nth-child(3) {
   /* Third Defender */
   top: 170px;
-  left: 236px;
+  left: 217px;
 }
 
 #starting_11.formation-3-5-2 .md li:nth-child(1) {
@@ -1092,33 +1092,33 @@ canvas {
 #starting_11.formation-3-5-2 .md li:nth-child(2) {
   /* Second Midfielder */
   top: 220px;
-  left: 206px;
+  left: 185px;
 }
 #starting_11.formation-3-5-2 .md li:nth-child(3) {
   /* Third Midfielder */
-  top: 261px;
-  left: 54px;
+  top: 259px;
+  left: 39px;
 }
 #starting_11.formation-3-5-2 .md li:nth-child(4) {
   /* Fourth Midfielder */
-  top: 261px;
-  left: 160px;
+  top: 265px;
+  left: 152px;
 }
 #starting_11.formation-3-5-2 .md li:nth-child(5) {
   /* Fifth Midfielder */
-  top: 261px;
+  top: 259px;
   left: 263px;
 }
 
 #starting_11.formation-3-5-2 .fw li:nth-child(1) {
   /* First Forward */
   top: 312px;
-  left: 116px;
+  left: 102px;
 }
 #starting_11.formation-3-5-2 .fw li:nth-child(2) {
   /* Second Forward */
   top: 312px;
-  left: 210px;
+  left: 205px;
 }
 
 ul#starting_11 .highlight {
@@ -1456,17 +1456,6 @@ button.update-lineup {
   margin-bottom: auto;
 }
 
-.save-lineup {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #004aad;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: smaller;
-}
-
 .save-lineup:hover {
     background-color: #003580;
 }
@@ -1569,6 +1558,8 @@ button.download-snapshot {
   color: #155724;
   background-color: #d4edda;
   border-color: #c3e6cb;
+  height: auto;
+  margin-top: 5px;
 }
 
 .error {
