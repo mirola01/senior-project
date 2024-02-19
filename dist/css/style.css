@@ -1515,7 +1515,9 @@ input#playerImage {
   height: auto;
   width: auto;
 }
-
+#labelImage {
+  width: 20px;
+}
 .cut {
   height: auto;
 }
@@ -1580,3 +1582,4 @@ button.download-snapshot {
 label .input-container.ic5 {
   width: 50px;
 }
+
