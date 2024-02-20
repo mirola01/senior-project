@@ -507,7 +507,14 @@ async function updateLineup() {
             owner: decodedJWT['sub']
           }
         })
-      );
+      ).then((ret) => {
+        console.log(ret);
+        displayMessage("Lineup updated successfully.", "success"); // Display success message
+      })
+      .catch((err) => {
+        console.error('Error:', err);
+        displayMessage("Error updating lineup.", "error"); // Optionally, display error message
+      });      
 
     } catch (err) {
       console.error('Error:', err);
