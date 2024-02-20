@@ -1208,7 +1208,6 @@ table.table-expand {
   table-layout: fixed;
 }
 body {
-  background: #eeeff1;
   font-family: 'Lato', sans-serif;
 }
 
@@ -1252,7 +1251,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #eeeff1;
+  background: white;
   font-family: Lato;
 }
 div.content {
